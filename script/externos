@@ -1,0 +1,16 @@
+<!--
+			Bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
+		-->
+		<!-- Necesaria para el funcionamiento de AJAX -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Javascript de Bootstrap -->
+        <script src="bootstrap-5.1.3/js/bootstrap.min.js"></script>  
+
+		<!-- Necesaria para pantallas emergentes (Bootstrap Bundle with Popper) -->
+        <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>  
+		
+		<!-- Necesaria para alertas y mensajes formateados -->
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	<!-- Formateo de mensajes de alerta	-->
+		
+        

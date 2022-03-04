@@ -1,0 +1,58 @@
+
+/* 	------------------------
+	Navigation
+	------------------------ */
+
+/* Línea de opciones dentro de la página */
+
+  .boton-alta {
+	display: table-cell; 
+	background-color: #82b74b;
+	color: black;
+	border: solid;
+	font-size: 20px;
+	text-transform: none;
+	cursor: pointer;
+	opacity: 0.8;
+	width: 125px;
+  }
+
+  .boton-consulta {
+	display: table-cell; 
+	background-color: #b7734b;
+	color: black;
+	border: solid;
+	font-size: 20px;
+	text-transform: uppercase;
+	cursor: pointer;
+	opacity: 0.8;
+  }
+  
+#boton-texto {
+	text-transform: capitalize;
+	display: none;
+	background-color: #f1f1f1;
+	width: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .boton:hover #boton-alta #boton-consulta {
+	  font-family: "AeroLight";
+	  background: #c5d5c5; /* color de la opción al pasar el ratón por encima */
+	  color: #bc5a45; /* Color de las letras de la opción al pasar el ratón por encima */
+  }
+  
+  .boton:hover #boton-texto {
+	display: block;
+	color: #000000; /* Color de las letras del menú explicativo */
+	background: rgb(246, 255, 90); /* color del menú explicativo */
+	font-size: 20px;
+	position: relative;
+	margin: auto;
+	width: 175px;
+	text-transform: none;
+  }
+/* 	-------------------
+	Fin opciones página
+	------------------- */	

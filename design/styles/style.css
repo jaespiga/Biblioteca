@@ -1,0 +1,167 @@
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+		margin: 0;
+		padding: 0;
+		font-family: "AeroRegular";
+		font-size: 14px;
+		line-height: 20px;
+		color: #444444;
+		text-align: center;
+		height: 100px;
+	}
+
+
+/* 	------------------------
+	Typography
+	------------------------ */
+	@font-face {
+	    font-family: 'AeroRegular'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Regular.ttf'); /*URL to font*/
+	}
+
+	@font-face {
+	    font-family: 'AeroLight'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Light.ttf'); /*URL to font*/
+	}
+
+	@font-face {
+	    font-family: 'AeroLightItalic'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Light-Italic.ttf'); /*URL to font*/
+	}
+
+	@font-face {
+	    font-family: 'AeroBold'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Bold.ttf'); /*URL to font*/
+	}
+
+	@font-face {
+	    font-family: 'AeroBoldItalic'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Bold-Italic.ttf'); /*URL to font*/
+	}
+
+	@font-face {
+	    font-family: 'AeroItalic'; /*a name to be used later*/
+	    src: url('../fonts/AeroMatics-Italic.ttf'); /*URL to font*/
+	}
+	
+/* Características del logo de la pantalla */
+#logo {
+	display: block;
+	padding: 5px 20px;
+	float: left;
+	width: 10%;
+	height: auto;
+}
+
+/* Características de la fecha */
+.day {
+	font-size: 20px;
+	color: #c51c38;
+	text-transform: capitalize;
+	}
+
+#date{
+		
+		width: 250;
+		float: right;
+		padding-right: 10px;
+		font-family: "AeroRegular";
+		font-size: 20px;
+		text-align: right;
+	}	
+
+/* Características de las etiquetas de los campos de entrada */
+
+.bloque_password{
+	position: relative;
+}
+
+.ojo {
+	position: absolute;
+	border: none;
+	width: 50px;
+	height: 55%;
+	right: 5px;
+	top: 25px;
+	z-index: 100;
+}
+
+.ojo:hover {
+	border: 1px solid #ddd;
+	cursor: pointer;
+	background-color: #feb236;
+}
+
+.icono {
+	width: 30px;
+	height: 25px;
+}
+.icono:hover {
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.imagen {
+	width: 50px;
+}
+
+.imagen:hover {
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+/* formateo de campos de error en validaciones de campos */
+
+.formulario__grupo-correcto {
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto{
+	color: #c51c38; 
+}
+
+.formulario__grupo-incorrecto .formulario__input{
+	border: 3px solid #c51c38; 
+}
+
+.formulario__input-error{
+	font-size: 15px;
+	display: none;
+}
+
+.formulario__input-error-activo{
+	display: block;
+}
+
+.formulario__mensaje{
+	font-size: 20px;
+	align-items: center;
+	color: #c51c1c;
+	opacity: 1;
+}
+
+.formulario__mensaje-activo{
+	opacity: 1;
+}
+
+.formulario__mensaje-exito{
+	font-size: 15px;
+	align-items: center;
+	color: darkgreen;
+	display: none;
+}
+
+.formulario__mensaje-exito-activo{
+	display: block;
+}
