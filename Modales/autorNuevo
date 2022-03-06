@@ -1,0 +1,39 @@
+
+<!-- Modal para dar de alta un autor y datos personales -->
+<div class="modal fade" id="autorNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg formulario"  id="formulario">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fw-bold" id="autorAlta">Nuevo autor</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+        <div class="formulario__grupo" id="grupo__autor">
+          <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
+
+          <input type="text" name="autor" id="autor" 
+                  onblur="document.getElementById('texto_web').value=this.value"
+                  class="form-control input-sm fs-5 mb-4 formulario__input" 
+                  autocomplete="off" required>
+          <div id="autor_error"></div>
+        
+        </div>
+         <!-- Campos comunes al alta y mantenimiento de autores -->
+         <?php require_once 'rutinas/autores_datos.php' ?>       
+        
+
+      <div class="modal-footer formulario__grupo">
+        <button type="submit" id="guardar_autor_alta" class="btn btn-success fs-4" 
+                data-bs-dismiss="modal">Alta</button>
+      </div>
+
+      <p class="formulario__mensaje-exito" id="formulario__mensaje-exito"> 
+          Operación realizada con éxito
+      </p>        
+    </div>
+  </div>
+</div>
+
+<!-- Tratar alta de registro de autor -->
+<?php require_once 'basedatos/autores_alta_datos.php' ?>
