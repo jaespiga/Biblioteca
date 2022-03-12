@@ -1,6 +1,6 @@
 
 <!-- Modal para dar de alta un autor y datos personales -->
-<div class="modal fade" id="autorNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="autorNuevo" role = 'dialog' tabindex="-1">
   <div class="modal-dialog modal-lg formulario"  id="formulario">
     <div class="modal-content">
       <div class="modal-header">
@@ -24,8 +24,9 @@
         
 
       <div class="modal-footer formulario__grupo">
-        <button type="submit" id="guardar_autor_alta" class="btn btn-success fs-4" 
-                data-bs-dismiss="modal">Alta</button>
+        <button type="submit" id="guardar_autor_alta" class="btn btn-success fs-4 submitBtn" 
+                onclick="validarSubmitAutor()">Alta
+        </button>
       </div>
 
       <p class="formulario__mensaje-exito" id="formulario__mensaje-exito"> 

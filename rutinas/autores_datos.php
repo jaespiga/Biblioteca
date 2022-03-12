@@ -4,7 +4,7 @@
             <div class="col-5 d-inline-flex">  
               <label for="nacionalidad" class="form-text text-primary fs-5 mt-1 text-primary">
                       Nacionalidad&nbsp;&nbsp;</label>
-              <input type="text" id="nacionalidad" list="lista_nacionalidades" name="autor_nacionalidad" 
+              <input type="text" id="nacionalidad" list="lista_nacionalidades" name="nacionalidad" 
                     autocomplete="off" class="form-control input-sm fs-5 h-75 w-100 ms-2">
               <datalist id="lista_nacionalidades"> </datalist>
             </div>
@@ -12,7 +12,7 @@
             <div class="col-7 d-inline-flex">
               <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 text-primary">
                       Corriente literaria&nbsp;&nbsp;</label>
-              <input type="text" id="cliteraria" list="lista_clit" name="autor_cliteraria" 
+              <input type="text" id="cliteraria" list="lista_clit" name="cliteraria" 
                     autocomplete="off" class="form-control input-sm fs-5 h-75 w-75">
               <datalist id="lista_clit"> </datalist>
             </div>
