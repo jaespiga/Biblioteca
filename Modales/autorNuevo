@@ -8,7 +8,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      
+
+        <input type="hidden" id="idOper" name="idOper" value="alta">
+
         <div class="formulario__grupo" id="grupo__autor">
           <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
 
@@ -19,13 +21,14 @@
           <div id="autor_error"></div>
         
         </div>
+        
          <!-- Campos comunes al alta y mantenimiento de autores -->
          <?php require_once 'rutinas/autores_datos.php' ?>       
         
 
       <div class="modal-footer formulario__grupo">
-        <button type="submit" id="guardar_autor_alta" class="btn btn-success fs-4 submitBtn" 
-                onclick="validarSubmitAutor()">Alta
+        <button type="submit" id="enviar_datos" class="btn btn-success fs-4 submitBtn" 
+                >Alta
         </button>
       </div>
 

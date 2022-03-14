@@ -2,7 +2,6 @@
 	session_start(); 
 
 	require_once 'basedatos/connect.php';  
-	require_once 'rutinas/autor_validar_actualizar.php';
 ?> 
 
 <!DOCTYPE html>
@@ -127,10 +126,10 @@
 			Script para la realización de funcionalidades personalizadas de la página
 		-->
 		
-
 		<script type="text/javascript" src="js/consulta_web.js"></script>  <!-- Buscar en Google  -->
 		
 		<script type="text/javascript" src="js/autor_validar_formulario.js"></script>  <!-- validar datos autor  -->
+		<script type="text/javascript" src="js/autor_validar_actualizar.js"></script>  <!-- validar datos autor  -->
 
 		<script type="text/javascript" src="js/lista_autores.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_autores_cambio.js"></script>  <!-- Lista de autores dinámica  -->
