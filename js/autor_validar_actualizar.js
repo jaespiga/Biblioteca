@@ -1,13 +1,18 @@
 /* Validación de campos de formulario de autor y actualizar si son correctos */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     $("#enviar_datos").click(function() {
-        form_campos= $("formulario").serialize();
-        Swal.fire({
-            icon: 'warning',
-            title: 'Campos formulario',
-            text: form_campos,
-          })     
+      form_campos= $('#pantalla').serialize();
+      alert ("formulario " + form_campos);
+      Swal.fire({
+          icon: 'warning',
+          title: 'Campos formulario',
+          text: "formulario: " + form_campos
+        })     
 
+        if (validarSubmit()) {  // Primero se valida el formulario
+            autor_actualizar_datos
+        }
+        
 
       $.ajax({                        
         type: 'POST',                 

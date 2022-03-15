@@ -1,27 +1,19 @@
 /* Validación de campos de formularios */
-const formulario = document.getElementById('autorNuevo');
-const inputs = document.querySelectorAll('#autorNuevo');
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario');
 
-var $anterior_input= "";
+const id_Apartado = document.getElementById('idApartado');
+const id_Oper = document.getElementById('idOper');
 
 const expresiones = {
-    autor: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
-}
-const campos = {
-    autor: false,
-    fnac: false,
-    ffal: false,
-    nacionalidad: false,
-    cliteraria: false,
-    pnac: false,
-    pfal: false
+    clave: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
 }
 
 const validarFormulario = (evento) =>{
     switch (evento.target.name) {  
-        case "autor":
+        case "clave":
         
-            if (expresiones.autor.test(evento.target.value)) {
+            if (expresiones.clave.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>"
                 validar_campo_resultado("ok", evento.target.name, error_lit);
@@ -31,11 +23,7 @@ const validarFormulario = (evento) =>{
                 validar_campo_resultado("nok", evento.target.name, error_lit);
                 }
         break;  
-        // No se validan caracteres de las fechas por hacerlo el input tipo date 
-        case "fnac":  
-        case "ffal":  
-        
-        break;     
+         
         default:
                 
         break;
@@ -44,23 +32,38 @@ const validarFormulario = (evento) =>{
 
 const validarCampoValor = (evento) =>{
     switch (evento.target.name) {  
-        case "autor":
+        case "clave":
             $.ajax({
                 type: 'POST',
-                url: 'basedatos/autor_leer_datos.php',
-                data: {param1: evento.target.value}
+                url: 'basedatos/leer_datos.php',
+                data: {param1: evento.target.value,
+                       param2: id_Apartado }
             })
             .done(function(autor_datos){
                 
                 res=autor_datos.split("#&");
-            
-                if (res[0].trim() == evento.target.value) {
-                    error_lit='<p class="formulario__grupo-incorrecto">Error. Autor ya existe. </p>'
-                    validar_campo_resultado("nok", evento.target.name, error_lit);
+                
+                if (id_Oper == "alta") {
+                    if (evento.target.value !== "" 
+                        && res[0].trim() == evento.target.value) {
+                        $error_texto = "Error. " + id_Apartado + "ya existe. </p>'"
+                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                        validar_campo_resultado("nok", evento.target.name, error_lit); 
+                    } else {
+                            error_lit="<p></p>"
+                            validar_campo_resultado("ok", evento.target.name, error_lit);       
+                        }
                 } else {
-                        error_lit="<p></p>"
-                        validar_campo_resultado("ok", evento.target.name, error_lit);       
+                    if (res[0].trim() == "") {
+                        $error_texto = "Error. " + id_Apartado + " no existe. </p>'"
+                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                        validar_campo_resultado("nok", evento.target.name, error_lit);
+                    } else {
+                            error_lit="<p></p>"
+                            validar_campo_resultado("ok", evento.target.name, error_lit);       
+                        }
                     }
+
             })
             .fail(function(){
                 Swal.fire({
