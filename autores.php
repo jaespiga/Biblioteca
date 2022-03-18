@@ -2,6 +2,7 @@
 	session_start(); 
 
 	require_once 'basedatos/connect.php';  
+
 ?> 
 
 <!DOCTYPE html>
@@ -66,7 +67,7 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
 					
 					<li class="nav-item">
-						<form  method="post" class="row g-3">
+						<form  method="post" class="row g-4 mb-0">
 							<div class="col-auto">
 								<label for="autores" class="form-text text-light fs-4 ps-2 ">Autor</label>
 							</div>	
@@ -88,7 +89,7 @@
 
 				<form>
 					<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
-						me-5 mb-2 text-light fs-4" 
+						me-5 mb-0 text-light fs-4" 
 						data-bs-toggle="modal" data-bs-target="#autorNuevo">
 						Alta autor &nbsp;
 						<svg class="bi" width="30" height="30" fill="currentColor">
@@ -99,7 +100,7 @@
 				</form>	
 			
 				<form>
-					<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-2 text-light fs-4"
+					<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
 						data-bs-toggle="collapse" type="button">Filtros  &nbsp;
 						<svg class="bi" width="30" height="30" fill="currentColor">
 							<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>

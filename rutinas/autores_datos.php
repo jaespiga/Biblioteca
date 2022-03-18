@@ -46,14 +46,14 @@
   <div class="d-flex col-12">
     <div class="col-8 d-inline-flex">  
       <label class="fs-5 mt-2 text-primary">Nacimiento&nbsp;&nbsp;&nbsp;&nbsp;: Lugar</label>
-      <input type="text" name="lnac" id="autor_alta_lnac" 
+      <input type="text" name="lnac" id="lnac" 
           class="form-control input-sm fs-5 w-50 h-75 mt-1 ms-3">
     </div>
 
     <div class="col-4 d-inline-flex">
-      <label for="autor_alta_pnac" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
+      <label for="pnac" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
               País&nbsp;&nbsp;</label>
-      <input type="text" id="autor_alta_pnac" list="lista_paises1" name="pnac" autocomplete="off"
+      <input type="text" id="pnac" list="lista_paises1" name="pnac" autocomplete="off"
             class="form-control input-sm fs-5 h-75 w-75 ms-2">
       <datalist id="lista_paises1"> </datalist>
     </div>
@@ -64,14 +64,14 @@
   <div class="d-flex col-12">
     <div class="col-8 d-inline-flex">  
       <label class="fs-5 mt-2 text-primary">Fallecimiento: Lugar</label>
-      <input type="text" name="" id="autor_alta_lfal" 
+      <input type="text" name="" id="lfal" 
           class="form-control input-sm fs-5 w-50 h-75 mt-1 ms-3">
     </div>
 
     <div class="col-4 d-inline-flex">
-      <label for="autor_alta_pfal" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
+      <label for="pfal" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
               País&nbsp;&nbsp;</label>
-      <input type="text" id="autor_alta_pfal" list="lista_paises2" name="pfal" autocomplete="off"
+      <input type="text" id="pfal" list="lista_paises2" name="pfal" autocomplete="off"
             class="form-control input-sm fs-5 h-75 w-75 ms-2">
       <datalist id="lista_paises2"> </datalist>
     </div>
@@ -84,7 +84,7 @@
       <label for="web" class="fs-5 mt-4 text-primary">
               Consulta WEB</label>
     
-      <input type="text" name="web" id="texto_web" 
+      <input type="text" name="web" id="web" 
             class="form-control input-sm fs-5 h-75 w-75 mt-3 ms-3"/>
     </div>       
     

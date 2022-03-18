@@ -1,6 +1,6 @@
 
 <!-- Modal para dar de alta un autor y datos personales -->
-<div class="modal fade" id="pantalla" role = 'dialog' tabindex="-1">
+<div class="modal fade" id="autorNuevo" role = 'dialog' tabindex="-1">
   <div class="modal-dialog modal-lg formulario"  id="formulario">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,7 +16,7 @@
           <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
 
           <input type="text" name="clave" id="clave" 
-                  onblur="document.getElementById('texto_web').value=this.value"
+                  onblur="document.getElementById('web').value=this.value"
                   class="form-control input-sm fs-5 mb-4 formulario__input" 
                   autocomplete="off" required>
           <div id="clave_error"></div>

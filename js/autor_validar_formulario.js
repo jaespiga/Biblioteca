@@ -33,10 +33,11 @@ const validarFormulario = (evento) =>{
 const validarCampoValor = (evento) =>{
     switch (evento.target.name) {  
         case "clave":
+            valor_clave = evento.target.value
             $.ajax({
                 type: 'POST',
                 url: 'basedatos/leer_datos.php',
-                data: {param1: evento.target.value,
+                data: {param1: valor_clave,
                        param2: id_Apartado }
             })
             .done(function(autor_datos){

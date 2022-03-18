@@ -2,6 +2,7 @@
         
 $tabla = $_POST['param1'];
 $clave = $_POST['param2'];
+echo ($tabla + "   " + $clave);
 
 leerListaCódigos($tabla, $clave);
 

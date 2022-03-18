@@ -3,11 +3,11 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     
     var clave_tabla = document.getElementById('tabla_paises_cambio').getAttribute('data-clave');                                                                                             
     //comprobamos si se pulsa una tecla
-    $("#autor_alta_pnac").keyup(function(){  
+    $("#pnac").keyup(function(){  
         //hacemos focus al campo de búsqueda
-        $("#autor_alta_pnac").focus();                            
+        $("#pnac").focus();                            
         //obtenemos el texto introducido en el campo de búsqueda
-        clave_clave = $("#autor_alta_pnac").val();
+        clave_clave = $("#pnac").val();
 
         $.ajax({
             type: "POST",
@@ -44,11 +44,11 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     })
 
     //comprobamos si se pulsa una tecla
-    $("#autor_alta_pfal").keyup(function(){  
+    $("#pfal").keyup(function(){  
         //hacemos focus al campo de búsqueda
-        $("#autor_alta_pfal").focus();                            
+        $("#pfal").focus();                            
         //obtenemos el texto introducido en el campo de búsqueda
-        clave_clave = $("#autor_alta_pfal").val();
+        clave_clave = $("#pfal").val();
 
         $.ajax({
             type: "POST",
