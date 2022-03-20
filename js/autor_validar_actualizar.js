@@ -14,11 +14,6 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       form_campos = form_campos  +  "#&" + $('#web').val();
       
       alert ("formulario " + form_campos);
-      Swal.fire({
-          icon: 'warning',
-          title: 'Campos formulario',
-          text: "formulario: " + form_campos
-        })     
 
       $.ajax({                        
         type: 'POST',                 
@@ -26,13 +21,19 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         data: {param1: form_campos}                  
       })    
       .done(function(respuesta){   
+        alert ("respuesta: " + respuesta)
         res=respuesta.split("#&")
+        alert ("status: " + res[0])
         
         if (res[0]) {
                       Swal.fire({
                         icon: 'succes',
                         title: res[1],
-                      })   
+                      })  
+                      
+                      if ($('#idOper').val() == "alta") {
+                          $('#autorNuevo').fadeOut();
+                      } 
         } else {
                 Swal.fire({
                   icon: 'error',
@@ -40,9 +41,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                   text: res[1],
                   footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
                 })   
-                if ($('#idOper').val() == "alta") {
-                    $('#autorNuevo').fadeOut();
-                }
+               
             }
       })
       .fail(function(){

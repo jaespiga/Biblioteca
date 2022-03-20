@@ -2,23 +2,26 @@
 <?php
 
 
-$campos = trim($_POST['param1']);
-$ind_validar = true;
-$mensaje = "";
+$campos_pantalla = trim($_POST['param1']);
 
-validarSubmit($campos, $ind_validar, $mensaje);
+list($campos_bdatos, $ind_validar, $mensaje) = validarSubmit($campos_pantalla);
 
 if ($ind_validar) {
-    actualizarSubmit($campos, $ind_validar, $mensaje);
+    list($ind_validar, $mensaje) = actualizarSubmit($campos_bdatos);
 }
 
-$respuesta = $campos + "#&" + $ind_validar + "#&" +  $mensaje;
+$respuesta =  $ind_validar . "#&" .  $mensaje;
+
 echo ($respuesta);
 
+
 // Validación campos de formulario de autor
-function validarSubmit($campos, $ind_validar, $mensaje) {
+function validarSubmit($campos) {
    
     require_once 'connect.php';
+
+    $ind_validar = true;
+    $mensaje = "";
 
     $res = explode("#&", $campos);
     
@@ -29,7 +32,7 @@ function validarSubmit($campos, $ind_validar, $mensaje) {
     if ($res[2] == "") { 
         $mensaje = "Nombre del autor tiene que estar informado";  
         $ind_validar = false;  
-        return ($campos, $ind_validar, $mensaje);  
+        return [$campos, $ind_validar, $mensaje];  
     } else {
             $sql= "SELECT cGR02_Autor
                     FROM tgr02_autores
@@ -41,13 +44,13 @@ function validarSubmit($campos, $ind_validar, $mensaje) {
                 if ($res[1] !== "alta") {
                     $mensaje = "Error. Autor no existe.";  
                     $ind_validar = false;   
-                    return; 
+                    return [$campos, $ind_validar, $mensaje];  
                 };
             } else {
                     if ($res[1] == "alta") {
                         $mensaje = "Error. Autor ya existe.";  
                         $ind_validar = false;   
-                        return; 
+                        return [$campos, $ind_validar, $mensaje];  
                     };
                 }   
         }
@@ -59,7 +62,7 @@ function validarSubmit($campos, $ind_validar, $mensaje) {
 }
 
 // Actualización campos de formulario de autor
-function actualizarSubmit($campos, $ind_validar, $mensaje) {
+function actualizarSubmit($campos) {
 
 }    
 ?>
