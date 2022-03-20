@@ -22,11 +22,28 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
 
       $.ajax({                        
         type: 'POST',                 
-        url: 'rutinas/autor_validar_actualizar.php',
+        url: 'basedatos/autor_validar_actualizar.php',
         data: {param1: form_campos}                  
       })    
       .done(function(respuesta){   
-        $('#tabla_autores').html(respuesta)
+        res=respuesta.split("#&")
+        
+        if (res[0]) {
+                      Swal.fire({
+                        icon: 'succes',
+                        title: res[1],
+                      })   
+        } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Operación no efectuada',
+                  text: res[1],
+                  footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+                })   
+                if ($('#idOper').val() == "alta") {
+                    $('#autorNuevo').fadeOut();
+                }
+            }
       })
       .fail(function(){
         Swal.fire({

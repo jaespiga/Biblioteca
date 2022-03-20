@@ -2,8 +2,8 @@
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario');
 
-const id_Apartado = document.getElementById('idApartado');
-const id_Oper = document.getElementById('idOper');
+const id_Apartado = document.getElementById('idApartado').value;
+const id_Oper = document.getElementById('idOper').value;
 
 const expresiones = {
     clave: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
@@ -33,21 +33,20 @@ const validarFormulario = (evento) =>{
 const validarCampoValor = (evento) =>{
     switch (evento.target.name) {  
         case "clave":
-            valor_clave = evento.target.value
             $.ajax({
                 type: 'POST',
                 url: 'basedatos/leer_datos.php',
-                data: {param1: valor_clave,
-                       param2: id_Apartado }
+                data: {param1: evento.target.value,
+                       param2: id_Apartado
+                    }
             })
             .done(function(autor_datos){
-                
                 res=autor_datos.split("#&");
                 
                 if (id_Oper == "alta") {
                     if (evento.target.value !== "" 
                         && res[0].trim() == evento.target.value) {
-                        $error_texto = "Error. " + id_Apartado + "ya existe. </p>'"
+                        $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
                         error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                         validar_campo_resultado("nok", evento.target.name, error_lit); 
                     } else {
