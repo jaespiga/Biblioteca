@@ -11,7 +11,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
 
         $.ajax({
             type: "POST",
-            url: "basedatos/cargar_tabla_codigos.php",
+            url: "basedatos/tabla_codigos_cargar.php",
             data: {param1: clave_tabla,
                    param2: clave_clave},
             dataType: "html"
@@ -52,7 +52,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
 
         $.ajax({
             type: "POST",
-            url: "basedatos/cargar_tabla_codigos.php",
+            url: "basedatos/tabla_codigos_cargar.php",
             data: {param1: clave_tabla,
                    param2: clave_clave},
             dataType: "html"

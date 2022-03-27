@@ -1,10 +1,9 @@
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     var clave_tabla = document.getElementById('tabla_paises').getAttribute('data-clave');
     var clave_codigo =""
-
     $.ajax({                        
       type: 'POST',                 
-      url: 'basedatos/cargar_tabla_codigos.php',
+      url: 'basedatos/tabla_codigos_cargar.php',
       data: {param1: clave_tabla,
              param2: clave_codigo}    
     })    

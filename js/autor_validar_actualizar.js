@@ -12,8 +12,6 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       form_campos = form_campos  +  "#&" + $('#lfal').val();
       form_campos = form_campos  +  "#&" + $('#pfal').val();
       form_campos = form_campos  +  "#&" + $('#web').val();
-      
-      alert ("formulario " + form_campos);
 
       $.ajax({                        
         type: 'POST',                 
@@ -25,7 +23,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         res=respuesta.split("#&")
         alert ("status: " + res[0])
         
-        if (res[0]) {
+        if (res[0] == "0") {
                       Swal.fire({
                         icon: 'succes',
                         title: res[1],
@@ -35,13 +33,31 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                           $('#autorNuevo').fadeOut();
                       } 
         } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Operación no efectuada',
-                  text: res[1],
-                  footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
-                })   
-               
+                if (res[0] == "1") {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Operación no efectuada',
+                      text: res[1],
+                      footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+                    })   
+                  } else {
+                          if (res[0] == "2") {
+                            Swal.fire({
+                              icon: 'succes',
+                              title: 'Operación realizada con incidencias',
+                              text: res[1],
+                              footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+                            })   
+                          } else {
+                                  Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Código de respuesta desconocido',
+                                    text: res[1],
+                                    footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+                                  })   
+
+                              }
+                      }
             }
       })
       .fail(function(){
@@ -54,3 +70,4 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       })            
     })  
   })
+  

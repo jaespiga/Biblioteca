@@ -6,7 +6,8 @@ const id_Apartado = document.getElementById('idApartado').value;
 const id_Oper = document.getElementById('idOper').value;
 
 const expresiones = {
-    clave: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
+    clave: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,    // letras, acentos, números, espacios, guión bajo, guión
+   
 }
 
 const validarFormulario = (evento) =>{
@@ -22,7 +23,7 @@ const validarFormulario = (evento) =>{
                 error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>"
                 validar_campo_resultado("nok", evento.target.name, error_lit);
                 }
-        break;  
+        break; 
          
         default:
                 
