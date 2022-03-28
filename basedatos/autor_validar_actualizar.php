@@ -3,13 +3,16 @@
 
 $campos_pantalla = trim($_POST['param1']);
 
-list($ind_validar, $mensaje, $campos_bdatos) = validarSubmit($campos_pantalla);
+list($ind_validar, $mensaje_validar, $campos_bdatos) = validarSubmit($campos_pantalla);
 
 if ($ind_validar == "0" || $ind_validar == "2") {
-    list($ind_validar, $mensaje) = actualizarSubmit($campos_bdatos);
-}
+    list($ind_actualizar, $mensaje_actualizar) = actualizarSubmit($campos_bdatos);
+} else {
+        $ind_actualizar = 9;
+        $mensaje_actualizar = $mensaje_validar;
+    }
 
-$respuesta =  $ind_validar . "#&" .  $mensaje;
+$respuesta =  $ind_validar . "#&" .  $mensaje_validar . "#&" . $ind_actualizar . "#&" .  $mensaje_actualizar;
 
 echo ($respuesta);
 
@@ -71,22 +74,59 @@ function validarSubmit($campos) {
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
 
+    // Validar corriente literaria
+    $tabla = "CLiteraria";
+    $literal = $res[4];
+    $ind_lectura= "";
+    $bdatos_clave= 0;   
+
+    require_once 'tabla_codigos_leer_descripcion.php';
+
+    if ($ind_lectura == "1")  {
+        $mensaje .= "<br> Corriente literaria no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $ind_validar = "2";   
+    } 
+    $campos_bdatos .= "#&" . $bdatos_clave;
 
     
+    // Validar país de nacimiento
+    $tabla = "País";
+    $literal = $res[8];
+    $ind_lectura= "";
+    $bdatos_clave= 0;   
 
+    require_once 'tabla_codigos_leer_descripcion.php';
 
+    if ($ind_lectura == "1")  {
+        $mensaje .= "<br> País de nacimiento no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $ind_validar = "2";   
+    } 
+    $campos_bdatos .= "#&" . $bdatos_clave;
     
+    // Validar país de fallecimiento
+    $tabla = "País";
+    $literal = $res[10];
+    $ind_lectura= "";
+    $bdatos_clave= 0;   
+
+    require_once 'tabla_codigos_leer_descripcion.php';
+
+    if ($ind_lectura == "1")  {
+        $mensaje .= "<br> País de fallecimiento no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $ind_validar = "2";   
+    } 
+    $campos_bdatos .= "#&" . $bdatos_clave;
     return [$ind_validar, $mensaje, $campos_bdatos];   
     
 }
 
 // Actualización campos de formulario de autor
 function actualizarSubmit($campos) {
-    $ind_validar = 0;
-    $mensaje = "";
+    $ind_actualizar = 0;
+    $mensaje_actualizar = "";
 
     $res = explode("#&", $campos);
 
-    return [$ind_validar, $mensaje];   
+    return [$ind_actualizar, $mensaje_actualizar];   
 }    
 ?>

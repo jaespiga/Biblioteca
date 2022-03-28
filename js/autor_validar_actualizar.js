@@ -23,17 +23,27 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         res=respuesta.split("#&")
         alert ("status: " + res[0])
         
-        if (res[0] == "0") {
-                      Swal.fire({
-                        icon: 'succes',
-                        title: res[1],
-                      })  
-                      
-                      if ($('#idOper').val() == "alta") {
-                          $('#autorNuevo').fadeOut();
-                      } 
+        if (res[2] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
+          if (res[0] == 0) { // Indicador de validación correcta
+                Swal.fire({
+                  icon: 'succes',
+                  title: "Operación efectuada"
+                })  
+                
+                if ($('#idOper').val() == "alta") {
+                    $('#autorNuevo').modal('hide');  // oculta el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                }
+          } else {
+                  Swal.fire({
+                    icon: 'succes',
+                    title: 'Operación realizada con incidencias',
+                    html: '<p>' + res[1] + '</p>'
+                  })   
+              }      
         } else {
-                if (res[0] == "1") {
+                if (res[0] == 1) {
                     Swal.fire({
                       icon: 'error',
                       title: 'Operación no efectuada',
@@ -41,22 +51,12 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                       footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
                     })   
                   } else {
-                          if (res[0] == "2") {
-                            Swal.fire({
-                              icon: 'succes',
-                              title: 'Operación realizada con incidencias',
-                              text: res[1],
-                              footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
-                            })   
-                          } else {
-                                  Swal.fire({
-                                    icon: 'warning',
-                                    title: 'Código de respuesta desconocido',
-                                    text: res[1],
-                                    footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
-                                  })   
-
-                              }
+                          Swal.fire({
+                            icon: 'warning',
+                            title: 'Código de validación desconocido: ' + res[0],
+                            text: res[1],
+                            footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
+                          })   
                       }
             }
       })
