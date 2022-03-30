@@ -142,14 +142,17 @@
 				src="js/lista_tabla_codigos_nacionalidad.js"></script>  <!-- Lista nacionalidades  -->
 		<script  id="tabla_nacionalidad_cambio" data-clave="Nacionalidad"
 				src="js/lista_tabla_codigos_nacionalidad_cambio.js"></script>  <!-- Lista nacionalidades ordenado por tecleo  -->		
+		
+		<script  id="tabla_clit" data-clave="CLiteraria"
+				src="js/lista_tabla_codigos_clit.js"></script>  <!-- Lista corrientes literarias  -->
+		<script  id="tabla_clit_cambio" data-clave="CLiteraria"
+				src="js/lista_tabla_codigos_clit_cambio.js"></script>  <!-- Lista corrientes literarias  ordenado por tecleo  -->
 
 		<script  id="tabla_paises" data-clave="País"
 				src="js/lista_tabla_codigos_paises.js"></script>  <!-- Lista países  -->	
 		<script  id="tabla_paises_cambio" data-clave="País"
 				src="js/lista_tabla_codigos_paises_cambio.js"></script>  <!-- Lista países ordenados por tecleo  -->									
 
-		<script  id="tabla_clit" data-clave="CLiteraria"
-								src="js/lista_tabla_codigos_clit.js"></script>  <!-- Lista corrientes literarias  -->
 	</body>
 
 </html>

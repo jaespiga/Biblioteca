@@ -10,10 +10,10 @@
             </div>
 
             <div class="col-7 d-inline-flex">
-              <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 text-primary">
+              <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 ps-3 text-primary">
                       Corriente literaria&nbsp;&nbsp;</label>
               <input type="text" id="cliteraria" list="lista_clit" name="cliteraria" 
-                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-75">
+                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-50">
               <datalist id="lista_clit"> </datalist>
             </div>
           </div>      
@@ -23,19 +23,125 @@
   <div class="d-flex mb-2">
     <div class="formulario__grupo" id="grupo__fnac">  
       <div class="col-auto d-inline-flex"> 
-        <label class="fs-5 mt-4 text-primary formulario__input-label">Fecha de nacimiento</label>
-        <input type="date" name="fnac" id="fnac" 
-                class="form-control input-sm bg-secondary fs-5 h-50 w-75 mt-3 ms-2 
-                formulario__input">
+        <label class="fs-5 mt-3 text-primary">Fecha de nacimiento</label>
+        <select id="fnacdd"  class="form-control fs-5 mt-2 fechadd">>
+          <option value="" disabled selected hidden>dd</option>
+          <option value=""></option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>        
+        </select>        
+        <label class="fs-5 mt-3 fecha_separador">/</label>
+        <select id="fnacmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm">
+          <option value="" disabled selected hidden>mm</option>
+          <option value=""></option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        <label class="fs-5 mt-3 fecha_separador">/</label>
+        <input type="text" name="fnacsa" id="fnacsa" 
+                class="form-control input-sm fs-5 mt-2 fechasa" placeholder="ssaa"
+                maxlength="4" value="" >
       </div>    
       <div id="fnac_error"></div>      
     </div>
-    <div class="formulario__grupo"  id="grupo__ffal"> 
+    <div class="formulario__grupo  ms-5 ps-5"  id="grupo__ffal"> 
       <div class="col-auto d-inline-flex ">
-        <label class="fs-5 mt-4 ms-2 text-primary formulario__input-label">Fecha de defunción</label>
-        <input type="date" name="ffal" id="ffal" 
-               class="form-control input-sm bg-secondary fs-5 h-50 w-75 mt-3 ms-3 
-                      formulario__input">
+        <label class="fs-5 mt-3 text-primary">Fecha de defunción</label>
+        <select id="ffaldd"  class="form-control fs-5 mt-2 fechadd">>
+          <option value="" disabled selected hidden>dd</option>
+          <option value=""></option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>        
+        </select>        
+        <label class="fs-5 mt-3 fecha_separador">/</label>
+        <select id="ffalmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm">
+          <option value="" disabled selected hidden>mm</option>
+          <option value=""></option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        <label class="fs-5 mt-3 fecha_separador">/</label>
+        <input type="text" name="ffalsa" id="ffalsa" 
+                class="form-control input-sm fs-5 mt-2 fechasa" placeholder="ssaa"
+                maxlength="4" value="" >              
       </div>        
       <div id="ffal_error"></div>
     </div>

@@ -66,10 +66,10 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
-    require_once 'tabla_codigos_leer_descripcion.php';
+    require 'tabla_codigos_leer_descripcion.php';
 
     if ($ind_lectura == "1")  {
-        $mensaje .= "<br> Nacionalidad no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $mensaje .= "<br> <strong> Nacionalidad no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
         $ind_validar = "2";   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
@@ -80,10 +80,10 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
-    require_once 'tabla_codigos_leer_descripcion.php';
+    require 'tabla_codigos_leer_descripcion.php';
 
     if ($ind_lectura == "1")  {
-        $mensaje .= "<br> Corriente literaria no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $mensaje .= "<br> <strong> Corriente literaria no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
         $ind_validar = "2";   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
@@ -95,10 +95,10 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
-    require_once 'tabla_codigos_leer_descripcion.php';
+    require 'tabla_codigos_leer_descripcion.php';
 
     if ($ind_lectura == "1")  {
-        $mensaje .= "<br> País de nacimiento no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $mensaje .= "<br> <strong> País de nacimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
         $ind_validar = "2";   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
@@ -109,10 +109,10 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
-    require_once 'tabla_codigos_leer_descripcion.php';
+    require 'tabla_codigos_leer_descripcion.php';
 
     if ($ind_lectura == "1")  {
-        $mensaje .= "<br> País de fallecimiento no existe. Será ignorada. Dar de alta en tabla de códigos";  
+        $mensaje .= "<br> <strong> País de fallecimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
         $ind_validar = "2";   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;

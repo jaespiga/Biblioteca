@@ -39,7 +39,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                   Swal.fire({
                     icon: 'succes',
                     title: 'Operación realizada con incidencias',
-                    html: '<p>' + res[1] + '</p>'
+                    html: '<p align="left">' + res[1] + '</p>'
                   })   
               }      
         } else {

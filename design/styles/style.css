@@ -112,6 +112,25 @@ body {
 	cursor: pointer;
 }
 
+/* formateo de campos de fecha */
+.fechadd {
+	border: none;
+	width: 43px;
+}
+.fechamm {
+	border: none;
+	width: 43px;
+}
+.fechasa {
+	border: none;
+	width: 55px;
+	padding-left: 5px;
+}
+.fecha_separador {
+	border: none;
+	width: 5px;
+}
+
 /* formateo de campos de error en validaciones de campos */
 
 .formulario__grupo-correcto {
