@@ -31,7 +31,6 @@
 	<body>
 
 		<?php require_once 'rutinas/ControlSesion.php'; ?>
-		<?php require_once 'rutinas/validar_fecha_espanol.php'; ?>
 		<!--
 			Pantalla de autores
 		--> 

@@ -7,165 +7,207 @@ const id_Oper = document.getElementById('idOper').value;
 
 const expresiones = {
     clave: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,    // letras, acentos, números, espacios, guión bajo, guión
-   
+    fnac:  /^[0-9]{1,4}$/,                      // números
+    ffal:  /^[0-9]{1,4}$/                       // números
 }
 
-const validarFormulario = (evento) =>{
+function validarFormulario(evento) {
+    
     switch (evento.target.name) {  
         case "clave":
         
             if (expresiones.clave.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
-                error_lit="<p></p>"
+                error_lit="<p></p>";
                 validar_campo_resultado("ok", evento.target.name, error_lit);
 
             } else {
-                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>"
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
                 validar_campo_resultado("nok", evento.target.name, error_lit);
                 }
         break; 
-         
+
+        case "fnac":
+            if (expresiones.fnac.test(evento.target.value)) {
+                /* Validación de caracteres correcta */
+                error_lit="<p></p>";
+                validar_campo_resultado("ok", evento.target.name, error_lit);
+
+            } else {
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultado("nok", evento.target.name, error_lit);
+                }
+        break; 
+
+        case "ffal":
+            if (expresiones.ffal.test(evento.target.value)) {
+                /* Validación de caracteres correcta */
+                error_lit="<p></p>";
+                validar_campo_resultado("ok", evento.target.name, error_lit);
+
+            } else {
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultado("nok", evento.target.name, error_lit);
+                }
+        break; 
+
         default:
                 
         break;
     } 
+    return
 }
-
-const validarCampoValor = (evento) =>{
+function validarCampoValor(evento){
+    
     switch (evento.target.name) {  
         case "clave":
-            $.ajax({
-                type: 'POST',
-                url: 'basedatos/leer_datos.php',
-                data: {param1: evento.target.value,
-                       param2: id_Apartado
-                    }
-            })
-            .done(function(autor_datos){
-                res=autor_datos.split("#&");
-                
-                if (id_Oper == "alta") {
-                    if (evento.target.value !== "" 
-                        && res[0].trim() == evento.target.value) {
-                        $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
-                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                        validar_campo_resultado("nok", evento.target.name, error_lit); 
-                    } else {
-                            error_lit="<p></p>"
-                            validar_campo_resultado("ok", evento.target.name, error_lit);       
+            if (expresiones.clave.test(evento.target.value)) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'basedatos/leer_datos.php',
+                    data: {param1: evento.target.value,
+                        param2: id_Apartado
                         }
-                } else {
-                    if (res[0].trim() == "") {
-                        $error_texto = "Error. " + id_Apartado + " no existe. </p>'"
-                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                        validar_campo_resultado("nok", evento.target.name, error_lit);
+                })
+                .done(function(autor_datos){
+                    res=autor_datos.split("#&");
+                    
+                    if (id_Oper == "alta") {
+                        if (evento.target.value !== "" 
+                            && res[0].trim() == evento.target.value) {
+                            $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
+                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                            validar_campo_resultado("nok", evento.target.name, error_lit); 
+                        } else {
+                                error_lit="<p></p>"
+                                validar_campo_resultado("ok", evento.target.name, error_lit);       
+                            }
                     } else {
-                            error_lit="<p></p>"
-                            validar_campo_resultado("ok", evento.target.name, error_lit);       
+                        if (res[0].trim() == "") {
+                            $error_texto = "Error. " + id_Apartado + " no existe. </p>'"
+                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                            validar_campo_resultado("nok", evento.target.name, error_lit);
+                        } else {
+                                error_lit="<p></p>"
+                                validar_campo_resultado("ok", evento.target.name, error_lit);       
+                            }
                         }
-                    }
 
-            })
-            .fail(function(){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Hubo un error al leer autor',
-                    footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                }) 
-            })
+                })
+                
+                .fail(function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Hubo un error al leer autor',
+                        footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                    }) 
+                })
+            } else {
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultado("nok", evento.target.name, error_lit);
+                }
         break; 
 
         case "fnac":  
-            annos_referencia = -15  // Años a sumar/restar al año en curso para no ser superado 
-            $.ajax({
-                    type: 'POST',
-                    url: 'rutinas/validar_fecha_espanol.php',
-                    data: {param1: evento.target.value,
-                           param2: annos_referencia   
-                    }
-                })
-                .done(function(respuesta){                              
-                    res=respuesta.split("#&");
-                    if (res[0] == "0") {
-                        error_lit="<p></p>"
-                        validar_campo_resultado("ok", evento.target.name, error_lit);   
-                    } else {
-                        if (res[0] == "1") {
-                            $error_texto="Error. Fecha errónea. "
-                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                            validar_campo_resultado("nok", evento.target.name, error_lit); 
+            if (expresiones.fnac.test(evento.target.value)) {
+                annos_referencia = -15  // Años a sumar/restar al año en curso para no ser superado 
+                $.ajax({
+                        type: 'POST',
+                        url: 'rutinas/validar_fecha_espanol.php',
+                        data: {param1: evento.target.value,
+                            param2: annos_referencia   
+                        }
+                    })
+                    .done(function(respuesta){                              
+                        res=respuesta.split("#&");
+                        if (res[0] == "0") {
+                            error_lit="<p></p>"
+                            validar_campo_resultado("ok", evento.target.name, error_lit);   
                         } else {
-                            if (res[0] == "2") {
-                                $error_texto = "Error. Fecha no puede ser superior a " + res[1]
+                            if (res[0] == "1") {
+                                $error_texto="Error. Fecha errónea. "
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultado("nok", evento.target.name, error_lit); 
                             } else {
-                                error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                }
-                            }   
-                        }
-                })
-                .fail(function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Hubo un error al validar la fecha',
-                    }) 
-                })
-    
+                                if (res[0] == "2") {
+                                    $error_texto = "Error. Fecha no puede ser superior a " + res[1]
+                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                } else {
+                                    error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
+                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                    }
+                                }   
+                            }
+                    })
+                    .fail(function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Hubo un error al validar la fecha',
+                        }) 
+                    })
+            } else {
+                    error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                    validar_campo_resultado("nok", evento.target.name, error_lit);
+                }
         break; 
 
         case "ffal": 
-        
-            annos_referencia = 0  // Años a sumar/restar al año en curso para no ser superado 
-            $.ajax({
-                    type: 'POST',
-                    url: 'rutinas/validar_fecha_espanol.php',
-                    data: {param1: evento.target.value,
-                           param2: annos_referencia   
-                    }
-                })
-                .done(function(respuesta){                              
-                    res=respuesta.split("#&");
-                    if (res[0] == "0") {
-                        error_lit="<p></p>"
-                        validar_campo_resultado("ok", evento.target.name, error_lit);               
-                    } else {
-                        if (res[0] == "1") {
-                            $error_texto="Error. Fecha errónea. "
-                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                            validar_campo_resultado("nok", evento.target.name, error_lit); 
+            if (expresiones.ffal.test(evento.target.value)) {
+                annos_referencia = 0  // Años a sumar/restar al año en curso para no ser superado 
+                $.ajax({
+                        type: 'POST',
+                        url: 'rutinas/validar_fecha_espanol.php',
+                        data: {param1: evento.target.value,
+                            param2: annos_referencia   
+                        }
+                    })
+                    .done(function(respuesta){                              
+                        res=respuesta.split("#&");
+                        if (res[0] == "0") {
+                            error_lit="<p></p>"
+                            validar_campo_resultado("ok", evento.target.name, error_lit);               
                         } else {
-                            if (res[0] == "2") { 
-                                $error_texto = "Error. Fecha no puede ser superior a " + res[1]
+                            if (res[0] == "1") {
+                                $error_texto="Error. Fecha errónea. "
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultado("nok", evento.target.name, error_lit); 
                             } else {
-                                error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                }
-                            }   
-                        }
-                })
-                .fail(function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Hubo un error al validar la fecha',
-                    }) 
-                })
-    
+                                if (res[0] == "2") { 
+                                    $error_texto = "Error. Fecha no puede ser superior a " + res[1]
+                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                } else {
+                                    error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
+                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                    }
+                                }   
+                            }
+                    })
+                    .fail(function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Hubo un error al validar la fecha',
+                        }) 
+                    })
+            } else {
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultado("nok", evento.target.name, error_lit);
+                }
         break; 
 
         default:
                 
         break;
-    }    
+    }  
+    return  
 }
 
-const validarCompararFechas = () => {
+function validarCompararFechas () {
+    
     fecha_inicial_id = "fnac";
     fecha_final_id= "ffal";
     fecha_inicial = document.getElementById(`${fecha_inicial_id}`).value;
@@ -185,11 +227,12 @@ const validarCompararFechas = () => {
         error_lit="<p></p>"
         validar_campo_resultado("ok", fecha_inicial_id, error_lit); 
         }
+        return
 }
 
 
 /* función para resaltar resultados del análisis de un campo del formulario */
-const validar_campo_resultado = (resultado_validacion, campo, error_mensaje) => {
+function validar_campo_resultado (resultado_validacion, campo, error_mensaje) {
     
     $(`#${campo}_error`).html(error_mensaje);   
     if (resultado_validacion == "ok") {
@@ -202,13 +245,14 @@ const validar_campo_resultado = (resultado_validacion, campo, error_mensaje) => 
         document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto'); 
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo'); 
         campos['campo'] = false;       
-        }                                            
+        }  
+        return                                              
 }
 
 /* Analizar las entradas del formulario que queramos validar  */ 
 inputs.forEach((input, button)=> {
     input.addEventListener('focusout', validarCampoValor);
-    input.addEventListener('focusout', validarCompararFechas);
+    
     input.addEventListener('keyup', validarFormulario);
 });
 

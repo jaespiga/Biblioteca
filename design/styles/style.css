@@ -115,16 +115,17 @@ body {
 /* formateo de campos de fecha */
 .fechadd {
 	border: none;
-	width: 43px;
+	width: 45px;
+	margin-right: 0px;
 }
 .fechamm {
 	border: none;
-	width: 43px;
+	width: 30px;
 }
 .fechasa {
 	border: none;
-	width: 55px;
-	padding-left: 5px;
+	width: 65px;
+	padding-left: 10px;
 }
 .fecha_separador {
 	border: none;
@@ -142,7 +143,7 @@ body {
 }
 
 .formulario__grupo-incorrecto .formulario__input{
-	border: 3px solid #c51c38; 
+	border: 2px solid #c51c38; 
 }
 
 .formulario__input-error{

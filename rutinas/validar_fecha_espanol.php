@@ -1,5 +1,31 @@
 <?php
-   /* Validar fecha */
+   /* Tratamiento de fechas (función, ....campos necesarios para esa función ....)
+    Las fechas válidas serán con formato ssaa-mm-dd donde "-" es un delimitador 
+    Función: 1- Validar fecha
+        Entrada: Función / Fecha
+        Salida : Indicador de fecha correcta (0) o errónea (1)
+    Función: 2- Validar fecha y sumar(+)/ restar(-) años, meses y/o días
+        Entrada: Función / Fecha / años / meses / días a sumar restar
+        Salida : Indicador de fecha correcta (0) o errónea (1)
+                 Fecha calculada (nula si no ha podido ser calculada)
+    Función: 3- Comparar fechas y dar diferencia: total días / diferencia en años, meses y días
+        Entrada: Función / Fecha1 / Fecha2
+        Salida : Indicador de primera fecha correcta (0) o errónea (1) 
+                 Indicador de segunda fecha correcta (0) o errónea (1)
+                 Indicador de cuál fecha es mayor: 0- Primera menor o igual, 1- Segunda menor 
+                 Diferencia de fechas en días
+                 Diferencia de fechas en años, meses y días
+    Función: 4- Días del año
+        Entrada: Función / Año
+        Salida : Indicador año correcto (0) o erróneo (1)
+                 Días. 0 si el año es incorrecto
+    Función: 5- Fecha fin de mes
+        Entrada: Función / Fecha de la que se quiere saber cuál es el último día del mes
+        Salida : Indicador de fecha correcta (0) o errónea (1)
+                 Fecha de fin de mes. Nula si entrada es incorrecta.
+   
+   
+   */
 $fecha = trim($_POST['param1']);         // fecha a validar
 $fecha = stripslashes($fecha);
 $fecha = htmlspecialchars($fecha);

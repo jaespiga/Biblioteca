@@ -77,8 +77,8 @@
           <option value="12">12</option>
         </select>
         <label class="fs-5 mt-3 fecha_separador">/</label>
-        <input type="text" name="fnacsa" id="fnacsa" 
-                class="form-control input-sm fs-5 mt-2 fechasa" placeholder="ssaa"
+        <input type="text" name="fnac" id="fnac" 
+                class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
                 maxlength="4" value="" >
       </div>    
       <div id="fnac_error"></div>      
@@ -139,8 +139,8 @@
           <option value="12">12</option>
         </select>
         <label class="fs-5 mt-3 fecha_separador">/</label>
-        <input type="text" name="ffalsa" id="ffalsa" 
-                class="form-control input-sm fs-5 mt-2 fechasa" placeholder="ssaa"
+        <input type="text" name="ffal" id="ffal" 
+                class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
                 maxlength="4" value="" >              
       </div>        
       <div id="ffal_error"></div>
