@@ -111,34 +111,40 @@ function validarCampoValor(evento){
 
         case "fnac":  
             if (expresiones.fnac.test(evento.target.value)) {
-                annos_referencia = -15  // Años a sumar/restar al año en curso para no ser superado 
+                funcion = 1
+                ssaa = document.getElementById('fnac').value
+                mm = document.getElementById('fnacmm').value
+                dd = document.getElementById('fnacdd').value
+                fecha = ssaa + "-" + mm + "-" + dd
+                annos_referencia = -15  // Años a sumar/restar a la fecha del día
+                meses_referencia = 1    // Meses a sumar/restar a la fecha del día
+                dias_referencia = 1     // Días a sumar/restar a la fecha del día
                 $.ajax({
                         type: 'POST',
-                        url: 'rutinas/validar_fecha_espanol.php',
-                        data: {param1: evento.target.value,
-                            param2: annos_referencia   
+                        url: 'rutinas/tratamiento_fechas_pantalla.php',
+                        data: {
+                            param0: funcion,
+                            param1: fecha,
+                            param2: annos_referencia,
+                            param3: meses_referencia,
+                            param4: dias_referencia   
                         }
                     })
-                    .done(function(respuesta){                              
+                    .done(function(respuesta){  
                         res=respuesta.split("#&");
-                        if (res[0] == "0") {
-                            error_lit="<p></p>"
-                            validar_campo_resultado("ok", evento.target.name, error_lit);   
-                        } else {
-                            if (res[0] == "1") {
-                                $error_texto="Error. Fecha errónea. "
+                        nro_elementos= res.length
+                        if (res[0]==0) { // indicador de validación general                          
+                            if (res[3] == 1) {   // Fecha superior a fecha límite máxima
+                                $error_texto = "Error. Fecha no puede ser superior a " + res[5]
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultado("nok", evento.target.name, error_lit); 
                             } else {
-                                if (res[0] == "2") {
-                                    $error_texto = "Error. Fecha no puede ser superior a " + res[1]
-                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                } else {
-                                    error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
-                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                    }
-                                }   
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", evento.target.name, error_lit);  
+                                }
+                        } else {
+                                error_lit='<p class="formulario__grupo-incorrecto">' + mensaje +'</p>'
+                                validar_campo_resultado("nok", evento.target.name, error_lit); 
                             }
                     })
                     .fail(function(){
@@ -156,34 +162,40 @@ function validarCampoValor(evento){
 
         case "ffal": 
             if (expresiones.ffal.test(evento.target.value)) {
-                annos_referencia = 0  // Años a sumar/restar al año en curso para no ser superado 
+                funcion = 1
+                ssaa = document.getElementById('ffal').value
+                mm = document.getElementById('ffalmm').value
+                dd = document.getElementById('ffaldd').value
+                fecha = ssaa + "-" + mm + "-" + dd
+                annos_referencia = 0  // Años a sumar/restar a la fecha del día
+                meses_referencia = 0    // Meses a sumar/restar a la fecha del día
+                dias_referencia = 0     // Días a sumar/restar a la fecha del día
                 $.ajax({
                         type: 'POST',
-                        url: 'rutinas/validar_fecha_espanol.php',
-                        data: {param1: evento.target.value,
-                            param2: annos_referencia   
+                        url: 'rutinas/tratamiento_fechas_pantalla.php',
+                        data: {
+                            param0: funcion,
+                            param1: fecha,
+                            param2: annos_referencia,
+                            param3: meses_referencia,
+                            param4: dias_referencia   
                         }
                     })
-                    .done(function(respuesta){                              
+                    .done(function(respuesta){  
                         res=respuesta.split("#&");
-                        if (res[0] == "0") {
-                            error_lit="<p></p>"
-                            validar_campo_resultado("ok", evento.target.name, error_lit);               
-                        } else {
-                            if (res[0] == "1") {
-                                $error_texto="Error. Fecha errónea. "
+                        nro_elementos= res.length
+                        if (res[0]==0) { // indicador de validación general                          
+                            if (res[3] == 1) {   // Fecha superior a fecha límite máxima
+                                $error_texto = "Error. Fecha no puede ser superior a " + res[5]
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultado("nok", evento.target.name, error_lit); 
                             } else {
-                                if (res[0] == "2") { 
-                                    $error_texto = "Error. Fecha no puede ser superior a " + res[1]
-                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                } else {
-                                    error_lit='<p class="formulario__grupo-incorrecto">Error indeterminado. </p>';
-                                    validar_campo_resultado("nok", evento.target.name, error_lit); 
-                                    }
-                                }   
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", evento.target.name, error_lit);  
+                                }
+                        } else {
+                                error_lit='<p class="formulario__grupo-incorrecto">' + mensaje +'</p>'
+                                validar_campo_resultado("nok", evento.target.name, error_lit); 
                             }
                     })
                     .fail(function(){
@@ -194,8 +206,8 @@ function validarCampoValor(evento){
                         }) 
                     })
             } else {
-                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
-                validar_campo_resultado("nok", evento.target.name, error_lit);
+                    error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                    validar_campo_resultado("nok", evento.target.name, error_lit);
                 }
         break; 
 
@@ -252,7 +264,7 @@ function validar_campo_resultado (resultado_validacion, campo, error_mensaje) {
 /* Analizar las entradas del formulario que queramos validar  */ 
 inputs.forEach((input, button)=> {
     input.addEventListener('focusout', validarCampoValor);
-    
+    input.addEventListener('focusout', validarCompararFechas);
     input.addEventListener('keyup', validarFormulario);
 });
 

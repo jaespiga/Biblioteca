@@ -1,28 +1,36 @@
 
 <?php
+list ($respuesta) = autor_validar_actualizar();
 
-$campos_pantalla = trim($_POST['param1']);
+// Función para validar todos los campos de autor
+function autor_validar_actualizar() {
 
-list($ind_validar, $mensaje_validar, $campos_bdatos) = validarSubmit($campos_pantalla);
+    $campos_pantalla = trim($_POST['param1']);
 
-if ($ind_validar == "0" || $ind_validar == "2") {
-    list($ind_actualizar, $mensaje_actualizar) = actualizarSubmit($campos_bdatos);
-} else {
-        $ind_actualizar = 9;
-        $mensaje_actualizar = $mensaje_validar;
-    }
+    list($ind_actualizar, $ind_validar, $mensaje_validar, $campos_bdatos) 
+                    = validarSubmit($campos_pantalla);
 
-$respuesta =  $ind_validar . "#&" .  $mensaje_validar . "#&" . $ind_actualizar . "#&" .  $mensaje_actualizar;
+    if ($ind_actualizar == 0) {
+        list($ind_actualizar, $mensaje_actualizar) = actualizarSubmit($campos_bdatos);
+    } else {
+            $ind_actualizar = 1;
+            $mensaje_actualizar = $mensaje_validar;
+        }
 
-echo ($respuesta);
+    $respuesta =  $ind_actualizar . "#&" .  $ind_validar . "#&" .  $mensaje_validar . "#&" .  $mensaje_actualizar;
 
+return ($respuesta);
+}
 
 // Validación campos de formulario de autor
 function validarSubmit($campos) {
    
     require_once 'connect.php';
+    
+    require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
 
-    $ind_validar = "0";
+    $ind_actualizar = 0;    // 0- si actualizar, 1- no actualizar
+    $ind_validar = "0";     // 0- sin incidencias, 1- con incidencias
     $mensaje = "";
     $campos_bdatos="";
 
@@ -33,9 +41,9 @@ function validarSubmit($campos) {
 
     // Validar autor
     if ($res[2] == "") { 
-        $mensaje = "Nombre del autor tiene que estar informado";  
-        $ind_validar = "1";  
-        return [$ind_validar, $mensaje, $campos_bdatos];  
+        $mensaje = "Nombre del autor tiene que estar informado"; 
+        $ind_actualizar = 1; 
+        return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
     } else {
             $sql= "SELECT cGR02_Autor
                     FROM tgr02_autores
@@ -46,14 +54,14 @@ function validarSubmit($campos) {
             if ($resultados->num_rows == 0)  {
                 if ($res[1] !== "alta") {
                     $mensaje = "Error. Autor no existe.";  
-                    $ind_validar = "1";   
-                    return [$ind_validar, $mensaje, $campos_bdatos];  
+                    $ind_actualizar = "1";   
+                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
                 };
             } else {
                     if ($res[1] == "alta") {
                         $mensaje = "Error. Autor ya existe.";  
-                        $ind_validar = "1";   
-                        return [$ind_validar, $mensaje, $campos_bdatos];  
+                        $ind_actualizar = "1";   
+                        return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
                     };
                 }   
         }
@@ -70,7 +78,7 @@ function validarSubmit($campos) {
 
     if ($ind_lectura == "1")  {
         $mensaje .= "<br> <strong> Nacionalidad no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
-        $ind_validar = "2";   
+        $ind_validar = 1;   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
 
@@ -84,10 +92,24 @@ function validarSubmit($campos) {
 
     if ($ind_lectura == "1")  {
         $mensaje .= "<br> <strong> Corriente literaria no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
-        $ind_validar = "2";   
+        $ind_validar = 1;   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
 
+    // Validar fecha de nacimiento
+
+    $campos_funcion = $res[5];
+
+    $funcion_validar_fecha = 1;
+    list($ind_validar, $mensaje, $campos_salida) 
+                            = fechas($funcion_validar_fecha, $campos_funcion);
+    
+    if ($ind_validar == 0) {
+        # code...
+    } else {
+        # code...
+    }
+                            
     
     // Validar país de nacimiento
     $tabla = "País";
@@ -99,7 +121,7 @@ function validarSubmit($campos) {
 
     if ($ind_lectura == "1")  {
         $mensaje .= "<br> <strong> País de nacimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
-        $ind_validar = "2";   
+        $ind_validar = 1;   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
     
@@ -113,10 +135,10 @@ function validarSubmit($campos) {
 
     if ($ind_lectura == "1")  {
         $mensaje .= "<br> <strong> País de fallecimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
-        $ind_validar = "2";   
+        $ind_validar = 1;   
     } 
     $campos_bdatos .= "#&" . $bdatos_clave;
-    return [$ind_validar, $mensaje, $campos_bdatos];   
+    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];   
     
 }
 
