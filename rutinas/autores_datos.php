@@ -23,7 +23,7 @@
   <div class="d-flex mb-2">
     <div class="formulario__grupo" id="grupo__fnac">  
       <div class="col-auto d-inline-flex"> 
-        <label class="fs-5 mt-3 text-primary">Fecha de nacimiento</label>
+        <label class="fs-5 mt-3 text-primary">Fecha nacimiento</label>
         <select id="fnacdd"  class="form-control fs-5 mt-2 fechadd">>
           <option value="" disabled selected hidden>dd</option>
           <option value=""></option>
@@ -85,7 +85,7 @@
     </div>
     <div class="formulario__grupo  ms-5 ps-5"  id="grupo__ffal"> 
       <div class="col-auto d-inline-flex ">
-        <label class="fs-5 mt-3 text-primary">Fecha de defunción</label>
+        <label class="fs-5 mt-3 text-primary">Fecha defunción</label>
         <select id="ffaldd"  class="form-control fs-5 mt-2 fechadd">>
           <option value="" disabled selected hidden>dd</option>
           <option value=""></option>

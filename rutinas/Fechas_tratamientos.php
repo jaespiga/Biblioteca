@@ -40,7 +40,7 @@ function fechas($funcion, $campos){
             if ($res[0] !== "") {
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
                 if ($ind_validar == 0) {
-                    $campos_salida = $funcion + "#&" + $fechaSSAA_MM_DD;    
+                    $campos_salida = $funcion . "#&" . $fechaSSAA_MM_DD;    
                 }   
             } 
             return [$ind_validar, $mensaje, $campos_salida]; 
@@ -120,9 +120,9 @@ function fechas($funcion, $campos){
                 }  
             }  
 
-            $campos_salida = $funcion . "#&" . $ind_error1 . "#&" . $ind_error2. "#&" . $ind_orden 
+            $campos_salida = $funcion . "#&" . $ind_error1 . "#&" . $ind_error2 . "#&" . $ind_orden 
                 . "#&" . $fechaSSAA_MM_DD1 .  "#&" . $fechaSSAA_MM_DD2 .  "#&" .  $dif_total_dias 
-                .  "#&" . $dif_annos .  "#&" . $dif_meses .  "#&" . $dif_dias;
+                .  "#&" . $dif_annos . "#&" . $dif_meses . "#&" . $dif_dias;
             
             return [$ind_validar, $mensaje, $campos_salida]; 
         break;  
@@ -191,8 +191,12 @@ function validar_fecha ($fecha) {
     if (ctype_digit($fecha_elemento[0])
     &&  ctype_digit($fecha_elemento[1])
     &&  ctype_digit($fecha_elemento[2])) {
-        str_pad($fecha_elemento[0], 4, "0", STR_PAD_LEFT);
+        $fecha_elemento[0] = str_pad($fecha_elemento[0], 4, "0", STR_PAD_LEFT);
         $fecha_salida = $fecha_elemento[0] . "-" . $fecha_elemento[1] . "-" . $fecha_elemento[2];
+        if(!checkdate($fecha_elemento[1], $fecha_elemento[2], $fecha_elemento[0])){
+            $cod_retorno = 1; 
+            $mensaje = "Error. Fecha ilógica."; 
+        }
     } else {
             $cod_retorno = 1; 
             $mensaje = "Error. Fecha errónea."; 

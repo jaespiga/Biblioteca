@@ -124,7 +124,7 @@ body {
 }
 .fechasa {
 	border: none;
-	width: 65px;
+	width:70px ;
 	padding-left: 10px;
 }
 .fecha_separador {
@@ -139,6 +139,7 @@ body {
 }
 
 .formulario__grupo-incorrecto{
+	opacity: 1;
 	color: #c51c38; 
 }
 
