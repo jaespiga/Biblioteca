@@ -33,10 +33,7 @@ function fechas($funcion, $campos){
     /* Fecha */
     switch ($funcion) {  
         case 1: {     /* Función: 1- Validar fecha */
-            $ind_validar = 0;       /* 0- correcto resto- error */
-            $mensaje = "";
-            $campos_salida = "";
-
+            
             if ($res[0] !== "") {
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
                 if ($ind_validar == 0) {
@@ -48,10 +45,7 @@ function fechas($funcion, $campos){
         }
 
         case 2:{     /* Validar fecha y sumar(+)/ restar(-) años, meses y/o días */
-            $ind_validar = 0;       /* 0- correcto resto- error */
-            $mensaje = "";
-            $campos_salida = "";
-
+            
             if ($res[0] !== "") {
                 $ind_validar = 0;
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
@@ -69,9 +63,8 @@ function fechas($funcion, $campos){
         }
         
         case 3:{     /* Función: 3- Comparar fechas y dar diferencia: total días / diferencia en años, meses y días */
-            $ind_validar = 0;       /* 0- correcto resto- error */
-            $mensaje = "";
-            $campos_salida = "";
+            $mensaje1 = "";
+            $mensaje2 = "";
             
             $dif_annos = 0;
             $dif_meses = 0;
@@ -87,7 +80,7 @@ function fechas($funcion, $campos){
                 if ($ind_error1 !== 0) { /* Primera fecha comparación */
                     $ind_error1 = 1;
                     $ind_validar = 1;
-                    $mensaje .= $mensaje_error; 
+                    $mensaje1 = $mensaje_error; 
                 }     
             }
 
@@ -96,7 +89,7 @@ function fechas($funcion, $campos){
                 if ($ind_error2 !== 0){ 
                         $ind_error2 = 1;
                         $ind_validar = 1;
-                        $mensaje .= "     " . $mensaje_error; 
+                        $mensaje2 = $mensaje_error; 
                     }
             }
                   
@@ -120,18 +113,16 @@ function fechas($funcion, $campos){
                 }  
             }  
 
-            $campos_salida = $funcion . "#&" . $ind_error1 . "#&" . $ind_error2 . "#&" . $ind_orden 
-                . "#&" . $fechaSSAA_MM_DD1 .  "#&" . $fechaSSAA_MM_DD2 .  "#&" .  $dif_total_dias 
-                .  "#&" . $dif_annos . "#&" . $dif_meses . "#&" . $dif_dias;
+            $campos_salida = $funcion . "#&" . $ind_error1 ."#&" . $mensaje1 . "#&" . $ind_error2 
+                . "#&" . $mensaje2 . "#&" . $ind_orden . "#&" . $fechaSSAA_MM_DD1 .  "#&" . $fechaSSAA_MM_DD2 
+                . "#&" . $dif_total_dias . "#&" . $dif_annos . "#&" . $dif_meses . "#&" . $dif_dias;
             
             return [$ind_validar, $mensaje, $campos_salida]; 
         break;  
         }
         
         case 4:{     /* Función: 4- Días del año */
-            $ind_validar = 0;       /* 0- correcto resto- error */
-            $mensaje = "";
-            $campos_salida = "";
+            
             $dif_total_dias =  0;
             
             if ($res[0] !== ""){
@@ -149,9 +140,7 @@ function fechas($funcion, $campos){
         }  
 
         case 5:{     /* Fecha fin de mes */
-            $ind_validar = 0;       /* 0- correcto resto- error */
-            $mensaje = "";
-            $campos_salida = "";
+            
             $dif_total_dias =  0;
             
             if ($res[0] !== ""){

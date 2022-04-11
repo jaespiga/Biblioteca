@@ -28,7 +28,9 @@ function leerListaCódigos($tabla, $clave) {
         while($fila = $resultados->fetch_assoc()) {	
             $listas .= "<option value='$fila[cGR00_Descripcion]'>$fila[cGR00_Descripcion]</option>";
         } 
-	}	
+	}
+	return $listas;
+		
 	echo $listas;
 }   
 ?>
