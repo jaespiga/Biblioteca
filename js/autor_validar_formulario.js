@@ -78,6 +78,7 @@ function validarCampoValor(evento){
                             error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                             validar_campo_resultado("nok", evento.target.name, error_lit); 
                         } else {
+                                
                                 error_lit="<p></p>"
                                 validar_campo_resultado("ok", evento.target.name, error_lit);       
                             }
@@ -235,32 +236,55 @@ function validarCompararFechas () {
     annos_minimos = 18;
     annos_maximos = 100;
     
-    if (fecha_inicial !== "" 
-    && fecha_final !== ""){
-        funcion = 2
-        $.ajax({
-                type: 'POST',
-                url: 'rutinas/tratamiento_fechas_pantalla.php',
-                data: {
-                    param0: funcion,
-                    param1: fecha_inicial,
-                    param2: fecha_final
-                }
-            })
-            .done(function(respuesta){  
-                res=respuesta.split("#&");
-                nro_elementos= res.length;
-                
-                if (res[0]==0) { // indicador de validación general                          
-                    if (res[7] == 1) {   // Fecha superior a fecha límite máxima
-                        $error_texto = "Error. Fecha de nacimiento (" + res[8] + ") no puede ser superior a fecha de fallecimiento (" + res[9] + ")"
-                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                        alert (error_lit);
-                        validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
-                    } else {                       
-                            if (res[11] < annos_minimos) {   // Edad del autor menor a un mínimo ¿es correcto?
+    funcion = 2
+    $.ajax({
+            type: 'POST',
+            url: 'rutinas/tratamiento_fechas_pantalla.php',
+            data: {
+                param0: funcion,
+                param1: fecha_inicial,
+                param2: fecha_final
+            }
+        })
+        .done(function(respuesta){  
+            res=respuesta.split("#&");
+            nro_elementos= res.length;
+            
+            if (res[0]==0) { // indicador de validación general                          
+                if (res[7] == 1) {   // Fecha superior a fecha límite máxima
+                    $error_texto = "Error. Fecha de nacimiento (" + res[8] + ") no puede ser superior a fecha de fallecimiento (" + res[9] + ")"
+                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                    validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
+                } else {                       
+                        if (res[11] < annos_minimos) {   // Edad del autor menor a un mínimo ¿es correcto?
+                            Swal.fire({
+                                title: 'Edad del autor con menos de ' + annos_minimos + ' años ¿es correcto?',
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Sí',
+                                cancelButtonText: 'No'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", fecha_inicial_id, error_lit);
+                                } else {
+                                    $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  inferior a " + annos_minimos;
+                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                    validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
+                                    document.getElementById(`${fecha_inicial_id}`).value = "ssaa";
+                                    document.getElementById('fnacmm').value = "mm";
+                                    document.getElementById('fnacdd').value = "dd";
+                                    document.getElementById(`${fecha_final_id}`).value = "ssaa";
+                                    document.getElementById('ffalmm').value = "mm";
+                                    document.getElementById('ffaldd').value = "dd";
+                                    } 
+                            })
+                        } else {
+                            if (res[11] > annos_maximos) {   // Edad del autor mayor a un máximo ¿es correcto? 
                                 Swal.fire({
-                                    title: 'Edad del autor con menos de ' + annos_minimos + ' años ¿es correcto?',
+                                    title: 'Edad del autor mayor de ' + annos_maximos + ' años ¿es correcto?',
                                     icon: 'question',
                                     showCancelButton: true,
                                     confirmButtonColor: '#3085d6',
@@ -272,65 +296,42 @@ function validarCompararFechas () {
                                         error_lit="<p></p>"
                                         validar_campo_resultado("ok", fecha_inicial_id, error_lit);
                                     } else {
-                                        $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  inferior a " + annos_minimos;
+                                        $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  superior a " + annos_maximos;
                                         error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                         validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
                                         } 
                                 })
-                            } else {
-                                if (res[11] > annos_maximos) {   // Edad del autor mayor a un máximo ¿es correcto? 
-                                    Swal.fire({
-                                        title: 'Edad del autor mayor de ' + annos_maximos + ' años ¿es correcto?',
-                                        icon: 'question',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Sí',
-                                        cancelButtonText: 'No'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            error_lit="<p></p>"
-                                            validar_campo_resultado("ok", fecha_inicial_id, error_lit);
-                                        } else {
-                                            $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  superior a " + annos_maximos;
-                                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                                            validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
-                                            } 
-                                    })
-                                } else {     
-                                        error_lit="<p></p>"
-                                        validar_campo_resultado("ok", fecha_inicial_id, error_lit);  
-                                    }
-                                }       
-                        }
-                } else{
-                        if (res[3]==0) {
-                                        error_lit="<p></p>"
-                                        validar_campo_resultado("ok", fecha_inicial_id, error_lit); 
-                        } else {               
-                                error_lit='<p class="formulario__grupo-incorrecto">' + res[4] +'</p>'
-                                validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
-                            }
-                        if (res[5]==0) {
-                            error_lit="<p></p>"
-                            validar_campo_resultado("ok", fecha_final_id, error_lit); 
-                        } else {               
-                                error_lit='<p class="formulario__grupo-incorrecto">' + res[6] +'</p>'
-                                validar_campo_resultado("nok", fecha_final_id, error_lit); 
-                            }
+                            } else {     
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", fecha_inicial_id, error_lit);  
+                                }
+                            }       
                     }
-            })
-            .fail(function(){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Hubo un error al validar la fecha',
-                }) 
+            } else{
+                    if (res[3]==0) {
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", fecha_inicial_id, error_lit); 
+                    } else {               
+                            error_lit='<p class="formulario__grupo-incorrecto">' + res[4] +'</p>'
+                            validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
+                        }
+                    if (res[5]==0) {
+                        error_lit="<p></p>"
+                        validar_campo_resultado("ok", fecha_final_id, error_lit); 
+                    } else {               
+                            error_lit='<p class="formulario__grupo-incorrecto">' + res[6] +'</p>'
+                            validar_campo_resultado("nok", fecha_final_id, error_lit); 
+                        }
+                }
+        })
+        .fail(function(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al validar la fecha',
             }) 
-    } else {
-            error_lit="<p></p>"
-            validar_campo_resultado("ok", fecha_inicial_id, error_lit); 
-        }
+        }) 
+    
         
     return
 }

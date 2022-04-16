@@ -1,7 +1,9 @@
 <?php 
 $buscar = $_POST['tecleo'];
         
-leerListaAutores($buscar);
+list($opciones_autores) = leerListaAutores($buscar);
+
+echo $opciones_autores;
 
 function leerListaAutores($lit_autor) { 
 
@@ -25,6 +27,6 @@ function leerListaAutores($lit_autor) {
             $listas .= "<option value='$fila[cGR02_Autor]'>$fila[cGR02_Autor]</option>";
         } 
 	}	
-	echo $listas;
+	return [$listas]; 
 }   
 ?>

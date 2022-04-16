@@ -1,6 +1,6 @@
 <?php
-require '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
-require '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
+require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
+require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
 
    /* Tratamiento de fechas (función, ....campos necesarios para esa función ....)
     Las fechas válidas serán con formato ssaa-mm-dd donde "-" es un delimitador 

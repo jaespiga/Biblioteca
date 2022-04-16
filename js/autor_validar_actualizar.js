@@ -5,8 +5,13 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       form_campos = form_campos  +  "#&" + $('#clave').val();
       form_campos = form_campos  +  "#&" + $('#nacionalidad').val();
       form_campos = form_campos  +  "#&" + $('#cliteraria').val();
-      form_campos = form_campos  +  "#&" + $('#fnac').val();
-      form_campos = form_campos  +  "#&" + $('#ffal').val();
+
+      fecha= $('#fnac').val() + "-" + $('#fnacmm').val() + "-" + $('#fnacdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#ffal').val() + "-" + $('#ffalmm').val() + "-" + $('#ffaldd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
       form_campos = form_campos  +  "#&" + $('#lnac').val();
       form_campos = form_campos  +  "#&" + $('#pnac').val();
       form_campos = form_campos  +  "#&" + $('#lfal').val();
@@ -19,12 +24,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         data: {param1: form_campos}                  
       })    
       .done(function(respuesta){   
-        alert ("respuesta: " + respuesta)
         res=respuesta.split("#&")
-        alert ("status: " + res[0])
-        
-        if (res[2] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
-          if (res[0] == 0) { // Indicador de validación correcta
+      
+        if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
+          if (res[1] == 0) { // Indicador de validación correcta
                 Swal.fire({
                   icon: 'succes',
                   title: "Operación efectuada"
@@ -39,7 +42,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                   Swal.fire({
                     icon: 'succes',
                     title: 'Operación realizada con incidencias',
-                    html: '<p align="left">' + res[1] + '</p>'
+                    html: '<p align="left">' + res[2] + '</p>'
                   })   
               }      
         } else {
@@ -47,14 +50,14 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     Swal.fire({
                       icon: 'error',
                       title: 'Operación no efectuada',
-                      text: res[1],
+                      html: '<p align="left">' + res[2] + '</p>',
                       footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
                     })   
                   } else {
                           Swal.fire({
                             icon: 'warning',
                             title: 'Código de validación desconocido: ' + res[0],
-                            text: res[1],
+                            html: '<p align="left">' + res[2] + '</p>',
                             footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
                           })   
                       }
@@ -64,7 +67,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Hubo un error al cargar autores',
+          text: 'Hubo un error al validar/actualizar datos del autor',
           footer: '<a href="">Revise  datos de entrada y base de datos</a>'
         })                  
       })            

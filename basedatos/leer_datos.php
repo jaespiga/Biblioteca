@@ -8,17 +8,18 @@ $buscar = trim($_POST['param1']);
 $apartado = $_POST['param2'];
 
 if ($apartado = "Autor") {
-    leerDatosAutor($buscar);
+    list ($datos) = leerDatosAutor($buscar);
 } else {
         if ($apartado = "Libro") {
-            leerDatosLibro($buscar);
+            list ($datos) = leerDatosLibro($buscar);
         } else {
                 if ($apartado = "Lectura") {
-                    leerDatosLectura($buscar);
+                    list ($datos) = leerDatosLectura($buscar);
                 }    
             }
     }
 
+echo $datos;
 
 function leerDatosAutor($lit_autor) { 
 
@@ -27,7 +28,9 @@ function leerDatosAutor($lit_autor) {
     if($lit_autor == ""){
             $datos= "";
     } else{
-            $sql= "SELECT cGR02_Autor, cGR02_Nacionalidad, cGR02_PNacimiento, cGR02_LNacimiento,  cGR02_WEB
+            $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefuncion, cGR02_LNacimiento, 
+                            cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
+                            cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB
                         FROM tgr02_autores
                         WHERE cGR02_Autor = '$lit_autor'";
             $resultados= $dbcon->query($sql); 
@@ -36,11 +39,15 @@ function leerDatosAutor($lit_autor) {
                 $datos= "";
             } else{
                 $fila = $resultados->fetch_assoc();
-                $datos = $fila["cGR02_Autor"]. "#&" . $fila["cGR02_Nacionalidad"] . "#&" . $fila["cGR02_PNacimiento"] 
-                        . "#&" . $fila["cGR02_LNacimiento"] . "#&" . $fila["cGR02_WEB"];  
+                $datos = $fila["cGR02_Autor"]. "#&" . $fila["cGR02_Foto"]
+                        . $fila["cGR02_FNacimiento"]. $fila["cGR02_FDefuncion"]
+                        . $fila["cGR02_LNacimiento"]. $fila["cGR02_PNacimiento"]
+                        . $fila["cGR02_LFallecimiento"]. $fila["cGR02_PFallecimiento"]
+                        . $fila["cGR02_Nacionalidad"] . "#&" . $fila["cGR02_CLiteraria"] 
+                        . "#&" . $fila["cGR02_WEB"];  
             }    
     } 
-    echo $datos;
+    return [$datos];
 }
 
 function leerDatosLibro($lit_libro) { 
@@ -63,7 +70,7 @@ function leerDatosLibro($lit_libro) {
                         . "#&" . $fila["cGR02_LNacimiento"] . "#&" . $fila["cGR02_WEB"];  
             }    
     } 
-    echo $datos;
+    return [$datos];
 }
 
 function leerDatosLectura($lit_lectura) { 
@@ -86,7 +93,8 @@ function leerDatosLectura($lit_lectura) {
                         . "#&" . $fila["cGR02_LNacimiento"] . "#&" . $fila["cGR02_WEB"];  
             }    
     } 
-    echo $datos;
+    return [$datos];
 }
+
 ?>
     

@@ -13,9 +13,13 @@ function validar_limites_fecha($fecha, $fecha_referencia, $annos, $meses, $dias)
     $mensaje = "";
     $campos_salida = "";      
     
-    if ($fecha !== "") {
-        $campos_funcion = $fecha;
+    $funcion_validar_fecha = 1;
+    $campos_funcion = $fecha;
 
+    list($ind_validar, $mensaje, $campos_salida) 
+                        = fechas($funcion_validar_fecha, $campos_funcion);
+
+    if ($ind_validar == 0) {     
         // Obtener límite de fecha a no sobrepasar a partir de la del día
         $campos_funcion = $fecha_referencia . "#&" . $annos . "#&" . $meses . "#&" . $dias;
 
@@ -30,8 +34,42 @@ function validar_limites_fecha($fecha, $fecha_referencia, $annos, $meses, $dias)
             $funcion_comparar_fecha = 3;
             list($ind_validar, $mensaje, $campos_salida) 
                             = fechas($funcion_comparar_fecha, $campos_funcion); 
-        }          
-    }
+        } else {
+                $funcion = $funcion_validar_fecha;
+                $ind_error1 = 0;
+                $mensaje1 = "";
+                $ind_error2 = $ind_validar;
+                $mensaje2 = $mensaje;
+                $ind_orden = 0;
+                $fechaSSAA_MM_DD1 = $fecha;
+                $fechaSSAA_MM_DD2 = $fecha_referencia;
+                $dif_total_dias = 0;
+                $dif_annos = 0;
+                $dif_meses = 0;
+                $dif_dias = 0;
+                $campos_salida = $funcion . "#&" . $ind_error1 ."#&" . $mensaje1 . "#&" . $ind_error2 
+                . "#&" . $mensaje2 . "#&" . $ind_orden . "#&" . $fechaSSAA_MM_DD1 .  "#&" . $fechaSSAA_MM_DD2 
+                . "#&" . $dif_total_dias . "#&" . $dif_annos . "#&" . $dif_meses . "#&" . $dif_dias;
+            
+            }
+    } else {
+            $funcion = $funcion_validar_fecha;
+            $ind_error1 = $ind_validar;
+            $mensaje1 = $mensaje;
+            $ind_error2 = 0;
+            $mensaje2 = "";
+            $ind_orden = 0;
+            $fechaSSAA_MM_DD1 = $fecha;
+            $fechaSSAA_MM_DD2 = "";
+            $dif_total_dias = 0;
+            $dif_annos = 0;
+            $dif_meses = 0;
+            $dif_dias = 0;
+            $campos_salida = $funcion . "#&" . $ind_error1 ."#&" . $mensaje1 . "#&" . $ind_error2 
+                . "#&" . $mensaje2 . "#&" . $ind_orden . "#&" . $fechaSSAA_MM_DD1 .  "#&" . $fechaSSAA_MM_DD2 
+                . "#&" . $dif_total_dias . "#&" . $dif_annos . "#&" . $dif_meses . "#&" . $dif_dias;
+            
+        }
     $respuesta = $ind_validar . "#&" . $mensaje . "#&" . $campos_salida;
     return [$respuesta];
 }

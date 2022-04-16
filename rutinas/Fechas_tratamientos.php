@@ -34,7 +34,7 @@ function fechas($funcion, $campos){
     switch ($funcion) {  
         case 1: {     /* Función: 1- Validar fecha */
             
-            if ($res[0] !== "") {
+            if ($res[0] !== "--") {
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
                 if ($ind_validar == 0) {
                     $campos_salida = $funcion . "#&" . $fechaSSAA_MM_DD;    
@@ -46,7 +46,7 @@ function fechas($funcion, $campos){
 
         case 2:{     /* Validar fecha y sumar(+)/ restar(-) años, meses y/o días */
             
-            if ($res[0] !== "") {
+            if ($res[0] !== "--") {
                 $ind_validar = 0;
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
                 if ($ind_validar == 0) {
@@ -75,7 +75,7 @@ function fechas($funcion, $campos){
             $ind_error1 = 0;
             $ind_error2 = 0;
 
-            if ($res[0] !== "") {
+            if ($res[0] !== "--") {
                 list($ind_error1, $mensaje_error, $fechaSSAA_MM_DD1) = validar_fecha ($res[0]);
                 if ($ind_error1 !== 0) { /* Primera fecha comparación */
                     $ind_error1 = 1;
@@ -84,7 +84,7 @@ function fechas($funcion, $campos){
                 }     
             }
 
-            if ($res[1] !== "") { /* Segunda fecha comparación */
+            if ($res[1] !== "--") { /* Segunda fecha comparación */
                 list($ind_error2, $mensaje_error, $fechaSSAA_MM_DD2) = validar_fecha ($res[1]);
                 if ($ind_error2 !== 0){ 
                         $ind_error2 = 1;
@@ -93,8 +93,8 @@ function fechas($funcion, $campos){
                     }
             }
                   
-            if ($res[0] !== "" 
-            && $res[1] !== "") {
+            if ($res[0] !== "--" 
+            && $res[1] !== "--") {
                 if ($ind_validar == 0) {
                         $fechaPrimera = new DateTime($fechaSSAA_MM_DD1);
                         $fechaSegunda = new DateTime($fechaSSAA_MM_DD2);
@@ -143,7 +143,7 @@ function fechas($funcion, $campos){
             
             $dif_total_dias =  0;
             
-            if ($res[0] !== ""){
+            if ($res[0] !== "--"){
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($res[0]);
                 if ($ind_validar == 0) {
                     $fecha_inicio_mes = date("Y", $fechaSSAA_MM_DD);

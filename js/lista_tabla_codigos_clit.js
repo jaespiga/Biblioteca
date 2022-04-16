@@ -4,7 +4,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
   $.ajax({                        
     type: 'POST',                 
     url: 'basedatos/tabla_codigos_cargar.php',
-    data: {param1: clave_tabla}    
+    data: {param1: clave_tabla,
+           param2: ""}    
   })    
   .done(function(lista_select){
     $('#lista_clit').html(lista_select)

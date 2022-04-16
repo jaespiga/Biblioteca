@@ -1,11 +1,15 @@
 <?php 
+
+// Cargar todos los códigos de una tabla asociados a una clave
         
 $tabla = $_POST['param1'];
 $clave = $_POST['param2'];
 
-leerListaCódigos($tabla, $clave);
+list($listas) = leerListaCodigos($tabla, $clave);
 
-function leerListaCódigos($tabla, $clave) { 
+echo $listas;
+
+function leerListaCodigos($tabla, $clave) { 
 
 	require_once 'connect.php';
 
@@ -29,8 +33,8 @@ function leerListaCódigos($tabla, $clave) {
             $listas .= "<option value='$fila[cGR00_Descripcion]'>$fila[cGR00_Descripcion]</option>";
         } 
 	}
-	return $listas;
-		
-	echo $listas;
+return [$listas];
 }   
+
+
 ?>

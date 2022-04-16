@@ -1,9 +1,13 @@
 
 <?php
 
+require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
+require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
+
 // Validación de los campos de la pantalla de autores y su actualización en la base de datos
 
 list ($respuesta) = autor_validar_actualizar();
+echo $respuesta;
 
 // Función para validar todos los campos de autor
 function autor_validar_actualizar() {
@@ -14,7 +18,8 @@ function autor_validar_actualizar() {
                     = validarSubmit($campos_pantalla);
 
     if ($ind_actualizar == 0) {
-        list($ind_actualizar, $mensaje_actualizar) = actualizarSubmit($campos_bdatos);
+        list($ind_actualizar, $mensaje_actualizar) 
+                    = actualizarSubmit($campos_pantalla, $campos_bdatos);
     } else {
             $ind_actualizar = 1;
             $mensaje_actualizar = $mensaje_validar;
@@ -22,7 +27,7 @@ function autor_validar_actualizar() {
 
     $respuesta =  $ind_actualizar . "#&" .  $ind_validar . "#&" .  $mensaje_validar . "#&" .  $mensaje_actualizar;
 
-return ($respuesta);
+return [$respuesta];
 }
 
 // Validación campos de formulario de autor
@@ -30,7 +35,7 @@ function validarSubmit($campos) {
    
     require_once 'connect.php';
     
-    require_once 'tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos                          
+    require_once '../basedatos/tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos                          
     require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
     require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
 
@@ -71,9 +76,7 @@ function validarSubmit($campos) {
                     };
                 }   
         }
-
-    $campos_bdatos = $res[2];
-    
+        
     // Validar nacionalidad
     $funcion_obtener_clave = 1;
     $tabla = "Nacionalidad";
@@ -82,14 +85,14 @@ function validarSubmit($campos) {
     $bdatos_clave= 0;   
 
     list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
-                            = tabla_códigos($funcion, $tabla, $datos_entrada);
+                            = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
     if ($ind_error_codigo == 0) {
         if ($ind_validar_codigo == 1)  {
-            $mensaje .= "<br> <strong> Nacionalidad no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
+            $mensaje .= "<br> <strong> Nacionalidad no existe.</strong> Será ignorada. Dar de alta en tabla de codigos";  
             $ind_validar = 1;   
         } else {
-            $res = explode("#&", $campos);
-            $bdatos_clave= $res[0];  
+            $res_codigo = explode("#&", $campos_salida);
+            $bdatos_clave= $res_codigo[0];  
             }
     } else {
             $mensaje .= "<br> " . $mensaje_codigo;
@@ -105,15 +108,15 @@ function validarSubmit($campos) {
     $bdatos_clave= 0;   
 
     list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
-                            = tabla_códigos($funcion, $tabla, $datos_entrada);
+                            = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
 
     if ($ind_error_codigo == 0) {
         if ($ind_validar_codigo == 1)  {
-            $mensaje .= "<br> <strong> Corriente literaria no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
+            $mensaje .= "<br> <strong> Corriente literaria no existe.</strong> Será ignorada. Dar de alta en tabla de codigos";  
             $ind_validar = 1;   
         } else {
-            $res = explode("#&", $campos);
-            $bdatos_clave= $res[0];  
+            $res_codigo = explode("#&", $campos_salida);
+            $bdatos_clave= $res_codigo[0];  
             }
     } else {
             $mensaje .= "<br> " . $mensaje_codigo;
@@ -122,27 +125,98 @@ function validarSubmit($campos) {
     $campos_bdatos .= "#&" . $bdatos_clave;
 
     // Validar fecha de nacimiento
+    $ind_error_fechas = 0;      // Ver si se pueden comparar fechas de nacimiento y fallecimiento
 
-    $campos_funcion = $res[5];
+    $fecha = $res[5];
+    $fecha_referencia = date('Y-m-d');
+    $annos_minimos = -15;
     
-    ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('fnacmm').value
-                dd = document.getElementById('fnacdd').value
-                fecha = ssaa + "-" + mm + "-" + dd
-                annos_referencia = -15  // Años a sumar/restar a la fecha del día
-                meses_referencia = 0    // Meses a sumar/restar a la fecha del día
-                dias_referencia = 0     // Días a sumar/restar a la fecha del día
+    $annos = $annos_minimos;    // Años a sumar/restar a la fecha del día
+    $meses = 0;                 // Meses a sumar/restar a la fecha del día
+    $dias = 0;                  // Días a sumar/restar a la fecha del día
     
-    list($ind_validar, $mensaje, $campos_salida) 
-                            = calcular_fechas($funcion_validar_fecha, $campos_funcion);
+    list($respuesta) = validar_limites_fecha($fecha, $fecha_referencia, $annos, $meses, $dias);
     
-    if ($ind_validar == 0) {
-        # code...
+    $res_fecha = explode("#&", $respuesta);
+    
+    if ($res_fecha[0] == "0") {        // Indicador de validación 0- Correcto, Resto- Error
+        if ($res_fecha[7] !== "0") {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
+            $mensaje .= "<br> <strong> Aviso. Edad del autor inferior a " . abs($annos_minimos) . " años.</strong>";  
+            $ind_validar = 1; 
+        }
     } else {
-        # code...
-    }
-                            
+            if ($res_fecha[3] !== "0") {   // Indicador de error de fecha inicial 0- Correcto, Resto- Error
+                $mensaje .= "<br> <strong> Fecha de nacimiento. " . $res_fecha[4] . "</strong>";  
+                $ind_actualizar = 1;
+                $ind_error_fechas = 1;
+            }
+            if ($res_fecha[5] !== "0") {   // Indicador de error de fecha final 0- Correcto, Resto- Error
+                $mensaje .= "<br> <strong> Fecha de nacimiento. " . $res_fecha[6] . "</strong>";  
+                $ind_actualizar = 1;
+                $ind_error_fechas = 1;
+            }
+        }
+  
+    // Validar fecha de fallecimiento
+    $fecha = $res[6];
+    $fecha_referencia = date('Y-m-d');
+    $annos_minimos = 0;
     
+    $annos = $annos_minimos;    // Años a sumar/restar a la fecha del día
+    $meses = 0;                 // Meses a sumar/restar a la fecha del día
+    $dias = 0;                  // Días a sumar/restar a la fecha del día
+    
+    list($respuesta) = validar_limites_fecha($fecha, $fecha_referencia, $annos, $meses, $dias);
+    
+    $res_fecha = explode("#&", $respuesta);
+    
+    if ($res_fecha[0] == "0") {        // Indicador de validación 0- Correcto, Resto- Error
+        if ($res_fecha[7] !== 0) {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
+            $mensaje .= "<br> <strong> Error. Fecha de fallecimiento no puede ser superior a " . $res_fecha[9] . ".</strong>";  
+            $ind_actualizar = 1; 
+            $ind_error_fechas = 1;
+        }
+    } else {
+            if ($res_fecha[3] !== "0") {   // Indicador de error de fecha inicial 0- Correcto, Resto- Error
+                $mensaje .= "<br> <strong> Fecha de fallecimiento. " . $res_fecha[4] . "</strong>";  
+                $ind_actualizar = 1;
+                $ind_error_fechas = 1;
+            }
+            if ($res_fecha[5] !== "0") {   // Indicador de error de fecha final 0- Correcto, Resto- Error
+                $mensaje .= "<br> <strong> Fecha de fallecimiento. " . $res_fecha[6] . "</strong>";  
+                $ind_actualizar = 1;
+                $ind_error_fechas = 1;
+            }
+        }
+
+    // Comparar fechas de nacimiento y fallecimiento
+    if ($ind_error_fechas == 0) {
+        list($respuesta) = comparar_fechas($res[5], $res[6]);    
+        $res_fecha = explode("#&", $respuesta);
+        $res_fecha_nroele = count(array_filter(explode("#&", $respuesta)));
+        
+        if ($res_fecha[0] == 0) {        // Indicador de validación 0- Correcto, Resto- Error
+            if ($res_fecha[7] !== 0) {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
+                $mensaje .= "<br> <strong> Fecha de fallecimiento (" . $res_fecha[9] . " no puede ser inferior a fecha de nacimiento (" . $res_fecha[8] . ").</strong>";  
+                $ind_actualizar = 1; 
+            }
+        } else {
+                if ($res_fecha[3] !== 0) {   // Indicador de error de fecha inicial 0- Correcto, Resto- Error
+                    $mensaje .= "<br> <strong> Fecha de nacimiento. " . $res_fecha[4] . "</strong>";  
+                    $ind_actualizar = 1;
+                    $ind_error_fechas = 1;
+                }
+                if ($res_fecha[5] !== 0) {   // Indicador de error de fecha final 0- Correcto, Resto- Error
+                    $mensaje .= "<br> <strong> Fecha de fallecimiento. " . $res_fecha[6] . "</strong>";  
+                    $ind_actualizar = 1;
+                    $ind_error_fechas = 1;
+                }
+            }
+    }
+    
+    // Lugar de nacimiento
+    $campos_bdatos .= "#&" . $res[7];
+
     // Validar país de nacimiento
     $funcion_obtener_clave = 1;
     $tabla = "País";
@@ -151,15 +225,15 @@ function validarSubmit($campos) {
     $bdatos_clave= 0;   
 
     list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
-                            = tabla_códigos($funcion, $tabla, $datos_entrada);
+                            = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
                             
     if ($ind_error_codigo == 0) {
         if ($ind_validar_codigo == 1)  {
             $mensaje .= "<br> <strong> País de nacimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
             $ind_validar = 1;   
         } else {
-            $res = explode("#&", $campos);
-            $bdatos_clave= $res[0];  
+            $res_codigo = explode("#&", $campos_salida);
+            $bdatos_clave= $res_codigo[0];  
             }
     } else {
             $mensaje .= "<br> " . $mensaje_codigo;
@@ -167,6 +241,9 @@ function validarSubmit($campos) {
 
     $campos_bdatos .= "#&" . $bdatos_clave;
 
+    // Lugar de fallecimiento
+    $campos_bdatos .= "#&" . $res[9];
+    
     // Validar país de fallecimiento  
     $funcion_obtener_clave = 1;
     $tabla = "País";
@@ -174,16 +251,19 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
+    // Web
+    $campos_bdatos .= "#&" . $res[11];
+
     list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
-                            = tabla_códigos($funcion, $tabla, $datos_entrada);
+                            = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
                             
     if ($ind_error_codigo == 0) {
         if ($ind_validar_codigo == 1)  {
             $mensaje .= "<br> <strong> País de fallecimiento no existe.</strong> Será ignorada. Dar de alta en tabla de códigos";  
             $ind_validar = 1;   
         } else {
-            $res = explode("#&", $campos);
-            $bdatos_clave= $res[0];  
+            $res_codigo = explode("#&", $campos_salida);
+            $bdatos_clave= $res_codigo[0];  
             }
     } else {
             $mensaje .= "<br> " . $mensaje_codigo;
@@ -195,11 +275,48 @@ function validarSubmit($campos) {
 }
 
 // Actualización campos de formulario de autor
-function actualizarSubmit($campos) {
+function actualizarSubmit($campos_pantalla, $campos_bdatos) {
+    
+    require_once 'connect.php';
+
     $ind_actualizar = 0;
     $mensaje_actualizar = "";
 
-    $res = explode("#&", $campos);
+    $res = explode("#&", $campos_bdatos);
+
+    if ($res[1] == "alta") {
+        $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, cGR02_PNacimiento, cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) VALUES ('$res[2]','$res[3]','$res[4]','$res[5]','$res[6]','$res[7]','$res[8]','$res[9]','$res[10])";
+		if($dbcon->query($sql) === true){
+			$mensaje = "Alta efectuada <br />";
+
+		} else {
+				require_once 'basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+			} 
+        
+    } else { 
+            if ($res[1] == "modificación") {
+                $sql= "UPDATE tgr02_autores 
+                            SET cGR02_Autor='[value-1]',
+                                cGR02_Foto='[value-2]',
+                                cGR02_FNacimiento='[value-3]',
+                                cGR02_FDefunción='[value-4]',
+                                cGR02_LNacimiento='[value-5]',
+                                cGR02_PNacimiento='[value-6]',
+                                cGR02_Nacionalidad='[value-7]',
+                                cGR02_CLiteraria='[value-8]',
+                                cGR02_WEB`='[value-9]' 
+                            WHERE cGR02_Autor = '$codigoUsuario'";
+            
+               
+
+            } else {
+                    if ($res[1] == "baja") {
+                
+                    } 
+                } 
+                
+        }
+
 
     return [$ind_actualizar, $mensaje_actualizar];   
 }    

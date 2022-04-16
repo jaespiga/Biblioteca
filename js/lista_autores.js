@@ -7,13 +7,13 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       data: {param1: usuario}                  
     })    
     .done(function(lista_select){
-      
+        $('#lista_autores').html(lista_select)
     })
     .fail(function(){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Hubo un error al cargar autores',
+        text: 'Hubo un error al cargar lista de autores',
         footer: '<a href="">Revise  datos de entrada y base de datos</a>'
       })                   
     })            
