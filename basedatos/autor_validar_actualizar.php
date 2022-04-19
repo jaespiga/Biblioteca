@@ -43,10 +43,10 @@ function validarSubmit($campos) {
     $ind_actualizar = 0;    // 0- si actualizar, 1- no actualizar
     $ind_validar = 0;     // 0- sin incidencias, 1- con incidencias
     $mensaje = "";
-    $campos_bdatos="";
 
     $res = explode("#&", $campos);
     
+    $campos_bdatos = $res[0] . "#&" . $$res[1];    // Apartado (Autor) / Operación
 
     // Validar clave de la página web activa
 
@@ -76,6 +76,8 @@ function validarSubmit($campos) {
                     };
                 }   
         }
+
+        $campos_bdatos .= "#&" . $$res[2];    // Autor
         
     // Validar nacionalidad
     $funcion_obtener_clave = 1;
@@ -171,7 +173,7 @@ function validarSubmit($campos) {
     $res_fecha = explode("#&", $respuesta);
     
     if ($res_fecha[0] == "0") {        // Indicador de validación 0- Correcto, Resto- Error
-        if ($res_fecha[7] !== 0) {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
+        if ($res_fecha[7] !== "0") {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
             $mensaje .= "<br> <strong> Error. Fecha de fallecimiento no puede ser superior a " . $res_fecha[9] . ".</strong>";  
             $ind_actualizar = 1; 
             $ind_error_fechas = 1;
@@ -193,10 +195,9 @@ function validarSubmit($campos) {
     if ($ind_error_fechas == 0) {
         list($respuesta) = comparar_fechas($res[5], $res[6]);    
         $res_fecha = explode("#&", $respuesta);
-        $res_fecha_nroele = count(array_filter(explode("#&", $respuesta)));
         
         if ($res_fecha[0] == 0) {        // Indicador de validación 0- Correcto, Resto- Error
-            if ($res_fecha[7] !== 0) {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
+            if ($res_fecha[7] !== "0") {   // 0- Fecha inicial <= final 1- Fecha final < inicial 
                 $mensaje .= "<br> <strong> Fecha de fallecimiento (" . $res_fecha[9] . " no puede ser inferior a fecha de nacimiento (" . $res_fecha[8] . ").</strong>";  
                 $ind_actualizar = 1; 
             }
@@ -213,7 +214,9 @@ function validarSubmit($campos) {
                 }
             }
     }
-    
+    $campos_bdatos .= "#&" . $res[8] . "#&" . $res[9];      // fecha nacimiento y fallecimiento
+
+
     // Lugar de nacimiento
     $campos_bdatos .= "#&" . $res[7];
 
@@ -251,9 +254,6 @@ function validarSubmit($campos) {
     $ind_lectura= "";
     $bdatos_clave= 0;   
 
-    // Web
-    $campos_bdatos .= "#&" . $res[11];
-
     list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
                             = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
                             
@@ -268,8 +268,11 @@ function validarSubmit($campos) {
     } else {
             $mensaje .= "<br> " . $mensaje_codigo;
         }
-
+        
     $campos_bdatos .= "#&" . $bdatos_clave;
+
+    // Web
+    $campos_bdatos .= "#&" . $res[11];
 
     return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];
 }
@@ -285,7 +288,11 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
     $res = explode("#&", $campos_bdatos);
 
     if ($res[1] == "alta") {
-        $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, cGR02_PNacimiento, cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) VALUES ('$res[2]','$res[3]','$res[4]','$res[5]','$res[6]','$res[7]','$res[8]','$res[9]','$res[10])";
+        $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, 
+                            cGR02_LNacimiento, cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
+                            cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) 
+                    VALUES ('$res[2]',, '$res[5]','$res[6]','$res[7]','$res[8]','$res[9]','$res[10]',
+                            '$res[3]', '$res[4]','$res[11])";
 		if($dbcon->query($sql) === true){
 			$mensaje = "Alta efectuada <br />";
 

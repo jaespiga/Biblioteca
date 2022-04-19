@@ -270,15 +270,11 @@ function validarCompararFechas () {
                                     error_lit="<p></p>"
                                     validar_campo_resultado("ok", fecha_inicial_id, error_lit);
                                 } else {
-                                    $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  inferior a " + annos_minimos;
+                                    $('#fnac').val("ssaa");
+                                    $('#ffal').val("ssaa");
+                                    $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  inferior a " + annos_minimos + " años";
                                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                     validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
-                                    document.getElementById(`${fecha_inicial_id}`).value = "ssaa";
-                                    document.getElementById('fnacmm').value = "mm";
-                                    document.getElementById('fnacdd').value = "dd";
-                                    document.getElementById(`${fecha_final_id}`).value = "ssaa";
-                                    document.getElementById('ffalmm').value = "mm";
-                                    document.getElementById('ffaldd').value = "dd";
                                     } 
                             })
                         } else {
@@ -296,7 +292,9 @@ function validarCompararFechas () {
                                         error_lit="<p></p>"
                                         validar_campo_resultado("ok", fecha_inicial_id, error_lit);
                                     } else {
-                                        $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  superior a " + annos_maximos;
+                                        $('#fnac').val("ssaa");
+                                        $('#ffal').val("ssaa");
+                                        $error_texto = "Error. Diferencia entre fecha de nacimiento (" + res[8] + ") y fallecimiento (" + res[9] + ")  superior a " + annos_maximos + " años";
                                         error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                         validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
                                         } 

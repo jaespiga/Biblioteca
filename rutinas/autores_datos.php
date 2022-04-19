@@ -25,8 +25,7 @@
       <div class="col-auto d-inline-flex"> 
         <label class="fs-5 mt-3 text-primary">Fecha nacimiento</label>
         <select id="fnacdd"  class="form-control fs-5 mt-2 fechadd" onblur="validarCompararFechas()">
-          <option value="" disabled selected hidden>dd</option>
-          <option value=""></option>
+          <option value="dd" selected>dd</option>
           <option value="01">01</option>
           <option value="02">02</option>
           <option value="03">03</option>
@@ -61,8 +60,7 @@
         </select>        
         <label class="fs-5 mt-3 fecha_separador">/</label>
         <select id="fnacmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" onblur="validarCompararFechas()">
-          <option value="" disabled selected hidden>mm</option>
-          <option value=""></option>
+          <option value="mm" selected>mm</option>
           <option value="01">01</option>
           <option value="02">02</option>
           <option value="03">03</option>
@@ -79,7 +77,7 @@
         <label class="fs-5 mt-3 fecha_separador">/</label>
         <input type="text" name="fnac" id="fnac" 
                 class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
-                maxlength="4" value="" onblur="validarCompararFechas()">
+                maxlength="4" value="" onblur="validarCompararFechas()">       
       </div>    
       <div id="fnac_error"></div>      
     </div>
@@ -87,8 +85,7 @@
       <div class="col-auto d-inline-flex ">
         <label class="fs-5 mt-3 text-primary">Fecha defunción</label>
         <select id="ffaldd"  class="form-control fs-5 mt-2 fechadd" onblur="validarCompararFechas()">
-          <option value="" disabled selected hidden>dd</option>
-          <option value=""></option>
+          <option value="dd" selected>dd</option>
           <option value="01">01</option>
           <option value="02">02</option>
           <option value="03">03</option>
@@ -123,8 +120,7 @@
         </select>        
         <label class="fs-5 mt-3 fecha_separador">/</label>
         <select id="ffalmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" onblur="validarCompararFechas()">
-          <option value="" disabled selected hidden>mm</option>
-          <option value=""></option>
+          <option value="mm" selected>mm</option>
           <option value="01">01</option>
           <option value="02">02</option>
           <option value="03">03</option>
