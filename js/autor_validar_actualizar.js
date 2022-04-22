@@ -25,7 +25,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       })    
       .done(function(respuesta){   
         res=respuesta.split("#&")
-      
+    
         if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
           if (res[1] == 0) { // Indicador de validación correcta
                 Swal.fire({
@@ -50,14 +50,14 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     Swal.fire({
                       icon: 'error',
                       title: 'Operación no efectuada',
-                      html: '<p align="left">' + res[2] + '</p>',
+                      html: '<p align="left">' + res[3] + '</p>',
                       footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
                     })   
                   } else {
                           Swal.fire({
                             icon: 'warning',
                             title: 'Código de validación desconocido: ' + res[0],
-                            html: '<p align="left">' + res[2] + '</p>',
+                            html: '<p align="left">' + res[3] + '</p>',
                             footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
                           })   
                       }

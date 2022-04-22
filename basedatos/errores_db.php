@@ -1,5 +1,7 @@
-<!--  Análisis errores DB -->
+
 <?php
+	// Análisis errores DB 
+	
 	if ($dbcon->errno != 0) {
 		switch ($dbcon->errno) {
 		 	case '1062':

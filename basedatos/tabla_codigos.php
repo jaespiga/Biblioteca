@@ -28,6 +28,20 @@ function tabla_codigos($funcion, $tabla, $datos_entrada){
 
         break;
         }
+        case 2: {       // Función 2. Leer la descripción asociada a una clave de la tabla de códigos 
+            $ind_error = 0;         /* 0- correcto resto- error */
+            $ind_validar = 0;       /* 0- correcto 1- no existe clave para esa descripción */
+            $mensaje = "";
+            $campos_salida = "";     /* descripción asociada a la clave */
+
+            if ($res[0] !== "") {
+                list($ind_error, $ind_validar, $mensaje, $campos_salida) 
+                            = obtener_descripcion($tabla, $res[0]);
+            } 
+            return [$ind_error, $ind_validar, $mensaje, $campos_salida]; 
+
+        break;
+        }
 
         default:
             
@@ -67,4 +81,35 @@ function obtener_clave ($nombre_tabla, $descripcion) {
     return [$ind_error, $ind_validar, $mensaje, $bdatos_clave]; 
 }
 
+function obtener_descripcion ($nombre_tabla, $clave) { 
+    // Obtener la descripción asociada a una clave numérica. Si no existe se devuelve "".
+
+    $ind_error = 0;
+    $ind_validar = 0;
+    $mensaje= "";
+    $bdatos_descripcion = "";
+
+    if ($clave !== 0) {
+       
+        require 'connect.php';
+
+        $sql=	"SELECT cGR00_Tabla, cGR00_Clave, cGR00_Descripcion 
+                        FROM tgr00_tcodigos
+                        WHERE cGR00_Tabla = '$nombre_tabla'
+                        AND cGR00_Clave = '$clave'";
+                            
+        $resultados= $dbcon->query($sql);
+
+        if ($resultados->num_rows == 0)  {
+            $ind_validar = 1;   
+            $bdatos_descripcion = "";
+        } else {
+                $fila = $resultados->fetch_assoc();
+                $ind_validar = 0;   
+                $bdatos_descripcion = $fila['cGR00_Descripcion'];
+            };  
+        
+    } 
+    return [$ind_error, $ind_validar, $mensaje, $bdatos_descripcion]; 
+}
 ?>

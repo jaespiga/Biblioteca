@@ -46,7 +46,7 @@ function validarSubmit($campos) {
 
     $res = explode("#&", $campos);
     
-    $campos_bdatos = $res[0] . "#&" . $$res[1];    // Apartado (Autor) / Operación
+    $campos_bdatos = $res[0] . "#&" . $res[1];    // Apartado (Autor) / Operación
 
     // Validar clave de la página web activa
 
@@ -77,7 +77,7 @@ function validarSubmit($campos) {
                 }   
         }
 
-        $campos_bdatos .= "#&" . $$res[2];    // Autor
+        $campos_bdatos .= "#&" . $res[2];    // Autor
         
     // Validar nacionalidad
     $funcion_obtener_clave = 1;
@@ -214,8 +214,22 @@ function validarSubmit($campos) {
                 }
             }
     }
-    $campos_bdatos .= "#&" . $res[8] . "#&" . $res[9];      // fecha nacimiento y fallecimiento
+    $mascara = array("s", "a", "d", "m");   // Máscara de fecha ssaa-mm-dd para pasar a valor ("")
+    $fecha_ajustada = str_replace($mascara, "", $res[5]);
+    
+    if ($fecha_ajustada == "--") {
+        $fecha_ajustada = "";
+    } 
 
+    $campos_bdatos .= "#&" . $fecha_ajustada;      // fecha nacimiento 
+
+    $fecha_ajustada = str_replace($mascara, "", $res[6]);
+
+    if ($fecha_ajustada == "--") {
+        $fecha_ajustada = "";
+    } 
+
+    $campos_bdatos .= "#&" . $fecha_ajustada;      // fecha fallecimiento
 
     // Lugar de nacimiento
     $campos_bdatos .= "#&" . $res[7];
@@ -280,7 +294,7 @@ function validarSubmit($campos) {
 // Actualización campos de formulario de autor
 function actualizarSubmit($campos_pantalla, $campos_bdatos) {
     
-    require_once 'connect.php';
+    require 'connect.php';
 
     $ind_actualizar = 0;
     $mensaje_actualizar = "";
@@ -288,16 +302,30 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
     $res = explode("#&", $campos_bdatos);
 
     if ($res[1] == "alta") {
-        $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, 
-                            cGR02_LNacimiento, cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
-                            cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) 
-                    VALUES ('$res[2]',, '$res[5]','$res[6]','$res[7]','$res[8]','$res[9]','$res[10]',
-                            '$res[3]', '$res[4]','$res[11])";
+        
+        $Autor = $res[2];
+        $FNacimiento = $res[5];
+        $FDefunción = $res[6];
+        $LNacimiento = $res[7];
+        $PNacimiento = $res[8];
+        $LFallecimiento = $res[9];
+        $PFallecimiento = $res[10];
+        $Nacionalidad = $res[3];
+        $CLiteraria = $res[4];
+        $WEB = $res[11];
+
+        $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
+                                        cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento, 
+                                        cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) 
+                    VALUES ('$res[2]', '$res[5]', '$res[6]', '$res[7]', '$res[8]', '$res[9]', '$res[10]', '$res[3]', 
+                            '$res[4]', '$res[11]')";
 		if($dbcon->query($sql) === true){
 			$mensaje = "Alta efectuada <br />";
 
 		} else {
-				require_once 'basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+				require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                $ind_actualizar = 1;
+                $mensaje_actualizar = $mensaje;
 			} 
         
     } else { 
