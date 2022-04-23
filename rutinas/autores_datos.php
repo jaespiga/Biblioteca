@@ -12,7 +12,7 @@
             <div class="col-7 d-inline-flex">
               <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 ps-3 text-primary">
                       Corriente literaria&nbsp;&nbsp;</label>
-              <input type="text" id="cliteraria" list="lista_clit" name="cliteraria" 
+              <input type="text" id="cliteraria" list="lista_clit" name="CLiteraria" 
                     autocomplete="off" class="form-control input-sm fs-5 h-75 w-50">
               <datalist id="lista_clit"> </datalist>
             </div>

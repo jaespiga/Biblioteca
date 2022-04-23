@@ -59,7 +59,7 @@ function validarFormulario(evento) {
 function validarCampoValor(evento){
     
     switch (evento.target.name) {  
-        case "clave":
+        case "clave":   // Clave de la pantalla que se está tratando: Autor / Libro / Lectura
             if (expresiones.clave.test(evento.target.value)) {
                 $.ajax({
                     type: 'POST',
@@ -108,7 +108,7 @@ function validarCampoValor(evento){
                 }
         break; 
 
-        case "fnac":  
+        case "fnac":    // Fecha de nacimiento del autor 
             if (expresiones.fnac.test(evento.target.value)) {           
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
@@ -160,7 +160,7 @@ function validarCampoValor(evento){
                 }
         break; 
 
-        case "ffal":
+        case "ffal":    // Fecha de fallecimiento del autor
             if (expresiones.ffal.test(evento.target.value)) {
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
@@ -210,6 +210,117 @@ function validarCampoValor(evento){
                     validar_campo_resultado("nok", evento.target.name, error_lit);
                 }
         break; 
+
+        case "cliteraria":      // Corriente literaria a la que pertenece el autor
+        case "nacionalidad":    // Nacionalidad
+        case "pnac":            // País de nacimiento 
+        case "pfal":            // País de fallecimiento 
+            funcion_codigo = 1  // Leer descripción de la tabla de códigos
+
+            if (evento.target.name = "cliteraria") {
+                clave_tabla = "CLiteraria";
+                titulo = "Corriente literaria"
+            } else {
+                    if (evento.target.name = "nacionalidad") {
+                        clave_tabla = "Nacionalidad";
+                        titulo = "Nacionalidad"
+                    } else {
+                            if (evento.target.name = "pnac") {
+                                clave_tabla = "País";
+                                titulo = "País de nacimiento"
+                            } else {
+                                    if (evento.target.name = "pfal") {
+                                        clave_tabla = "País";
+                                        titulo = "País de fallecimiento"
+                                    } 
+                                }
+                            }        
+                }
+                
+            clave_clave = document.getElementById(evento.target.name).value;
+            
+            $.ajax({
+                type: "POST",
+                url: "basedatos/tabla_codigos_ajax.php",
+                data: {
+                    param0: funcion_codigo,
+                    param1: clave_tabla,
+                    param2: clave_clave},
+                })
+                .done(function(respuesta){  
+                    res=respuesta.split("#&");
+                    nro_elementos= res.length
+                    if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                        if (res[1] == 1) { // No existe el valor   
+                            Swal.fire({
+                                title: titulo + ' no existe. ¿Desea dar de alta?',
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Sí',
+                                cancelButtonText: 'No'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    funcion_codigo = 3  // Dar de alta nueva fila en la tabla de códigos
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "basedatos/tabla_codigos_ajax.php",
+                                        data: {
+                                            param0: funcion_codigo,
+                                            param1: clave_tabla,
+                                            param2: clave_clave},
+                                        })
+                                        .done(function(respuesta){  
+                                            res=respuesta.split("#&");
+                                            nro_elementos= res.length
+                                            if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                                                Swal.fire({
+                                                    icon: 'succes',
+                                                    title: 'Alta realizada',
+                                                    text: 'Nueva file en ' + clave_tabla + " con código " + res[3],                                                
+                                                }) 
+                                            } else {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'ERROR. Alta no realizada',
+                                                        text: res[2],
+                                                        footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                                                    }) 
+                                                } 
+                                        })
+                                        .fail(function(){
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Oops...',
+                                                text: 'Hubo un error al cargar las nacionalidades',
+                                                footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                                            })              
+                                        })      
+                                } else {
+                                    $("#'evento.target.name'").val("");
+                                    } 
+                            })
+                        }
+                    } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops... ERROR',
+                                text: 'Hubo un error en la tabla de códigos (' + titulo + ")." + res[2],
+                                footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                            })      
+                        }    
+                })
+                .fail(function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops... ERROR',
+                        text: 'Hubo un error en la tabla de códigos (' + titulo + ")." + res[2],
+                        footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                    })              
+                })      
+
+        break;
 
         default:
                 
