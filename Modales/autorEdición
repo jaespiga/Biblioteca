@@ -1,19 +1,44 @@
 
-<!-- Modal para el mantenimiento de los datos personales de los autores -->
-<div class="modal fade" id="autorEdición" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- Modal para editar un autor y los datos personales -->
+<div class="modal fade" id="autorNuevo" role = 'dialog' tabindex="-1">
+  <div class="modal-dialog modal-lg formulario"  id="formulario">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h2 class="modal-title fw-bold">Nuevo autor</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        
+        <input type="hidden" id="idApartado" name="idApartado" value="Autor">
+        <input type="hidden" id="idOper" name="idOper" value="alta">
+
+        <div class="formulario__grupo" id="grupo__clave">
+          <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
+
+          <input type="text" name="clave" id="clave" 
+                  onblur="document.getElementById('web').value=this.value"
+                  class="form-control input-sm fs-5 mb-4 formulario__input" 
+                  autocomplete="off" required>
+          <div id="clave_error"></div>
+        
+        </div>
+        
+         <!-- Campos comunes al alta y mantenimiento de autores -->
+         <?php require_once 'rutinas/autores_datos.php' ?>       
+        
+
+      <div class="modal-footer formulario__grupo">
+        <button type="submit" id="enviar_datos" class="btn btn-success fs-4 submitBtn" 
+                >Alta
+        </button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+      <p class="formulario__mensaje-exito" id="formulario__mensaje-exito"> 
+          Operación realizada con éxito
+      </p>        
     </div>
   </div>
 </div>
+
+<!-- Tratar alta de registro de autor -->
+<?php require_once 'basedatos/autores_alta_datos.php' ?>

@@ -152,6 +152,8 @@
 		<script  id="tabla_paises_cambio" data-clave="País"
 				src="js/lista_tabla_codigos_paises_cambio.js"></script>  <!-- Lista países ordenados por tecleo  -->									
 
+		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
+
 	</body>
 
 </html>

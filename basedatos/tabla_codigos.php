@@ -146,7 +146,7 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                             
         $resultados= $dbcon->query($sql);
 
-        if($dbcon->query($sql) === true){
+        if($dbcon->errno == 0){
 			
             if ($resultados->num_rows == 0)  {
                 $sql= "SELECT MAX(cGR00_Clave)
@@ -154,7 +154,7 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                         WHERE cGR00_Tabla = '$nombre_tabla'";
 
                 
-                if($dbcon->query($sql) === true){
+                if($dbcon->errno == 0){
                     $resultados= $dbcon->query($sql);
                     if ($resultados->num_rows == 0)  {
                         $max_clave = 1;
@@ -163,14 +163,13 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                         $ind_validar = 0;   
                         $max_clave = $fila['MAX(cGR00_Clave)'] + 1;   // Máximo número de clave que existe para esa tabla
                         }
-                    
-                    $max_clave += 1;     // Próxima clave
 
                     $sql="INSERT INTO tgr00_tcodigos(cGR00_Tabla, cGR00_Clave, cGR00_Descripcion) 
-                               VALUES ('$nombre_tabla', '$max_clave', '$descripcion'";
+                               VALUES ('$nombre_tabla', '$max_clave', '$descripcion')";
                     
-                    if($dbcon->query($sql) === true){
-                                $ind_error = 0;
+                    if($dbcon->errno == 0){
+                        $ind_error = 0;
+                        $bdatos_clave = $max_clave;
                     } else {
                             require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
                             $ind_error = 1;

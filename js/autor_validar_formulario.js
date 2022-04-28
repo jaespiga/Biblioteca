@@ -57,7 +57,6 @@ function validarFormulario(evento) {
     return
 }
 function validarCampoValor(evento){
-    
     switch (evento.target.name) {  
         case "clave":   // Clave de la pantalla que se está tratando: Autor / Libro / Lectura
             if (expresiones.clave.test(evento.target.value)) {
@@ -71,27 +70,35 @@ function validarCampoValor(evento){
                 .done(function(autor_datos){
                     res=autor_datos.split("#&");
                     
-                    if (id_Oper == "alta") {
-                        if (evento.target.value !== "" 
-                            && res[0].trim() == evento.target.value) {
-                            $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
-                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                            validar_campo_resultado("nok", evento.target.name, error_lit); 
+                    if (res[0] == 0) {              // Lectura de datos correcta
+                        if (id_Oper == "alta") {
+                            if (evento.target.value !== "" 
+                                && res[2].trim() == evento.target.value) {
+                                $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
+                                error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                validar_campo_resultado("nok", evento.target.name, error_lit); 
+                            } else {                                  
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", evento.target.name, error_lit);       
+                                }
                         } else {
-                                
-                                error_lit="<p></p>"
-                                validar_campo_resultado("ok", evento.target.name, error_lit);       
+                            if (res[2].trim() == "") {
+                                $error_texto = "Error. " + id_Apartado + " no existe."
+                                error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                validar_campo_resultado("nok", evento.target.name, error_lit);
+                            } else {
+                                    error_lit="<p></p>"
+                                    validar_campo_resultado("ok", evento.target.name, error_lit);       
+                                }
                             }
                     } else {
-                        if (res[0].trim() == "") {
-                            $error_texto = "Error. " + id_Apartado + " no existe."
-                            error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
-                            validar_campo_resultado("nok", evento.target.name, error_lit);
-                        } else {
-                                error_lit="<p></p>"
-                                validar_campo_resultado("ok", evento.target.name, error_lit);       
-                            }
-                        }
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
+                                text: res[1],
+                                footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                            }) 
+                        }    
                 })
                 
                 .fail(function(){
@@ -211,117 +218,6 @@ function validarCampoValor(evento){
                 }
         break; 
 
-        case "cliteraria":      // Corriente literaria a la que pertenece el autor
-        case "nacionalidad":    // Nacionalidad
-        case "pnac":            // País de nacimiento 
-        case "pfal":            // País de fallecimiento 
-            funcion_codigo = 1  // Leer descripción de la tabla de códigos
-
-            if (evento.target.name = "cliteraria") {
-                clave_tabla = "CLiteraria";
-                titulo = "Corriente literaria"
-            } else {
-                    if (evento.target.name = "nacionalidad") {
-                        clave_tabla = "Nacionalidad";
-                        titulo = "Nacionalidad"
-                    } else {
-                            if (evento.target.name = "pnac") {
-                                clave_tabla = "País";
-                                titulo = "País de nacimiento"
-                            } else {
-                                    if (evento.target.name = "pfal") {
-                                        clave_tabla = "País";
-                                        titulo = "País de fallecimiento"
-                                    } 
-                                }
-                            }        
-                }
-                
-            clave_clave = document.getElementById(evento.target.name).value;
-            
-            $.ajax({
-                type: "POST",
-                url: "basedatos/tabla_codigos_ajax.php",
-                data: {
-                    param0: funcion_codigo,
-                    param1: clave_tabla,
-                    param2: clave_clave},
-                })
-                .done(function(respuesta){  
-                    res=respuesta.split("#&");
-                    nro_elementos= res.length
-                    if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                        if (res[1] == 1) { // No existe el valor   
-                            Swal.fire({
-                                title: titulo + ' no existe. ¿Desea dar de alta?',
-                                icon: 'question',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Sí',
-                                cancelButtonText: 'No'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    funcion_codigo = 3  // Dar de alta nueva fila en la tabla de códigos
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "basedatos/tabla_codigos_ajax.php",
-                                        data: {
-                                            param0: funcion_codigo,
-                                            param1: clave_tabla,
-                                            param2: clave_clave},
-                                        })
-                                        .done(function(respuesta){  
-                                            res=respuesta.split("#&");
-                                            nro_elementos= res.length
-                                            if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                                                Swal.fire({
-                                                    icon: 'succes',
-                                                    title: 'Alta realizada',
-                                                    text: 'Nueva file en ' + clave_tabla + " con código " + res[3],                                                
-                                                }) 
-                                            } else {
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'ERROR. Alta no realizada',
-                                                        text: res[2],
-                                                        footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                                                    }) 
-                                                } 
-                                        })
-                                        .fail(function(){
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Oops...',
-                                                text: 'Hubo un error al cargar las nacionalidades',
-                                                footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
-                                            })              
-                                        })      
-                                } else {
-                                    $("#'evento.target.name'").val("");
-                                    } 
-                            })
-                        }
-                    } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops... ERROR',
-                                text: 'Hubo un error en la tabla de códigos (' + titulo + ")." + res[2],
-                                footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
-                            })      
-                        }    
-                })
-                .fail(function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops... ERROR',
-                        text: 'Hubo un error en la tabla de códigos (' + titulo + ")." + res[2],
-                        footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
-                    })              
-                })      
-
-        break;
-
         default:
                 
         break;
@@ -329,6 +225,7 @@ function validarCampoValor(evento){
     return  
 }
 
+/* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
 function validarCompararFechas () {
     
     fecha_inicial_id = "fnac";
@@ -440,7 +337,6 @@ function validarCompararFechas () {
                 text: 'Hubo un error al validar la fecha',
             }) 
         }) 
-    
         
     return
 }
@@ -453,16 +349,16 @@ function validar_campo_resultado (resultado_validacion, campo, error_mensaje) {
     if (resultado_validacion == "ok") {
         document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto'); 
         document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
-        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo'); 
-        campos['campo'] = true;      
+        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');     
     } else {
         document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
         document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto'); 
         document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo'); 
-        campos['campo'] = false;       
         }  
     return                                              
 }
+
+
 
 /* Analizar las entradas del formulario que queramos validar  */ 
 

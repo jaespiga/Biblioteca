@@ -1,23 +1,24 @@
 <!-- Tratamiento y campos comunes al alta y mantenimiento de autores -->
 <div class="row">
-          <div class="d-flex col-12">
-            <div class="col-5 d-inline-flex">  
-              <label for="nacionalidad" class="form-text text-primary fs-5 mt-1 text-primary">
-                      Nacionalidad&nbsp;&nbsp;</label>
-              <input type="text" id="nacionalidad" list="lista_nacionalidades" name="nacionalidad" 
-                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-100 ms-2">
-              <datalist id="lista_nacionalidades"> </datalist>
-            </div>
+  <div class="d-flex col-12">
+    <div class="col-5 d-inline-flex">  
+      <label for="nacionalidad" class="form-text text-primary fs-5 mt-1 text-primary">
+              Nacionalidad&nbsp;&nbsp;</label>
+      <input type="text" id="nacionalidad" list="lista_nacionalidades" name="nacionalidad" 
+            autocomplete="off" class="form-control input-sm fs-5 h-75 w-100 ms-2">
+      <datalist id="lista_nacionalidades"> </datalist>
+    </div>
 
-            <div class="col-7 d-inline-flex">
-              <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 ps-3 text-primary">
-                      Corriente literaria&nbsp;&nbsp;</label>
-              <input type="text" id="cliteraria" list="lista_clit" name="CLiteraria" 
-                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-50">
-              <datalist id="lista_clit"> </datalist>
-            </div>
-          </div>      
-        </div>
+    <div class="col-7 d-inline-flex">
+      <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 ps-3 text-primary">
+              Corriente literaria&nbsp;&nbsp;</label>
+      <input type="text" id="cliteraria" list="lista_clit" name="cliteraria" 
+            autocomplete="off" class="form-control input-sm fs-5 h-75 w-50" 
+            onblur="tratamiento_codigos('cliteraria')">     
+      <datalist id="lista_clit"> </datalist>
+    </div>
+  </div>      
+</div>
         
 <div class="row">
   <div class="d-flex mb-2">
@@ -156,7 +157,7 @@
       <label for="pnac" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
               País&nbsp;&nbsp;</label>
       <input type="text" id="pnac" list="lista_paises1" name="pnac" autocomplete="off"
-            class="form-control input-sm fs-5 h-75 w-75 ms-2">
+            class="form-control input-sm fs-5 h-75 w-75 ms-2" >
       <datalist id="lista_paises1"> </datalist>
     </div>
   </div>      
@@ -174,7 +175,7 @@
       <label for="pfal" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
               País&nbsp;&nbsp;</label>
       <input type="text" id="pfal" list="lista_paises2" name="pfal" autocomplete="off"
-            class="form-control input-sm fs-5 h-75 w-75 ms-2">
+            class="form-control input-sm fs-5 h-75 w-75 ms-2" >
       <datalist id="lista_paises2"> </datalist>
     </div>
   </div>      

@@ -62,19 +62,25 @@ function validarSubmit($campos) {
                     
             $resultados= $dbcon->query($sql);
 
-            if ($resultados->num_rows == 0)  {
-                if ($res[1] !== "alta") {
-                    $mensaje = "Error. Autor no existe.";  
-                    $ind_actualizar = 1;   
-                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                };
-            } else {
-                    if ($res[1] == "alta") {
-                        $mensaje = "Error. Autor ya existe.";  
+            if ($dbcon->errno == 0){ 
+                if ($resultados->num_rows == 0)  {
+                    if ($res[1] !== "alta") {
+                        $mensaje = "Error. Autor no existe.";  
                         $ind_actualizar = 1;   
                         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
                     };
-                }   
+                } else {
+                        if ($res[1] == "alta") {
+                            $mensaje = "Error. Autor ya existe.";  
+                            $ind_actualizar = 1;   
+                            return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
+                        };
+                    } 
+            } else {
+                    require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                    $ind_actualizar = 1;
+                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
+                }  
         }
 
         $campos_bdatos .= "#&" . $res[2];    // Autor

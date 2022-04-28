@@ -23,19 +23,19 @@ function leerDatosAutores($lit_autor) {
     $resultados= $dbcon->query($sql); ?>
     
     <table class="table table-hover table-condensed table-borderer border-primary align-middle">
-                    <thead>
-                        <tr class="align-items-center fs-4">
-                            <th class="table-secondary">Autor</th>
-                            <th class="table-secondary">Nacionalidad</th>
-                            <th class="table-secondary">Lugar nacimiento</th>
-                            <th class="table-secondary">País nacimiento</th>
-                            <th class="table-secondary">Información WEB</th>
-                            <th class="table-success">Editar</th>
-                            <th class="table-danger">Eliminar</th>
-                        </tr>
-                    </thead>    
-    
-                    <?php 
+        <thead>
+            <tr class="align-items-center fs-4">
+                <th class="table-secondary">Autor</th>
+                <th class="table-secondary">Nacionalidad</th>
+                <th class="table-secondary">Lugar nacimiento</th>
+                <th class="table-secondary">País nacimiento</th>
+                <th class="table-secondary">Información WEB</th>
+                <th class="table-success">Editar</th>
+                <th class="table-danger">Eliminar</th>
+            </tr>
+        </thead>    
+
+    <?php 
     if ($resultados->num_rows == 0)  {
         $listas = "";
     } else{?>
