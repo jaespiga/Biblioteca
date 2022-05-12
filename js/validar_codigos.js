@@ -21,7 +21,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 res=respuesta.split("#&");
                 nro_elementos= res.length
                 if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                    if (res[1] == 1) { // No existe el valor   
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
                         Swal.fire({
                             title: titulo + ' no existe. ¿Desea dar de alta?',
                             icon: 'question',
@@ -46,11 +47,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                                         nro_elementos= res.length
                                         if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
                                             Swal.fire({
-                                                icon: 'succes',
+                                                icon: 'success',
                                                 title: 'Alta realizada',
                                                 text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
                                             }) 
-                                            clave = "";
                                             
                                             $.ajax({
                                                 type: "POST",
@@ -132,7 +132,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 res=respuesta.split("#&");
                 nro_elementos= res.length
                 if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                    if (res[1] == 1) { // No existe el valor   
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
                         Swal.fire({
                             title: titulo + ' no existe. ¿Desea dar de alta?',
                             icon: 'question',
@@ -157,11 +158,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                                         nro_elementos= res.length
                                         if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
                                             Swal.fire({
-                                                icon: 'succes',
+                                                icon: 'success',
                                                 title: 'Alta realizada',
                                                 text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
                                             }) 
-                                            clave = "";
                                             
                                             $.ajax({
                                                 type: "POST",
@@ -244,7 +244,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 res=respuesta.split("#&");
                 nro_elementos= res.length
                 if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                    if (res[1] == 1) { // No existe el valor   
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
                         Swal.fire({
                             title: titulo + ' no existe. ¿Desea dar de alta?',
                             icon: 'question',
@@ -269,11 +270,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                                         nro_elementos= res.length
                                         if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
                                             Swal.fire({
-                                                icon: 'succes',
+                                                icon: 'success',
                                                 title: 'Alta realizada',
                                                 text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
                                             }) 
-                                            clave = "";
                                             
                                             $.ajax({
                                                 type: "POST",
@@ -358,7 +358,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 res=respuesta.split("#&");
                 nro_elementos= res.length
                 if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
-                    if (res[1] == 1) { // No existe el valor   
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
                         Swal.fire({
                             title: titulo + ' no existe. ¿Desea dar de alta?',
                             icon: 'question',
@@ -383,11 +384,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                                         nro_elementos= res.length
                                         if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
                                             Swal.fire({
-                                                icon: 'succes',
+                                                icon: 'success',
                                                 title: 'Alta realizada',
                                                 text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
                                             }) 
-                                            clave = "";
                                             
                                             $.ajax({
                                                 type: "POST",

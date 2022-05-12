@@ -17,18 +17,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             dataType: "html"
             })
             .done(function(lista_select){
-                if (!$.trim(lista_select)) {
-                    
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'info',
-                        title: 'No existe ningún país con esa combinación de caracteres.',
-                        text: 'Nota. Se tiene en cuenta los acentos',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-        
-                } else {
+                if ($.trim(lista_select)) {
+                
                         $("#lista_paises1").empty();
                         $("#lista_paises1").html(lista_select);
                 } 

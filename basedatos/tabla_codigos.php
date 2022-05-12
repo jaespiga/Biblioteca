@@ -75,21 +75,26 @@ function obtener_clave ($nombre_tabla, $descripcion) {
        
         require 'connect.php';
 
-        $sql=	"SELECT cGR00_Tabla, cGR00_Clave, cGR00_Descripcion 
+        $sql= "SELECT cGR00_Tabla, cGR00_Clave, cGR00_Descripcion 
                         FROM tgr00_tcodigos
                         WHERE cGR00_Tabla = '$nombre_tabla'
                         AND cGR00_Descripcion = '$descripcion'";
                             
         $resultados= $dbcon->query($sql);
 
-        if ($resultados->num_rows == 0)  {
-            $ind_validar = 1;   
-            $bdatos_clave = 0;
+        if($dbcon->errno == 0){
+            if ($resultados->num_rows == 0)  {
+                $ind_validar = 1;   
+                $bdatos_clave = 0;
+            } else {
+                    $fila = $resultados->fetch_assoc();
+                    $ind_validar = 0;   
+                    $bdatos_clave = $fila['cGR00_Clave'];
+                }
         } else {
-                $fila = $resultados->fetch_assoc();
-                $ind_validar = 0;   
-                $bdatos_clave = $fila['cGR00_Clave'];
-            };  
+            require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                $ind_error = 1;
+            }   
         
     } 
     return [$ind_error, $ind_validar, $mensaje, $bdatos_clave]; 
@@ -113,17 +118,23 @@ function obtener_descripcion ($nombre_tabla, $clave) {
                         AND cGR00_Clave = '$clave'";
                             
         $resultados= $dbcon->query($sql);
-
-        if ($resultados->num_rows == 0)  {
-            $ind_validar = 1;   
-            $bdatos_descripcion = "";
-        } else {
-                $fila = $resultados->fetch_assoc();
-                $ind_validar = 0;   
-                $bdatos_descripcion = $fila['cGR00_Descripcion'];
-            };  
         
-    } 
+        if($dbcon->errno == 0){
+            if ($resultados->num_rows == 0)  {
+                $ind_validar = 1;   
+                $bdatos_descripcion = "";
+            } else {
+                    $fila = $resultados->fetch_assoc();
+                    $ind_validar = 0;   
+                    $bdatos_descripcion = $fila['cGR00_Descripcion'];
+                } 
+        } else {
+            require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                $ind_error = 1;
+            }      
+    } else {
+            $bdatos_descripcion = "";
+        } 
     return [$ind_error, $ind_validar, $mensaje, $bdatos_descripcion]; 
 }
 
@@ -165,13 +176,13 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                         }
 
                     $sql="INSERT INTO tgr00_tcodigos(cGR00_Tabla, cGR00_Clave, cGR00_Descripcion) 
-                               VALUES ('$nombre_tabla', '$max_clave', '$descripcion')";
+                               VALUES ('$nombre_tabla', $max_clave, '$descripcion')";
                     
                     if($dbcon->errno == 0){
                         $ind_error = 0;
                         $bdatos_clave = $max_clave;
                     } else {
-                            require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                        require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
                             $ind_error = 1;
                         } 
                 } else {
@@ -185,7 +196,7 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                 }  
         } else {
             require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
-            $ind_actualizar = 1;
+            $ind_error = 1;
             } 
     } 
     return [$ind_error, $ind_validar, $mensaje, $bdatos_clave]; 

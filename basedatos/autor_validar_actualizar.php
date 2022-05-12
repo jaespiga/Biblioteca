@@ -325,7 +325,8 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
                                         cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB) 
                     VALUES ('$res[2]', '$res[5]', '$res[6]', '$res[7]', '$res[8]', '$res[9]', '$res[10]', '$res[3]', 
                             '$res[4]', '$res[11]')";
-		if($dbcon->query($sql) === true){
+		
+        if($dbcon->query($sql) === true){
 			$mensaje = "Alta efectuada <br />";
 
 		} else {

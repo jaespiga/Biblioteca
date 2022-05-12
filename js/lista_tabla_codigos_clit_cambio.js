@@ -17,18 +17,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             dataType: "html"
             })
             .done(function(lista_select){
-                if (!$.trim(lista_select)) {
-                    
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'info',
-                        title: 'No existe ninguna corriente literaria con esa combinación de caracteres.',
-                        text: 'Nota. Se tiene en cuenta los acentos',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-        
-                } else {
+                if ($.trim(lista_select)) {
+                
                         $("#lista_clit").empty();
                         $("#lista_clit").html(lista_select);
                 } 

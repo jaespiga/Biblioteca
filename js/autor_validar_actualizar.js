@@ -29,7 +29,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
           if (res[1] == 0) { // Indicador de validación correcta
                 Swal.fire({
-                  icon: 'succes',
+                  icon: 'success',
                   title: "Operación efectuada"
                 })  
                 
@@ -40,7 +40,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 }
           } else {
                   Swal.fire({
-                    icon: 'succes',
+                    icon: 'success',
                     title: 'Operación realizada con incidencias',
                     html: '<p align="left">' + res[2] + '</p>'
                   })   

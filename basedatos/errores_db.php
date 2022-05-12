@@ -12,7 +12,11 @@
 		 		$mensaje = "Operación NO efectuada. Error: " .$dbcon->errno.". ".$dbcon->error;
 		 		break;
 		 } 
-	}
+	} else {
+			if ($dbcon->query($sql) !== true) {
+				$mensaje = "Operación NO efectuada. Error: " . $dbcon->error;
+			}
+		}
 ?>
 
 
