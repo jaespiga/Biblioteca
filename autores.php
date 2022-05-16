@@ -118,7 +118,7 @@
 		<?php 
 				/* Pantallas modales a las que se puede acceder en la página */
 				require_once "Modales/autorNuevo"; 
-				require_once "Modales/autorEdición"; 
+				require_once "Modales/autorEdicion"; 
 				require_once "Modales/autorFiltro"; 
 		?> 	
 		

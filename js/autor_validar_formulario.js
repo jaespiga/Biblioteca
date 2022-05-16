@@ -64,7 +64,7 @@ function validarCampoValor(evento){
                     type: 'POST',
                     url: 'basedatos/leer_datos.php',
                     data: {param1: evento.target.value,
-                        param2: id_Apartado
+                           param2: id_Apartado
                         }
                 })
                 .done(function(autor_datos){

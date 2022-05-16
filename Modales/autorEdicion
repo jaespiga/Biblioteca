@@ -1,0 +1,42 @@
+
+<!-- Modal para editar un autor y los datos personales -->
+<div class="modal fade" id="autorModificar" role = 'dialog' tabindex="-1">
+  <div class="modal-dialog modal-lg formulario"  id="formulario">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fw-bold">Datos autor</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <input type="hidden" id="idApartado" name="idApartado" value="Autor">
+        <input type="hidden" id="idOper" name="idOper" value="modificacion">
+
+        <div class="formulario__grupo" id="grupo__clave">
+          <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
+
+          <input type="text" name="clave" id="clave" 
+                  class="form-control input-sm fs-5 mb-4 formulario__input" protected>
+          <div id="clave_error"></div>
+        
+        </div>
+        
+         <!-- Campos comunes al alta y mantenimiento de autores -->
+         <?php require_once 'rutinas/autores_datos.php' ?>       
+        
+
+      <div class="modal-footer formulario__grupo">
+        <button type="submit" id="enviar_datos" class="btn btn-success fs-4 submitBtn" 
+                >Actualización
+        </button>
+      </div>
+
+      <p class="formulario__mensaje-exito" id="formulario__mensaje-exito"> 
+          Operación realizada con éxito
+      </p>        
+    </div>
+  </div>
+</div>
+
+<!-- Tratar alta de registro de autor -->
+<?php require_once 'basedatos/autores_alta_datos.php' ?>

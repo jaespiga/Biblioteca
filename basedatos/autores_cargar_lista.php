@@ -1,4 +1,7 @@
 <?php 
+
+// Obtención de la lista de autores según los datos tecleados por pantalla	
+
 $buscar = $_POST['tecleo'];
         
 list($opciones_autores) = leerListaAutores($buscar);

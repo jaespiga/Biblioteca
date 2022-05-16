@@ -1,8 +1,9 @@
 
 <?php 
 
+/* Leer toda la información del Autor / Libros / Lecturas */
 
-/* Leer datos del autor */
+
 $buscar = $_POST['param1'];
 $apartado = $_POST['param2'];
 
@@ -44,10 +45,10 @@ function leerDatosAutor($lit_autor) {
             } else {
                     $fila = $resultados->fetch_assoc();
                     $datos_salida = $fila["cGR02_Autor"]. "#&" . $fila["cGR02_Foto"]
-                            . $fila["cGR02_FNacimiento"]. $fila["cGR02_FDefunción"]
-                            . $fila["cGR02_LNacimiento"]. $fila["cGR02_PNacimiento"]
-                            . $fila["cGR02_LFallecimiento"]. $fila["cGR02_PFallecimiento"]
-                            . $fila["cGR02_Nacionalidad"] . "#&" . $fila["cGR02_CLiteraria"] 
+                            . "#&" . $fila["cGR02_FNacimiento"] . "#&" . $fila["cGR02_FDefunción"]
+                            . "#&" . $fila["cGR02_LNacimiento"] . "#&" . $fila["cGR02_PNacimiento"]
+                            . "#&" . $fila["cGR02_LFallecimiento"] . "#&" . $fila["cGR02_PFallecimiento"]
+                            . "#&" . $fila["cGR02_Nacionalidad"] . "#&" . $fila["cGR02_CLiteraria"] 
                             . "#&" . $fila["cGR02_WEB"];  
                 }      
         } else {
