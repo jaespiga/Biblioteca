@@ -8,8 +8,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
              param2: clave_codigo}    
     })    
     .done(function(lista_select){
-            $('#lista_paises1').html(lista_select)
-            $('#lista_paises2').html(lista_select)
+          $('#lista_paises1').html(lista_select)
+          $('#lista_paises2').html(lista_select)
+          $('#lista_paises1E').html(lista_select)
+          $('#lista_paises2E').html(lista_select)
     })   
     .fail(function(){
       Swal.fire({

@@ -7,7 +7,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     data: {param1: clave_tabla}    
   })    
   .done(function(lista_select){
-    $('#lista_nacionalidades').html(lista_select)
+    $('#lista_nacionalidades').html(lista_select)       // Alta
+    $('#lista_nacionalidadesE').html(lista_select)      // Edición
   })
   .fail(function(){
     Swal.fire({

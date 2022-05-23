@@ -39,13 +39,13 @@ function leerDatosAutores($lit_autor) {
     if($lit_autor == ""){
             $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                           cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
-                          cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB
+                          cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio
                         FROM tgr02_autores
                         order by cGR02_Autor";
     } else{
             $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                           cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
-                          cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB
+                          cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio
                         FROM tgr02_autores
                         WHERE cGR02_Autor like '$lit_autor%'";
     }   
@@ -152,7 +152,8 @@ function leerDatosAutores($lit_autor) {
         $datos_pantalla = "Autor" . "#&" . $fila["cGR02_Autor"] . "#&" . $fila["cGR02_Foto"] 
             . "#&" . $fila["cGR02_FNacimiento"]. "#&" . $fila["cGR02_FDefunción"] . "#&" . $fila["cGR02_LNacimiento"]
             . "#&" . $pais_nac_lit . "#&" . $fila["cGR02_LFallecimiento"]. "#&" . $pais_fal_lit 
-            . "#&" . $fila["cGR02_Nacionalidad"] . "#&" . $cliteraria . "#&" . $fila["cGR02_WEB"];     
+            . "#&" . $nacionalidad_lit . "#&" . $cliteraria . "#&" . $fila["cGR02_WEB"]
+            . "#&" . $fila["cGR02_TSUltCambio"];     
 ?>    
             
         <tr class="align-items-center fs-5">;
@@ -162,7 +163,7 @@ function leerDatosAutores($lit_autor) {
             <td> <?php echo $pais_nac_lit  ?> </td>";             
             <td> <?php echo $fila['cGR02_WEB'] ?> </td>";
             <td> 
-                <button class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
+                <button type="button"  class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
                                 fs-4' data-bs-toggle="modal"  data-bs-target="#autorEdicion"
                                  onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
                     

@@ -178,7 +178,7 @@ function alta_clave_descripcion ($nombre_tabla, $descripcion) {
                     $sql="INSERT INTO tgr00_tcodigos(cGR00_Tabla, cGR00_Clave, cGR00_Descripcion) 
                                VALUES ('$nombre_tabla', $max_clave, '$descripcion')";
                     
-                    if($dbcon->errno == 0){
+                    if($dbcon->query($sql) === true){
                         $ind_error = 0;
                         $bdatos_clave = $max_clave;
                     } else {

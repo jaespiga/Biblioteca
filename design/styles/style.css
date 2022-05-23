@@ -166,14 +166,3 @@ body {
 .formulario__mensaje-activo{
 	opacity: 1;
 }
-
-.formulario__mensaje-exito{
-	font-size: 15px;
-	align-items: center;
-	color: darkgreen;
-	display: none;
-}
-
-.formulario__mensaje-exito-activo{
-	display: block;
-}

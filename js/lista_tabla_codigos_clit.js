@@ -9,6 +9,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
   })    
   .done(function(lista_select){
     $('#lista_clit').html(lista_select)
+    $('#lista_clitE').html(lista_select)
   })
   .fail(function(){
     Swal.fire({

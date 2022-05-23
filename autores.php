@@ -3,6 +3,11 @@
 
 	require_once 'basedatos/connect.php';  
 
+    require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
+	/*
+	Scripts de bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
+	*/
+ 	require_once "script/externos";  
 ?> 
 
 <!DOCTYPE html>
@@ -23,10 +28,7 @@
 		<link rel="stylesheet" href="bootstrap-5.1.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="design/styles/style.css" type="text/css" media="screen"> 
 		
-		<!--
-			Scripts de bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
-		-->
-		<?php require_once "script/externos"; ?> 
+		
 	</head>
 	<body>
 
@@ -89,12 +91,12 @@
 				<form>
 					<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
 						me-5 mb-0 text-light fs-4" 
-						data-bs-toggle="modal" data-bs-target="#autorNuevo">
-						Alta autor &nbsp;
+						data-bs-toggle="modal" data-bs-target="#autorNuevo"
+						onclick="autorInicializarDatosPantalla()"> Alta autor &nbsp;
+
 						<svg class="bi" width="30" height="30" fill="currentColor">
 							<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#plus-square"/>
-						</svg>
-								
+						</svg>								
 					</button>
 				</form>	
 			
@@ -116,10 +118,10 @@
 		</div>
 
 		<?php 
-				/* Pantallas modales a las que se puede acceder en la página */
-				require_once "Modales/autorNuevo"; 
-				require_once "Modales/autorEdicion"; 
-				require_once "Modales/autorFiltro"; 
+			// Pantallas modales a las que se puede acceder en la página 
+			require_once "Modales/autorNuevo"; 
+			require_once "Modales/autorEdicion"; 
+			require_once "Modales/autorFiltro"; 
 		?> 	
 		
 		<!--
@@ -128,8 +130,9 @@
 		
 		<script type="text/javascript" src="js/consulta_web.js"></script>  <!-- Buscar en Google  -->
 		
-		<script type="text/javascript" src="js/autor_validar_formulario.js"></script>  <!-- validar datos autor  -->
-		<script type="text/javascript" src="js/autor_validar_actualizar.js"></script>  <!-- validar datos autor  -->
+		<script type="text/javascript" src="js/autor_validar_formulario.js"></script>  <!-- validar datos autor: Alta  -->
+		<script type="text/javascript" src="js/autor_validar_formulario_edicion.js"></script>  <!-- validar datos autor: Edición  -->
+		<script type="text/javascript" src="js/autor_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 
 		<script type="text/javascript" src="js/lista_autores.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_autores_cambio.js"></script>  <!-- Lista de autores dinámica  -->
