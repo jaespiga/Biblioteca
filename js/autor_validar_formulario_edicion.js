@@ -1,11 +1,11 @@
 /* Validación de campos de formularios: Autor / Edición */
-const formulario = document.getElementById('formularioE');
-const inputs = document.querySelectorAll('#formularioE');
+const formularioE = document.getElementById('formularioE');
+const inputsE = document.querySelectorAll('#formularioE');
 
-const id_Apartado = document.getElementById('idApartadoE').value;
-const id_Oper = document.getElementById('idOperE').value;
+const id_ApartadoE = document.getElementById('idApartadoE').value;
+const id_OperE = document.getElementById('idOperE').value;
 
-const expresiones = {
+const expresionesE = {
     claveE: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,    // letras, acentos, números, espacios, guión bajo, guión
     fnacE:  /^[0-9]{1,4}$/,                      // números
     ffalE:  /^[0-9]{1,4}$/                       // números
@@ -15,7 +15,7 @@ function validarFormularioE(evento) {
     
     switch (evento.target.name) {  
         case "claveE":       
-            if (expresiones.claveE.test(evento.target.value)) {
+            if (expresionesE.claveE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoE("ok", evento.target.name, error_lit);
@@ -27,7 +27,7 @@ function validarFormularioE(evento) {
         break; 
 
         case "fnacE":
-            if (expresiones.fnacE.test(evento.target.value)) {
+            if (expresionesE.fnacE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoE("ok", evento.target.name, error_lit);
@@ -39,7 +39,7 @@ function validarFormularioE(evento) {
         break; 
 
         case "ffalE":
-            if (expresiones.ffalE.test(evento.target.value)) {
+            if (expresionesE.ffalE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoE("ok", evento.target.name, error_lit);
@@ -59,22 +59,22 @@ function validarFormularioE(evento) {
 function validarCampoValorE(evento){
     switch (evento.target.name) {  
         case "claveE":   // clave de la pantalla que se está tratando: Autor / Libro / Lectura
-            if (expresiones.claveE.test(evento.target.value)) {
+            if (expresionesE.claveE.test(evento.target.value)) {
                 $.ajax({
                     type: 'POST',
                     url: 'basedatos/leer_datos.php',
                     data: {param1: evento.target.value,
-                           param2: id_Apartado
+                           param2: id_ApartadoE
                         }
                 })
                 .done(function(autor_datos){
                     res=autor_datos.split("#&");
                     
                     if (res[0] == 0) {              // Lectura de datos correcta
-                        if (id_Oper == "alta") {
+                        if (id_OperE == "alta") {
                             if (evento.target.value !== "" 
                                 && res[2].trim() == evento.target.value) {
-                                $error_texto = "Error. " + id_Apartado + " ya existe. </p>'"
+                                $error_texto = "Error. " + id_ApartadoE + " ya existe. </p>'"
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultadoE("nok", evento.target.name, error_lit); 
                             } else {                                  
@@ -83,7 +83,7 @@ function validarCampoValorE(evento){
                                 }
                         } else {
                             if (res[2].trim() == "") {
-                                $error_texto = "Error. " + id_Apartado + " no existe."
+                                $error_texto = "Error. " + id_ApartadoE + " no existe."
                                 error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                                 validar_campo_resultadoE("nok", evento.target.name, error_lit);
                             } else {
@@ -116,7 +116,7 @@ function validarCampoValorE(evento){
         break; 
 
         case "fnacE":    // Fecha de nacimiento del autor 
-            if (expresiones.fnacE.test(evento.target.value)) {           
+            if (expresionesE.fnacE.test(evento.target.value)) {           
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
                 mm = document.getElementById('fnacEmm').value
@@ -168,7 +168,7 @@ function validarCampoValorE(evento){
         break; 
 
         case "ffalE":    // Fecha de fallecimiento del autor
-            if (expresiones.ffalE.test(evento.target.value)) {
+            if (expresionesE.ffalE.test(evento.target.value)) {
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
                 mm = document.getElementById('ffalEmm').value
@@ -362,7 +362,7 @@ function validar_campo_resultadoE (resultado_validacion, campo, error_mensaje) {
 
 /* Analizar las entradas del formulario que queramos validar  */ 
 
-inputs.forEach((input, button)=> {
+inputsE.forEach((input, button)=> {
     input.addEventListener('focusout', validarCampoValorE);
     input.addEventListener('keyup', validarFormularioE);
 });

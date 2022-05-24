@@ -17,9 +17,8 @@
 
           <input type="text" name="claveE" id="claveE" 
                   onblur="document.getElementById('webE').value=this.value"
-                  class="form-control input-sm fs-5 mb-4 formulario__input" 
-                  autocomplete="off" required>
-          <div id="clave_errorE"></div>
+                  class="form-control input-sm fs-5 mb-4 formulario__input" readonly>
+          <div id="claveE_error"></div>
         </div>
         
         <div class="row">
@@ -105,7 +104,7 @@
                         class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
                         maxlength="4" value="" onblur="validarCompararFechasE()">       
               </div>    
-              <div id="fnac_errorE"></div>      
+              <div id="fnacE_error"></div>      
             </div>
             <!-- Fecha de fallecimiento -->
             <div class="formulario__grupo  ms-5 ps-5"  id="grupo__ffalE"> 
@@ -166,7 +165,7 @@
                         class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
                         maxlength="4" value="" onblur="validarCompararFechasE()" >              
               </div>        
-              <div id="ffal_errorE"></div>
+              <div id="ffalE_error"></div>
             </div>
           </div>
         </div>

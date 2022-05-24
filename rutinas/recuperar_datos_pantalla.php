@@ -11,20 +11,28 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
     $('#cliterariaE').val(res[10]);
 
     // Tratamiento de la fecha de nacimiento
-    if (isNaN(Date.parse(res[3]))) { 
+    if (!isNaN(Date.parse(res[3]))) { 
         ele_fecha=res[3].split("-");
         $('#fnacEdd').val(ele_fecha[2]);
         $('#fnacEmm').val(ele_fecha[1]);
         $('#fnacE').val(ele_fecha[0]);
-    }    
+    } else {
+            $('#fnacEdd').val("dd");
+            $('#fnacEmm').val("mm");
+            $('#fnacE').val("ssaa");
+        }   
 
     // Tratamiento de la fecha de fallecimiento
-    if (isNaN(Date.parse(res[4]))) { 
+    if (!isNaN(Date.parse(res[4]))) { 
         ele_fecha=res[4].split("-");
         $('#ffalEdd').val(ele_fecha[2]);
         $('#ffalEmm').val(ele_fecha[1]);
         $('#ffalE').val(ele_fecha[0]);
-    }    
+    } else {
+            $('#ffalEdd').val("dd");
+            $('#ffalEmm').val("mm");
+            $('#ffalE').val("ssaa");
+        }   
     
     $('#lnacE').val(res[5]);
     $('#pnacE').val(res[6]);

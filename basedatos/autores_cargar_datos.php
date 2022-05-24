@@ -8,7 +8,7 @@
 <?php
     require_once '../rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
 ?>
-
+<div class="table-wrapper">
 <table class="table table-hover table-condensed table-borderer border-primary align-middle">
     <thead>
         <tr class="align-items-center fs-4">
@@ -197,4 +197,4 @@ return [$listas];
 }  
 
 ?>
-
+</div>
