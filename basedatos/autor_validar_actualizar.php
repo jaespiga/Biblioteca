@@ -56,7 +56,7 @@ function validarSubmit($campos) {
         $ind_actualizar = 1; 
         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
     } else {
-            $sql= "SELECT cGR02_Autor
+            $sql= "SELECT cGR02_Autor, cGR02_TSUltCambio
                     FROM tgr02_autores
                     WHERE cGR02_Autor = '$res[2]'";  
                     
@@ -64,11 +64,17 @@ function validarSubmit($campos) {
 
             if ($dbcon->errno == 0){ 
                 if ($resultados->num_rows == 0)  {
+                    $fila = $resultados->fetch_assoc();
                     if ($res[1] !== "alta") {
                         $mensaje = "Error. Autor no existe.";  
                         $ind_actualizar = 1;   
                         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                    };
+                    } else {
+                            if ($res[12] !== $fila[1]) {
+                                $mensaje = "Error. Datos del autor han sido modificados desde otro terminal. Refresque datos y repita operación.";  
+                                $ind_actualizar = 1;   
+                            }
+                        };
                 } else {
                         if ($res[1] == "alta") {
                             $mensaje = "Error. Autor ya existe.";  
@@ -336,21 +342,27 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
 			} 
         
     } else { 
-            if ($res[1] == "modificación") {
+            if ($res[1] == "edición") {
                 $sql= "UPDATE tgr02_autores 
-                            SET cGR02_Autor='[value-1]',
-                                cGR02_Foto='[value-2]',
-                                cGR02_FNacimiento='[value-3]',
-                                cGR02_FDefunción='[value-4]',
-                                cGR02_LNacimiento='[value-5]',
-                                cGR02_PNacimiento='[value-6]',
-                                cGR02_Nacionalidad='[value-7]',
-                                cGR02_CLiteraria='[value-8]',
-                                cGR02_WEB`='[value-9]' 
-                            WHERE cGR02_Autor = '$codigoUsuario'";
-            
-               
+                            SET cGR02_FNacimiento='$res[5]',
+                                cGR02_FDefunción='$res[6]',
+                                cGR02_LNacimiento='$res[7]',
+                                cGR02_PNacimiento='$res[8]',
+                                cGR02_LFallecimiento='$res[9]',
+                                cGR02_PFallecimiento='$res[10]',
+                                cGR02_Nacionalidad='$res[3]',
+                                cGR02_CLiteraria='$res[4]',
+                                cGR02_WEB='$res[11]',
+                                cGR02_TSUltCambio='CURRENT_TIMESTAMP'
+                            WHERE cGR02_Autor = '$res[2]'";
 
+                if($dbcon->query($sql) === true){
+                    $mensaje = "Datos actualizados <br />";       
+                } else {
+                        require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
+                        $ind_actualizar = 1;
+                        $mensaje_actualizar = $mensaje;
+                    }                
             } else {
                     if ($res[1] == "baja") {
                 

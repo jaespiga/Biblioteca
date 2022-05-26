@@ -17,8 +17,8 @@
             <th class="table-secondary">Lugar nacimiento</th>
             <th class="table-secondary">País nacimiento</th>
             <th class="table-secondary">Información WEB</th>
-            <th class="table-success">Editar</th>
-            <th class="table-danger">Eliminar</th>
+            <th class="table-success th_editar">Editar</th>
+            <th class="table-danger th_borrar">Eliminar</th>
         </tr>
     </thead>    
 
@@ -162,9 +162,8 @@ function leerDatosAutores($lit_autor) {
             <td> <?php echo $fila['cGR02_LNacimiento'] ?> </td>";
             <td> <?php echo $pais_nac_lit  ?> </td>";             
             <td> <?php echo $fila['cGR02_WEB'] ?> </td>";
-            <td> 
-                <button type="button"  class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
-                                fs-4' data-bs-toggle="modal"  data-bs-target="#autorEdicion"
+            <td class='td_editar'> 
+                <button type="button"  class='d-inline-flex btn btn-info btn-outline-success' data-bs-toggle="modal"  data-bs-target="#autorEdicion"
                                  onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
@@ -173,9 +172,8 @@ function leerDatosAutores($lit_autor) {
                                         
                 </button>
             </td>
-            <td> 
-                <button class='d-inline-flex btn btn-info btn-outline-success mb-0 p-0 
-                                text-light fs-4' data-bs-target="#autorEdición"> 
+            <td class='td_borrar'> 
+                <button class='d-inline-flex btn btn-warning btn-outline-danger' data-bs-target="#autorEdición"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
                         <use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#trash"/>

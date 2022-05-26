@@ -39,6 +39,8 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
     $('#lfalE').val(res[7]);
     $('#pfalE').val(res[8]);
     $('#webE').val(res[11]);
+    $('#tSUltCambioE').val(res[12]);
+    
 
     return
 }
@@ -64,7 +66,6 @@ function autorInicializarDatosPantalla() {
     $('#lfal').val("");
     $('#pfal').val("");
     $('#web').val("");
-
     return
 }
 

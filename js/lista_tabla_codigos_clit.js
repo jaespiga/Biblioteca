@@ -8,8 +8,8 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
            param2: ""}    
   })    
   .done(function(lista_select){
-    $('#lista_clit').html(lista_select)
-    $('#lista_clitE').html(lista_select)
+    $('#lista_clit').html(lista_select)         // Alta
+    $('#lista_clitE').html(lista_select)        // Edición
   })
   .fail(function(){
     Swal.fire({

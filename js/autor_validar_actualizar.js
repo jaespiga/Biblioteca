@@ -1,6 +1,6 @@
 /* Validación de campos de formulario de autor y actualizar si son correctos */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
-    $("#enviar_datos").click(function() {
+    $("#enviar_datos").click(function() {       /* Alta de autor */       
       form_campos= $('#idApartado').val() + "#&" + $('#idOper').val();
       form_campos = form_campos  +  "#&" + $('#clave').val();
       form_campos = form_campos  +  "#&" + $('#nacionalidad').val();
@@ -35,6 +35,80 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 
                 if ($('#idOper').val() == "alta") {
                     $('#autorNuevo').modal('hide');  // oculta el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                }
+          } else {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Operación realizada con incidencias',
+                    html: '<p align="left">' + res[2] + '</p>'
+                  })   
+              }      
+        } else {
+                if (res[0] == 1) {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Operación no efectuada',
+                      html: '<p align="left">' + res[3] + '</p>',
+                      footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+                    })   
+                  } else {
+                          Swal.fire({
+                            icon: 'warning',
+                            title: 'Código de validación desconocido: ' + res[0],
+                            html: '<p align="left">' + res[3] + '</p>',
+                            footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
+                          })   
+                      }
+            }
+      })
+      .fail(function(){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error al validar/actualizar datos del autor',
+          footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+        })                  
+      })            
+    })  
+
+    $("#actualizar_datos").click(function() { /* Actualizar datos de autor */ 
+      form_campos= $('#idApartadoE').val() + "#&" + $('#idOperE').val();
+      form_campos = form_campos  +  "#&" + $('#claveE').val();
+      form_campos = form_campos  +  "#&" + $('#nacionalidadE').val();
+      form_campos = form_campos  +  "#&" + $('#cliterariaE').val();
+
+      fecha= $('#fnacE').val() + "-" + $('#fnacEmm').val() + "-" + $('#fnacEdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#ffalE').val() + "-" + $('#ffalEmm').val() + "-" + $('#ffalEdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      form_campos = form_campos  +  "#&" + $('#lnacE').val();
+      form_campos = form_campos  +  "#&" + $('#pnacE').val();
+      form_campos = form_campos  +  "#&" + $('#lfalE').val();
+      form_campos = form_campos  +  "#&" + $('#pfalE').val();
+      form_campos = form_campos  +  "#&" + $('#webE').val();
+      form_campos = form_campos  +  "#&" + $('#tSUltCambioE').val();
+      alert ("actualizar datos: " + form_campos);
+      $.ajax({                        
+        type: 'POST',                 
+        url: 'basedatos/autor_validar_actualizar.php',
+        data: {param1: form_campos}                  
+      })    
+      .done(function(respuesta){   
+        res=respuesta.split("#&")
+    
+        if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
+          if (res[1] == 0) { // Indicador de validación correcta
+                Swal.fire({
+                  icon: 'success',
+                  title: "Operación efectuada"
+                })  
+                
+                if ($('#idOperE').val() == "alta") {
+                    $('#autorEdicion').modal('hide');  // oculta el modal
                     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                     $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                 }
