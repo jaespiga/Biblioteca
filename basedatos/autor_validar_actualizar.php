@@ -64,23 +64,24 @@ function validarSubmit($campos) {
 
             if ($dbcon->errno == 0){ 
                 if ($resultados->num_rows == 0)  {
-                    $fila = $resultados->fetch_assoc();
                     if ($res[1] !== "alta") {
                         $mensaje = "Error. Autor no existe.";  
                         $ind_actualizar = 1;   
                         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                    } else {
-                            if ($res[12] !== $fila[1]) {
-                                $mensaje = "Error. Datos del autor han sido modificados desde otro terminal. Refresque datos y repita operación.";  
-                                $ind_actualizar = 1;   
-                            }
-                        };
+                    }
                 } else {
                         if ($res[1] == "alta") {
                             $mensaje = "Error. Autor ya existe.";  
                             $ind_actualizar = 1;   
                             return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                        };
+                        } else {
+                                $fila = $resultados->fetch_assoc();
+                                if ($res[12] !== $fila['cGR02_TSUltCambio']) {
+                                    $mensaje = "Error. Datos del autor han sido modificados desde otro terminal. Refresque datos y repita operación.";  
+                                    $ind_actualizar = 1; 
+                                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];   
+                                }
+                            };
                     } 
             } else {
                     require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
@@ -353,7 +354,7 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
                                 cGR02_Nacionalidad='$res[3]',
                                 cGR02_CLiteraria='$res[4]',
                                 cGR02_WEB='$res[11]',
-                                cGR02_TSUltCambio='CURRENT_TIMESTAMP'
+                                cGR02_TSUltCambio= CURRENT_TIMESTAMP
                             WHERE cGR02_Autor = '$res[2]'";
 
                 if($dbcon->query($sql) === true){

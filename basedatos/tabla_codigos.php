@@ -34,7 +34,7 @@ function tabla_codigos($funcion, $tabla, $datos_entrada){
             $mensaje = "";
             $campos_salida = "";     /* descripción asociada a la clave */
 
-            if ($res[0] !== "") {
+            if ($res[0] !== "0") {
                 list($ind_error, $ind_validar, $mensaje, $campos_salida) 
                             = obtener_descripcion($tabla, $res[0]);
             } 

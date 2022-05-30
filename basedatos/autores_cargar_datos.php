@@ -7,18 +7,24 @@
 -->    
 <?php
     require_once '../rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
+    require_once '../rutinas/fechas_tratamientos.php';  /* Función para informar datos de la pantalla de autor */
 ?>
 <div class="table-wrapper">
 <table class="table table-hover table-condensed table-borderer border-primary align-middle">
     <thead>
         <tr class="align-items-center fs-4">
-            <th class="table-secondary">Autor</th>
-            <th class="table-secondary">Nacionalidad</th>
-            <th class="table-secondary">Lugar nacimiento</th>
-            <th class="table-secondary">País nacimiento</th>
-            <th class="table-secondary">Información WEB</th>
             <th class="table-success th_editar">Editar</th>
             <th class="table-danger th_borrar">Eliminar</th>
+            <th class="table-secondary">Autor</th>
+            <th class="table-secondary">Nacionalidad</th>
+            <th class="table-secondary">Corriente literaria</th>
+            <th class="table-secondary">Fecha de nacimiento</th>
+            <th class="table-secondary">Lugar nacimiento</th>
+            <th class="table-secondary">País nacimiento</th>
+            <th class="table-secondary">Fecha de fallecimiento</th>
+            <th class="table-secondary">Lugar fallecimiento</th>
+            <th class="table-secondary">País fallecimiento</th>
+            <th class="table-secondary">Información WEB</th>
         </tr>
     </thead>    
 
@@ -87,6 +93,26 @@ function leerDatosAutores($lit_autor) {
                 $nacionalidad_lit=  $mensaje_codigo;
             }
         
+        // Fecha de nacimiento
+        $funcion_validar_fecha = 1;
+        list($ind_validar, $mensaje, $campos_salida) = fechas($funcion_validar_fecha, $fila['cGR02_FNacimiento']);
+        if ($ind_validar == 0) {
+            $fechas_elemento = explode("#&", $campos_salida);
+            $fecha_nacimiento_DD_MM_SSAA = $fechas_elemento[2];
+        } else {
+            $fecha_nacimiento_DD_MM_SSAA = $mensaje;
+            }   
+            
+        // Fecha de fallecimiento
+        $funcion_validar_fecha = 1;
+        list($ind_validar, $mensaje, $campos_salida) = fechas($funcion_validar_fecha, $fila['cGR02_FDefunción']);
+        if ($ind_validar == 0) {
+            $fechas_elemento = explode("#&", $campos_salida);
+            $fecha_fallecimiento_DD_MM_SSAA = $fechas_elemento[2];
+        } else {
+            $fecha_fallecimiento_DD_MM_SSAA = $mensaje;
+            }     
+
         // País de nacimiento
         $funcion_obtener_descripcion = 2;
         $tabla = "País";
@@ -133,35 +159,33 @@ function leerDatosAutores($lit_autor) {
         $tabla = "CLiteraria";
         $datos_entrada = $fila['cGR02_CLiteraria'];
         $ind_lectura= "";
-        $cliteraria= "";   
+        $cliteraria_lit= "";   
 
         list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
                                 = tabla_codigos($funcion_obtener_descripcion, $tabla, $datos_entrada);
 
         if ($ind_error_codigo == 0) {
             if ($ind_validar_codigo == 1)  {
-                $cliteraria = "Código " +  $fila['cGR02_CLiteraria'] + " no existe.";   
+                $cliteraria_lit = "Código " +  $fila['cGR02_CLiteraria'] + " no existe.";   
             } else {
                 $res_codigo = explode("#&", $campos_salida);
-                $cliteraria= $res_codigo[0];  
+                $cliteraria_lit = $res_codigo[0];  
                 }
         } else {
-                $cliteraria=  $mensaje_codigo;
+                $cliteraria_lit =  $mensaje_codigo;
             }
+
+
         
         $datos_pantalla = "Autor" . "#&" . $fila["cGR02_Autor"] . "#&" . $fila["cGR02_Foto"] 
             . "#&" . $fila["cGR02_FNacimiento"]. "#&" . $fila["cGR02_FDefunción"] . "#&" . $fila["cGR02_LNacimiento"]
             . "#&" . $pais_nac_lit . "#&" . $fila["cGR02_LFallecimiento"]. "#&" . $pais_fal_lit 
-            . "#&" . $nacionalidad_lit . "#&" . $cliteraria . "#&" . $fila["cGR02_WEB"]
+            . "#&" . $nacionalidad_lit . "#&" . $cliteraria_lit . "#&" . $fila["cGR02_WEB"]
             . "#&" . $fila["cGR02_TSUltCambio"];     
 ?>    
             
         <tr class="align-items-center fs-5">;
-            <td> <?php echo $fila['cGR02_Autor'] ?> </td>";
-            <td> <?php echo $nacionalidad_lit ?> </td>";
-            <td> <?php echo $fila['cGR02_LNacimiento'] ?> </td>";
-            <td> <?php echo $pais_nac_lit  ?> </td>";             
-            <td> <?php echo $fila['cGR02_WEB'] ?> </td>";
+            
             <td class='td_editar'> 
                 <button type="button"  class='d-inline-flex btn btn-info btn-outline-success' data-bs-toggle="modal"  data-bs-target="#autorEdicion"
                                  onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
@@ -172,6 +196,7 @@ function leerDatosAutores($lit_autor) {
                                         
                 </button>
             </td>
+            
             <td class='td_borrar'> 
                 <button class='d-inline-flex btn btn-warning btn-outline-danger' data-bs-target="#autorEdición"> 
                     
@@ -180,6 +205,18 @@ function leerDatosAutores($lit_autor) {
                     </svg>   
                 </button>
             </td>
+            
+            <td> <?php echo $fila['cGR02_Autor'] ?> </td>";
+            <td> <?php echo $nacionalidad_lit ?> </td>";
+            <td> <?php echo $cliteraria_lit ?> </td>";
+            <td> <?php echo $fecha_nacimiento_DD_MM_SSAA ?> </td>";
+            <td> <?php echo $fila['cGR02_LNacimiento'] ?> </td>";
+            <td> <?php echo $pais_nac_lit  ?> </td>";        
+            <td> <?php echo $fecha_fallecimiento_DD_MM_SSAA ?> </td>";
+            <td> <?php echo $fila['cGR02_LFallecimiento'] ?> </td>";
+            <td> <?php echo $pais_fal_lit  ?> </td>";        
+            <td> <?php echo $fila['cGR02_WEB'] ?> </td>";
+            
         </tr>
     
     <?php } ?>

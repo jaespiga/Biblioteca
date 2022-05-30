@@ -1,4 +1,5 @@
 /* Validación de campos de formulario de autor y actualizar si son correctos */
+/* Alta autor */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     $("#enviar_datos").click(function() {       /* Alta de autor */       
       form_campos= $('#idApartado').val() + "#&" + $('#idOper').val();
@@ -73,6 +74,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       })            
     })  
 
+    /* Editar datos de autor */
     $("#actualizar_datos").click(function() { /* Actualizar datos de autor */ 
       form_campos= $('#idApartadoE').val() + "#&" + $('#idOperE').val();
       form_campos = form_campos  +  "#&" + $('#claveE').val();
@@ -91,7 +93,6 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       form_campos = form_campos  +  "#&" + $('#pfalE').val();
       form_campos = form_campos  +  "#&" + $('#webE').val();
       form_campos = form_campos  +  "#&" + $('#tSUltCambioE').val();
-      alert ("actualizar datos: " + form_campos);
       $.ajax({                        
         type: 'POST',                 
         url: 'basedatos/autor_validar_actualizar.php',
@@ -101,24 +102,39 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         res=respuesta.split("#&")
     
         if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
+          
           if (res[1] == 0) { // Indicador de validación correcta
-                Swal.fire({
-                  icon: 'success',
-                  title: "Operación efectuada"
-                })  
-                
-                if ($('#idOperE').val() == "alta") {
-                    $('#autorEdicion').modal('hide');  // oculta el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-                }
+              Swal.fire({
+                icon: 'success',
+                title: "Operación efectuada",
+                confirmButtonText: 'Ok'
+              }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    };
+                  }
+                );
+
+              if ($('#idOperE').val() == "alta") {
+                  $('#autorEdicion').modal('hide');  // oculta el modal
+                  $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                  $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+              }
           } else {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Operación realizada con incidencias',
-                    html: '<p align="left">' + res[2] + '</p>'
-                  })   
-              }      
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Operación realizada con incidencias',
+                html: '<p align="left">' + res[2] + '</p>',
+                confirmButtonText: 'Ok'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      location.reload();
+                  };
+                }
+              );
+              } 
+          
         } else {
                 if (res[0] == 1) {
                     Swal.fire({

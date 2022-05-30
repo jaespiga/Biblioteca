@@ -4,6 +4,7 @@
     Función: 1- Validar fecha
         Entrada: Función / Fecha
         Salida : Indicador de fecha correcta (0) o errónea (1)
+                 Fecha válida en formato dd-mm-ssaa o espacios en caso contrario
     Función: 2- Validar fecha y sumar(+)/ restar(-) años, meses y/o días
         Entrada: Función / Fecha / años / meses / días a sumar restar
         Salida : Indicador de fecha correcta (0) o errónea (1)
@@ -29,7 +30,7 @@ function fechas($funcion, $campos){
     $mensaje = "";
     $campos_salida = "";
     
-    $mascara = array("s", "a", "d", "m");   // Máscara de fecha ssaa-mm-dd para pasar a valor ("--")
+    $mascara = array("s", "a", "d", "m", "0000-00-00");   // Máscara de fecha ssaa-mm-dd para pasar a valor ("--")
 
     $res = explode("#&", $campos);
 
@@ -38,10 +39,12 @@ function fechas($funcion, $campos){
         case 1: {     /* Función: 1- Validar fecha */
             $fecha_ajustada = str_replace($mascara, "", $res[0]);
 
-            if ($fecha_ajustada !== "--") {
-                list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($fecha_ajustada);
+            if ($fecha_ajustada !== "--" 
+            && $fecha_ajustada !== "") {
+                list($ind_validar, $mensaje, $campos_salida) = validar_fecha ($fecha_ajustada);
+                /* campos_salida es la misma fecha en formato: ssaa-mm-dd y dd-mm-ssaa o espacios  */
                 if ($ind_validar == 0) {
-                    $campos_salida = $funcion . "#&" . $fechaSSAA_MM_DD;    
+                    $campos_salida = $funcion . "#&" . $campos_salida;    
                 }   
             } 
             return [$ind_validar, $mensaje, $campos_salida]; 
@@ -52,10 +55,14 @@ function fechas($funcion, $campos){
             
             $fecha_ajustada = str_replace($mascara, "", $res[0]);
 
-            if ($fecha_ajustada !== "--") {
-                list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($fecha_ajustada);
+            if ($fecha_ajustada !== "--"
+            && $fecha_ajustada !== "") {
+                list($ind_validar, $mensaje, $campos_salida) = validar_fecha ($fecha_ajustada);
 
                 if ($ind_validar == 0) {
+                    $fechas_elemento = explode('"#&"', $campos_salida);
+                    $fechaSSAA_MM_DD = $fechas_elemento[0];
+
                     list($ind_validar, $mensaje, $fechaSSAA_MM_DD)
                          = nueva_fecha ($fechaSSAA_MM_DD, $res[1], $res[2], $res[3]);
                     
@@ -83,29 +90,39 @@ function fechas($funcion, $campos){
 
             $fecha_ajustada1 = str_replace($mascara, "", $res[0]);
 
-            if ($fecha_ajustada1 !== "--") {
-                list($ind_error1, $mensaje_error, $fechaSSAA_MM_DD1) = validar_fecha ($fecha_ajustada1);
+            if ($fecha_ajustada1 !== "--"
+            && $fecha_ajustada1 !== "") {
+                list($ind_error1, $mensaje_error, $campos_salida) = validar_fecha ($fecha_ajustada1);
 
                 if ($ind_error1 !== 0) { /* Primera fecha comparación */
                     $ind_error1 = 1;
                     $ind_validar = 1;
                     $mensaje1 = $mensaje_error; 
-                }     
+                } else {
+                        $fechas_elemento = explode('"#&"', $campos_salida);
+                        $fechaSSAA_MM_DD1 = $fechas_elemento[0];
+                    }    
             }
 
             $fecha_ajustada2 = str_replace($mascara, "", $res[1]);
 
-            if ($fecha_ajustada2 !== "--") { /* Segunda fecha comparación */
-                list($ind_error2, $mensaje_error, $fechaSSAA_MM_DD2) = validar_fecha ($fecha_ajustada2);
+            if ($fecha_ajustada2 !== "--"
+            && $fecha_ajustada2 !== "") { /* Segunda fecha comparación */
+                list($ind_error2, $mensaje_error, $campos_salida) = validar_fecha ($fecha_ajustada2);
                 if ($ind_error2 !== 0){ 
                         $ind_error2 = 1;
                         $ind_validar = 1;
                         $mensaje2 = $mensaje_error; 
-                    }
+                    } else {
+                            $fechas_elemento = explode('"#&"', $campos_salida);
+                            $fechaSSAA_MM_DD2 = $fechas_elemento[0];
+                        }   
             }
                   
-            if ($fecha_ajustada1 !== "--" 
-            && $fecha_ajustada2 !== "--") {
+            if ($fecha_ajustada1 !== "--"
+            && $fecha_ajustada1 !== "" 
+            && $fecha_ajustada2 !== "--"
+            && $fecha_ajustada2 !== "") {
                 if ($ind_validar == 0) {
                         $fechaPrimera = new DateTime($fechaSSAA_MM_DD1);
                         $fechaSegunda = new DateTime($fechaSSAA_MM_DD2);
@@ -136,7 +153,8 @@ function fechas($funcion, $campos){
             
             $dif_total_dias =  0;
             
-            if ($res[0] !== "--"){
+            if ($res[0] !== "--"
+            && $res[0] !== ""){
                 $fecha_inicio_anno = $res[0] . "-01-01";
                 $fecha_prox_anno = $res[0] + 1 . "-01-01";
                 $fechaPrimera = new DateTime($fecha_inicio_anno);
@@ -156,10 +174,14 @@ function fechas($funcion, $campos){
             
             $fecha_ajustada = str_replace($mascara, "", $res[0]);
 
-            if ($fecha_ajustada !== "--") {
+            if ($fecha_ajustada !== "--"
+            && $fecha_ajustada !== "") {
             
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($fecha_ajustada);
                 if ($ind_validar == 0) {
+                    $fechas_elemento = explode('"#&"', $campos_salida);
+                    $fechaSSAA_MM_DD = $fechas_elemento[0];
+                    
                     $fecha_inicio_mes = date("Y", $fechaSSAA_MM_DD);
                     $fecha_inicio_mes .= "-" . date("m", $fechaSSAA_MM_DD);
                     $fecha_inicio_mes .= "-01";
@@ -185,8 +207,10 @@ function fechas($funcion, $campos){
 function validar_fecha ($fecha) {
     $cod_retorno = 0;
     $mensaje = "";
-    $fecha_salida = "";
-
+    $fecha_salida_ssaa_mm_dd = "";
+    $fecha_salida_dd_mm_ssaa = "";
+    $campos_salida="";
+    
     $delimitadores = [ '/' , '.', '-' ]; 
     $fecha=str_replace($delimitadores,'/',$fecha);
     $fecha_elemento = explode('/', $fecha); 
@@ -195,7 +219,8 @@ function validar_fecha ($fecha) {
     &&  ctype_digit($fecha_elemento[1])
     &&  ctype_digit($fecha_elemento[2])) {
         $fecha_elemento[0] = str_pad($fecha_elemento[0], 4, "0", STR_PAD_LEFT);
-        $fecha_salida = $fecha_elemento[0] . "-" . $fecha_elemento[1] . "-" . $fecha_elemento[2];
+        $fecha_salida_ssaa_mm_dd = $fecha_elemento[0] . "-" . $fecha_elemento[1] . "-" . $fecha_elemento[2];
+        $fecha_salida_dd_mm_ssaa = $fecha_elemento[2] . "-" . $fecha_elemento[1] . "-" . $fecha_elemento[0];
         if(!checkdate($fecha_elemento[1], $fecha_elemento[2], $fecha_elemento[0])){
             $cod_retorno = 1; 
             $mensaje = "Error. Fecha ilógica."; 
@@ -204,8 +229,9 @@ function validar_fecha ($fecha) {
             $cod_retorno = 1; 
             $mensaje = "Error. Fecha errónea."; 
         }
-    
-    return [$cod_retorno, $mensaje, $fecha_salida];
+    $campos_salida = $fecha_salida_ssaa_mm_dd . "#&" . $fecha_salida_dd_mm_ssaa; 
+
+    return [$cod_retorno, $mensaje, $campos_salida];
 }
 
 function nueva_fecha ($fecha, $annos, $meses, $dias) {

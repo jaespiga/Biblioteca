@@ -116,7 +116,7 @@
 				<div id="tabla_autores"> </div>
 			</div>
 		</div>
-
+		 
 		<?php 
 			// Pantallas modales a las que se puede acceder en la página 
 			require_once "Modales/autorNuevo"; 
