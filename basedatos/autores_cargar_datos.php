@@ -174,8 +174,6 @@ function leerDatosAutores($lit_autor) {
         } else {
                 $cliteraria_lit =  $mensaje_codigo;
             }
-
-
         
         $datos_pantalla = "Autor" . "#&" . $fila["cGR02_Autor"] . "#&" . $fila["cGR02_Foto"] 
             . "#&" . $fila["cGR02_FNacimiento"]. "#&" . $fila["cGR02_FDefunción"] . "#&" . $fila["cGR02_LNacimiento"]
@@ -187,8 +185,9 @@ function leerDatosAutores($lit_autor) {
         <tr class="align-items-center fs-5">;
             
             <td class='td_editar'> 
-                <button type="button"  class='d-inline-flex btn btn-info btn-outline-success' data-bs-toggle="modal"  data-bs-target="#autorEdicion"
-                                 onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
+                <button type="button"  class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
+                                fs-4' data-bs-toggle="modal"  data-bs-target="#autorEdicion" 
+                        onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
                         <use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#pencil"/>
@@ -198,7 +197,9 @@ function leerDatosAutores($lit_autor) {
             </td>
             
             <td class='td_borrar'> 
-                <button class='d-inline-flex btn btn-warning btn-outline-danger' data-bs-target="#autorEdición"> 
+                <button type="button" id= "eliminar_datos" class='d-inline-flex btn btn-info btn-outline-success
+                                mb-0 p-0 text-light fs-4' 
+                        onclick="eliminarRegistro('<?php echo $datos_pantalla ?>')"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
                         <use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#trash"/>

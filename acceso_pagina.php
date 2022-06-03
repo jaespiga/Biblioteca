@@ -69,9 +69,19 @@
 			}					
 			
 		?>
-
 		<!--  Tratamiento de mensaje para sacar por consola -->
-		<?php require_once 'rutinas/TratarMensajes.php'; ?>
+		<?php 
+			if (!empty($mensaje)):  ?>
+				<script type="text/javascript">
+					Swal.fire({
+								position: 'top',
+								icon: 'error',
+								title: '<?php echo $mensaje ?>',
+								showConfirmButton: false,
+								timer: 3000
+							})
+				</script>
+		<?php endif; ?>	
 		
     	<!--
 			Formulario validación del usuario

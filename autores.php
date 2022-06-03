@@ -4,6 +4,7 @@
 	require_once 'basedatos/connect.php';  
 
     require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
+	require_once 'rutinas/borrar_datos.php';  /* Función para confirmar el borrado */
 	/*
 	Scripts de bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
 	*/

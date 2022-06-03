@@ -17,9 +17,9 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
         $('#fnacEmm').val(ele_fecha[1]);
         $('#fnacE').val(ele_fecha[0]);
     } else {
-            $('#fnacEdd').val("dd");
-            $('#fnacEmm').val("mm");
-            $('#fnacE').val("ssaa");
+            $('#fnacEdd').val("");
+            $('#fnacEmm').val("");
+            $('#fnacE').val("");
         }   
 
     // Tratamiento de la fecha de fallecimiento
@@ -29,9 +29,9 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
         $('#ffalEmm').val(ele_fecha[1]);
         $('#ffalE').val(ele_fecha[0]);
     } else {
-            $('#ffalEdd').val("dd");
-            $('#ffalEmm').val("mm");
-            $('#ffalE').val("ssaa");
+            $('#ffalEdd').val("");
+            $('#ffalEmm').val("");
+            $('#ffalE').val("");
         }   
     
     $('#lnacE').val(res[5]);
@@ -44,6 +44,7 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
 
     return
 }
+//  Inicializar los datos de la pantalla de autores
 function autorInicializarDatosPantalla() {
 
     $('#clave').val("");

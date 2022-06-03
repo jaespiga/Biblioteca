@@ -60,7 +60,7 @@ function fechas($funcion, $campos){
                 list($ind_validar, $mensaje, $campos_salida) = validar_fecha ($fecha_ajustada);
 
                 if ($ind_validar == 0) {
-                    $fechas_elemento = explode('"#&"', $campos_salida);
+                    $fechas_elemento = explode("#&", $campos_salida);
                     $fechaSSAA_MM_DD = $fechas_elemento[0];
 
                     list($ind_validar, $mensaje, $fechaSSAA_MM_DD)
@@ -99,7 +99,7 @@ function fechas($funcion, $campos){
                     $ind_validar = 1;
                     $mensaje1 = $mensaje_error; 
                 } else {
-                        $fechas_elemento = explode('"#&"', $campos_salida);
+                        $fechas_elemento = explode("#&", $campos_salida);
                         $fechaSSAA_MM_DD1 = $fechas_elemento[0];
                     }    
             }
@@ -114,7 +114,7 @@ function fechas($funcion, $campos){
                         $ind_validar = 1;
                         $mensaje2 = $mensaje_error; 
                     } else {
-                            $fechas_elemento = explode('"#&"', $campos_salida);
+                            $fechas_elemento = explode("#&", $campos_salida);
                             $fechaSSAA_MM_DD2 = $fechas_elemento[0];
                         }   
             }
@@ -179,7 +179,7 @@ function fechas($funcion, $campos){
             
                 list($ind_validar, $mensaje, $fechaSSAA_MM_DD) = validar_fecha ($fecha_ajustada);
                 if ($ind_validar == 0) {
-                    $fechas_elemento = explode('"#&"', $campos_salida);
+                    $fechas_elemento = explode("#&", $campos_salida);
                     $fechaSSAA_MM_DD = $fechas_elemento[0];
                     
                     $fecha_inicio_mes = date("Y", $fechaSSAA_MM_DD);
@@ -213,7 +213,7 @@ function validar_fecha ($fecha) {
     
     $delimitadores = [ '/' , '.', '-' ]; 
     $fecha=str_replace($delimitadores,'/',$fecha);
-    $fecha_elemento = explode('/', $fecha); 
+    $fecha_elemento = explode("/", $fecha); 
 
     if (ctype_digit($fecha_elemento[0])
     &&  ctype_digit($fecha_elemento[1])

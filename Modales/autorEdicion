@@ -49,7 +49,9 @@
             <div class="formulario__grupo" id="grupo__fnacE">  
               <div class="col-auto d-inline-flex"> 
                 <label class="fs-5 mt-3 text-primary">Fecha nacimiento</label>
-                <select id="fnacEdd"  class="form-control fs-5 mt-2 fechadd" onblur="validarCompararFechasE()">
+                <select id="fnacEdd"  class="form-control fs-5 mt-2 fechadd" 
+                        onchange="$('#fnacEmm').focus()"
+                        onblur="validarCompararFechasE()">
                   <option value="dd" selected>dd</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -84,7 +86,9 @@
                   <option value="31">31</option>        
                 </select>        
                 <label class="fs-5 mt-3 fecha_separador">/</label>
-                <select id="fnacEmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" onblur="validarCompararFechasE()">
+                <select id="fnacEmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" 
+                        onchange="$('#fnacE').focus()"
+                        onblur="validarCompararFechasE()">
                   <option value="mm" selected>mm</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -102,7 +106,8 @@
                 <label class="fs-5 mt-3 fecha_separador">/</label>
                 <input type="text" name="fnacE" id="fnacE" 
                         class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
-                        maxlength="4" value="" onblur="validarCompararFechasE()">       
+                        maxlength="4" onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#ffalEdd').focus()" 
+                        value="" onblur="validarCompararFechasE()">       
               </div>    
               <div id="fnacE_error"></div>      
             </div>
@@ -110,7 +115,9 @@
             <div class="formulario__grupo  ms-5 ps-5"  id="grupo__ffalE"> 
               <div class="col-auto d-inline-flex ">
                 <label class="fs-5 mt-3 text-primary">Fecha defunción</label>
-                <select id="ffalEdd"  class="form-control fs-5 mt-2 fechadd" onblur="validarCompararFechasE()">
+                <select id="ffalEdd"  class="form-control fs-5 mt-2 fechadd" 
+                        onchange="$('#ffalEmm').focus()"
+                        onblur="validarCompararFechasE()">
                   <option value="dd" selected>dd</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -145,7 +152,9 @@
                   <option value="31">31</option>        
                 </select>        
                 <label class="fs-5 mt-3 fecha_separador">/</label>
-                <select id="ffalEmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" onblur="validarCompararFechasE()">
+                <select id="ffalEmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm" 
+                        onchange="$('#ffalE').focus()"
+                        onblur="validarCompararFechasE()">
                   <option value="mm" selected>mm</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -163,7 +172,8 @@
                 <label class="fs-5 mt-3 fecha_separador">/</label>
                 <input type="text" name="ffalE" id="ffalE" 
                         class="form-control input-sm fs-5 mt-2 formulario__input fechasa" placeholder="ssaa"
-                        maxlength="4" value="" onblur="validarCompararFechasE()" >              
+                        maxlength="4" onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#lnacE').focus()" 
+                        value="" onblur="validarCompararFechasE()" >              
               </div>        
               <div id="ffalE_error"></div>
             </div>

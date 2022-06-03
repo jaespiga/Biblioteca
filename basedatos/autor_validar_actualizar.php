@@ -364,15 +364,8 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
                         $ind_actualizar = 1;
                         $mensaje_actualizar = $mensaje;
                     }                
-            } else {
-                    if ($res[1] == "baja") {
-                
-                    } 
-                } 
-                
+            }                 
         }
-
-
     return [$ind_actualizar, $mensaje_actualizar];   
 }    
 ?>
