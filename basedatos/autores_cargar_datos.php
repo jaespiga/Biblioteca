@@ -46,14 +46,14 @@ function leerDatosAutores($lit_autor) {
             $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                           cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
                           cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio
-                        FROM tgr02_autores
-                        order by cGR02_Autor";
+                    FROM tgr02_autores
+                    ORDER BY cGR02_Autor";
     } else{
             $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                           cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
                           cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio
-                        FROM tgr02_autores
-                        WHERE cGR02_Autor like '$lit_autor%'";
+                    FROM tgr02_autores
+                    WHERE cGR02_Autor like '$lit_autor%'";
     }   
     
     $resultados= $dbcon->query($sql); 

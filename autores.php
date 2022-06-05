@@ -1,7 +1,9 @@
-<?php 												/* Conexión a la base de datos	*/
-	session_start(); 
+<?php 
+	/* Tratamiento de autores: alta, edición, baja, consultas	*/
+	
+	session_start(); 						/* Inicializar las variables de sesión  */
 
-	require_once 'basedatos/connect.php';  
+	require_once 'basedatos/connect.php';  /* Conexión a la base de datos	*/
 
     require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
 	require_once 'rutinas/borrar_datos.php';  /* Función para confirmar el borrado */
@@ -18,7 +20,7 @@
 <html>
 	<head>
 	    
-	    <title>Biblioteca. Lecturas</title>
+	    <title>Biblioteca. Autores</title>
 	    <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,9 +67,8 @@
 	
 		<nav class="navbar navbar-expand-lg navbar-light bg-orange p-3 h-50" >
 			 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="d-flex collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
-					
 					<li class="nav-item">
 						<form  method="post" class="row g-4 mb-0">
 							<div class="col-auto">
