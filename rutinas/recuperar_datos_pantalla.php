@@ -17,9 +17,9 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
         $('#fnacEmm').val(ele_fecha[1]);
         $('#fnacE').val(ele_fecha[0]);
     } else {
-            $('#fnacEdd').val("");
-            $('#fnacEmm').val("");
-            $('#fnacE').val("");
+            $('#fnacEdd').val("dd");
+            $('#fnacEmm').val("mm");
+            $('#fnacE').val("ssaa");
         }   
 
     // Tratamiento de la fecha de fallecimiento
@@ -29,9 +29,9 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
         $('#ffalEmm').val(ele_fecha[1]);
         $('#ffalE').val(ele_fecha[0]);
     } else {
-            $('#ffalEdd').val("");
-            $('#ffalEmm').val("");
-            $('#ffalE').val("");
+            $('#ffalEdd').val("dd");
+            $('#ffalEmm').val("mm");
+            $('#ffalE').val("ssaa");
         }   
     
     $('#lnacE').val(res[5]);

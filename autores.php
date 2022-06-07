@@ -124,6 +124,7 @@
 			require_once "Modales/autorNuevo"; 
 			require_once "Modales/autorEdicion"; 
 			require_once "Modales/autorFiltro"; 
+
 		?> 	
 		
 		<!--
@@ -136,26 +137,25 @@
 		<script type="text/javascript" src="js/autor_validar_formulario_edicion.js"></script>  <!-- validar datos autor: Edición  -->
 		<script type="text/javascript" src="js/autor_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 
-		<script type="text/javascript" src="js/lista_autores.js"></script>  <!-- Lista de opciones de datalist  -->
-		<script type="text/javascript" src="js/lista_autores_cambio.js"></script>  <!-- Lista de autores dinámica  -->
-		<script type="text/javascript" src="js/lista_autores_datos.js"></script>  <!-- Lista autores y sus datos  -->
+		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista autores y sus datos  -->
 		<!--
 			Script para cargar las tablas de códigos
 		-->
 		<script  id="tabla_nacionalidad" data-clave="Nacionalidad"
 				src="js/lista_tabla_codigos_nacionalidad.js"></script>  <!-- Lista nacionalidades  -->
 		<script  id="tabla_nacionalidad_cambio" data-clave="Nacionalidad"
-				src="js/lista_tabla_codigos_nacionalidad_cambio.js"></script>  <!-- Lista nacionalidades ordenado por tecleo  -->		
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista nacionalidades ordenado por tecleo  -->		
 		
 		<script  id="tabla_clit" data-clave="CLiteraria"
 				src="js/lista_tabla_codigos_clit.js"></script>  <!-- Lista corrientes literarias  -->
 		<script  id="tabla_clit_cambio" data-clave="CLiteraria"
-				src="js/lista_tabla_codigos_clit_cambio.js"></script>  <!-- Lista corrientes literarias  ordenado por tecleo  -->
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista corrientes literarias ordenado por tecleo  -->
 
 		<script  id="tabla_paises" data-clave="País"
 				src="js/lista_tabla_codigos_paises.js"></script>  <!-- Lista países  -->	
 		<script  id="tabla_paises_cambio" data-clave="País"
-				src="js/lista_tabla_codigos_paises_cambio.js"></script>  <!-- Lista países ordenados por tecleo  -->									
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista países ordenados por tecleo  -->									
 
 		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
 

@@ -5,7 +5,7 @@
 
 	require_once 'basedatos/connect.php';  /* Conexión a la base de datos	*/
 
-    require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de autor */
+    require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de libros */
 	require_once 'rutinas/borrar_datos.php';  /* Función para confirmar el borrado */
 	/*
 	Scripts de bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
@@ -135,16 +135,15 @@
 		<script type="text/javascript" src="js/libro_validar_formulario_edicion.js"></script>  <!-- validar datos libro: Edición  -->
 		<script type="text/javascript" src="js/libro_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 
-		<script type="text/javascript" src="js/lista_libros.js"></script>  <!-- Lista de opciones de datalist  -->
-		<script type="text/javascript" src="js/lista_libros_cambio.js"></script>  <!-- Lista de libros dinámica  -->
-		<script type="text/javascript" src="js/lista_libros_datos.js"></script>  <!-- Lista libros y sus datos  -->
+		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista libros y sus datos  -->
 		<!--
 			Script para cargar las tablas de códigos
 		-->
-		<script  id="tabla_nacionalidad" data-clave="Nacionalidad"
+		<script  id="tabla_nacionalidad" data-clave="Editorial"
 				src="js/lista_tabla_codigos_nacionalidad.js"></script>  <!-- Lista nacionalidades  -->
-		<script  id="tabla_nacionalidad_cambio" data-clave="Nacionalidad"
-				src="js/lista_tabla_codigos_nacionalidad_cambio.js"></script>  <!-- Lista nacionalidades ordenado por tecleo  -->		
+		<script  id="tabla_nacionalidad_cambio" data-clave="Editorial"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista editoriales ordenado por tecleo  -->		
 		
 		<script  id="tabla_clit" data-clave="CLiteraria"
 				src="js/lista_tabla_codigos_clit.js"></script>  <!-- Lista corrientes literarias  -->

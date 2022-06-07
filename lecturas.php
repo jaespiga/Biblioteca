@@ -134,8 +134,7 @@
 		<!--
 			Script para la realización de funcionalidades personalizadas de la página
 		-->
-		<script type="text/javascript" src="js/lista_autores.js"></script>  <!-- Lista de opciones de datalist  -->
-		<script type="text/javascript" src="js/lista_autores_cambio.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  --
 
 	</body>
 
