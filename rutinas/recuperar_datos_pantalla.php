@@ -75,19 +75,19 @@ function librorecuperarDatosPantalla(datos_pantalla) {
 res=datos_pantalla.split("#&");
 
 $('#claveE').val(res[1]);
-$('#nacionalidadE').val(res[9]);
-$('#cliterariaE').val(res[10]);
+$('#autorE').val(res[9]);
+$('#editorial').val(res[10]);
 
-// Tratamiento de la fecha de nacimiento
+// Tratamiento de la fecha de publicación
 if (!isNaN(Date.parse(res[3]))) { 
     ele_fecha=res[3].split("-");
-    $('#fnacEdd').val(ele_fecha[2]);
-    $('#fnacEmm').val(ele_fecha[1]);
-    $('#fnacE').val(ele_fecha[0]);
+    $('#fpubEdd').val(ele_fecha[2]);
+    $('#fpubEmm').val(ele_fecha[1]);
+    $('#fpubE').val(ele_fecha[0]);
 } else {
-        $('#fnacEdd').val("");
-        $('#fnacEmm').val("");
-        $('#fnacE').val("");
+        $('#fpubEdd').val("dd");
+        $('#fpubEmm').val("mm");
+        $('#fpubE').val("ssaa");
     }   
 
 // Tratamiento de la fecha de fallecimiento
@@ -97,9 +97,9 @@ if (!isNaN(Date.parse(res[4]))) {
     $('#ffalEmm').val(ele_fecha[1]);
     $('#ffalE').val(ele_fecha[0]);
 } else {
-        $('#ffalEdd').val("");
-        $('#ffalEmm').val("");
-        $('#ffalE').val("");
+        $('#ffalEdd').val("dd");
+        $('#ffalEmm').val("mm");
+        $('#ffalE').val("ssaa");
     }   
 
 $('#lnacE').val(res[5]);
@@ -116,13 +116,13 @@ return
 function libroinicializarDatosPantalla() {
 
 $('#clave').val("");
-$('#nacionalidad').val("");
-$('#cliteraria').val("");
+$('#autor').val("");
+$('#editorial').val("");
 
 // Tratamiento de la fecha de nacimiento
-$('#fnacdd').val("dd");
-$('#fnacmm').val("mm");
-$('#fnac').val("ssaa");
+$('#fpubdd').val("dd");
+$('#fpubmm').val("mm");
+$('#fpub').val("ssaa");
 
 // Tratamiento de la fecha de fallecimiento
 

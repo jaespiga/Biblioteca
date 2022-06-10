@@ -140,20 +140,30 @@
 		<!--
 			Script para cargar las tablas de códigos
 		-->
-		<script  id="tabla_nacionalidad" data-clave="Editorial"
-				src="js/lista_tabla_codigos_nacionalidad.js"></script>  <!-- Lista nacionalidades  -->
-		<script  id="tabla_nacionalidad_cambio" data-clave="Editorial"
+		<script  id="tabla_editorial" data-clave="Editorial"
+				src="js/lista_tabla_codigos_editorial.js"></script>  <!-- Lista editoriales  -->
+		<script  id="tabla_editorial_cambio" data-clave="Editorial"
 				src="js/lista_tabla_codigos.js"></script>  <!-- Lista editoriales ordenado por tecleo  -->		
 		
-		<script  id="tabla_clit" data-clave="CLiteraria"
-				src="js/lista_tabla_codigos_clit.js"></script>  <!-- Lista corrientes literarias  -->
-		<script  id="tabla_clit_cambio" data-clave="CLiteraria"
-				src="js/lista_tabla_codigos_clit_cambio.js"></script>  <!-- Lista corrientes literarias  ordenado por tecleo  -->
+		<script  id="tabla_genlit" data-clave="GenLit"
+				src="js/lista_tabla_codigos_genlit.js"></script>  <!-- Lista géneros literarios  -->	
+		<script  id="tabla_genlit_cambio" data-clave="GenLit"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista géneros literarios ordenados por tecleo  -->
 
-		<script  id="tabla_paises" data-clave="País"
-				src="js/lista_tabla_codigos_paises.js"></script>  <!-- Lista países  -->	
-		<script  id="tabla_paises_cambio" data-clave="País"
-				src="js/lista_tabla_codigos_paises_cambio.js"></script>  <!-- Lista países ordenados por tecleo  -->									
+		<script  id="tabla_idioma" data-clave="Idioma"
+				src="js/lista_tabla_codigos_idioma.js"></script>  <!-- Lista idiomas  -->
+		<script  id="tabla_idioma_cambio" data-clave="Idioma"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista idiomas ordenado por tecleo  -->
+
+		<script  id="tabla_sitlibro" data-clave="SitLibro"
+				src="js/lista_tabla_codigos_sitlibro.js"></script>  <!-- Lista situación del libro  -->	
+		<script  id="tabla_sitlibro_cambio" data-clave="SitLibro"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista situación del libro ordenados por tecleo  -->
+
+		<script  id="tabla_soplib" data-clave="SopLibro"
+				src="js/lista_tabla_codigos_soplibro.js"></script>  <!-- Lista soportes publicación  -->	
+		<script  id="tabla_soplib_cambio" data-clave="SopLibro"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista soportes publicación ordenados por tecleo  -->									
 
 		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
 

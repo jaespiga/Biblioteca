@@ -16,7 +16,6 @@
           <label class="fs-4 text-primary formulario__input-label">Nombre del autor</label>
 
           <input type="text" name="claveE" id="claveE" 
-                  onblur="document.getElementById('webE').value=this.value"
                   class="form-control input-sm fs-5 mb-4 formulario__input" readonly>
           <div id="claveE_error"></div>
         </div>

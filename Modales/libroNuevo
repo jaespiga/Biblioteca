@@ -1,7 +1,7 @@
 
 <!-- Modal para dar de alta un libro y datos asociados -->
 <div class="modal fade" id="libroNuevo" role = 'dialog' tabindex="-1" aria-labelledby="libro_nuevo">
-  <div class="modal-dialog modal-lg formulario" id='formulario' role='document'>
+  <div class="modal-dialog modal-xl formulario" id='formulario' role='document'>
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title fw-bold">Nuevo libro</h2>
@@ -12,39 +12,136 @@
         <input type="hidden" id="idApartado" name="idApartado" value="Libro">
         <input type="hidden" id="idOper" name="idOper" value="alta">
 
-        <div class="formulario__grupo" id="grupo__clave">
-          <label class="fs-4 text-primary formulario__input-label">Nombre del libro</label>
+        <div class="row">
+          <div class="d-flex col-12">
+            <!-- Título -->    
+             <div class="formulario__grupo col-6 d-inline-flex" id="grupo__clave"> 
+              <label for="clave" class="fs-3 text-primary formulario__input-label mt-2">Título</label>
+              <input type="text" name="clave" id="clave" 
+                      onblur="document.getElementById('web').value=this.value"
+                      class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
+                      autocomplete="off" required>
+              <div id="clave_error"></div>
+            </div>
+            <!-- Autor -->
+            
+            <div class="formulario__grupo col-6 d-inline-flex" id="grupo__autor">   
+              <label for="autor" class="formulario__input-label text-primary fs-3 mt-2 ms-3 me-2">Autor</label>                  
+              <input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
+                    class="form-control input-sm mb-3 ms-2 fs-5 w-100">
+              <datalist id="lista_autores"> </datalist>
+              <div id="autor_error"></div>
+            </div>
+          </div>
+        </div>
 
-          <input type="text" name="clave" id="clave" 
-                  onblur="document.getElementById('web').value=this.value"
-                  class="form-control input-sm fs-5 mb-4 formulario__input" 
-                  autocomplete="off" required>
-          <div id="clave_error"></div>
-        
+        <div class="row">
+          <div class="d-flex col-12">
+            <!-- Editorial -->
+            <div class="col-7 d-inline-flex">  
+              <label for="editorial" class="form-text text-primary fs-5 mt-2 text-primary">
+                      Editorial&nbsp;&nbsp;</label>
+              <input type="text" id="editorial" list="lista_edit" name="editorial" 
+                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-100 ms-2">
+              <datalist id="lista_edit"> </datalist>
+            </div>
+
+            <!-- Fecha de publicación -->
+            <div class="formulario__grupo" id="grupo__fpub">  
+              <div class="col-5 d-inline-flex ms-5 w-100"> 
+                <label class="fs-5 mt-2 text-primary">Fecha de publicación</label>
+                <select id="fpubdd"  class="form-control fs-5 mt-0 fechadd" 
+                  onchange="$('#fpubmm').focus()" 
+                  onblur="validarCompararFechas()">
+                  <option value="dd" selected>dd</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>        
+                </select>        
+                <label class="fs-5 mt-2 fecha_separador">/</label>
+                <select id="fpubmm" class="form-control input-sm fs-5 w-auto mt-0 fechamm"
+                        onchange="$('#fpub').focus()"  
+                        onblur="validarCompararFechas()">
+                  <option value="mm" selected>mm</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+                <label class="fs-5 mt-2 fecha_separador">/</label>
+                <input type="text" name="fpub" id="fpub" 
+                        class="form-control input-sm fs-5 mt-0 formulario__input fechasa" placeholder="ssaa"
+                        maxlength="4" onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#ffaldd').focus()" 
+                        value="" onblur="validarCompararFechas()">       
+              </div>    
+              <div id="fpub_error"></div>      
+            </div>
+          </div>      
         </div>
         
         <div class="row">
           <div class="d-flex col-12">
-            <!-- Nacionalidad -->
-            <div class="col-5 d-inline-flex">  
-              <label for="nacionalidad" class="form-text text-primary fs-5 mt-1 text-primary">
-                      Nacionalidad&nbsp;&nbsp;</label>
-              <input type="text" id="nacionalidad" list="lista_nacionalidades" name="nacionalidad" 
-                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-100 ms-2">
-              <datalist id="lista_nacionalidades"> </datalist>
+            <!-- Género literario -->
+            <div class="col-4 d-inline-flex">  
+              <label class="fs-5 mt-1 text-primary">Género literario</label>
+              <input type="text" id="genlit" list="lista_genlit" name="genlit" autocomplete="off"
+                    class="form-control input-sm fs-5 h-75 mt-2 ms-1 me-4" >
+              <datalist id="lista_genlit"> </datalist>
             </div>
-
-            <!-- Corriente literaria -->
-            <div class="col-7 d-inline-flex">
-              <label for="cliteraria" class="form-text text-primary fs-5 mt-0 ms-5 ps-3 text-primary">
-                      Corriente literaria&nbsp;&nbsp;</label>
-              <input type="text" id="cliteraria" list="lista_clit" name="cliteraria" 
-                    autocomplete="off" class="form-control input-sm fs-5 h-75 w-50"> 
-              <datalist id="lista_clit"> </datalist>
+            <!-- Idioma en el que se lee el libro -->
+            <div class="col-4 d-inline-flex">
+              <label for="idioma" class="form-text text-primary fs-5 mt-3 ms-2 text-primary">
+                      Idioma</label>
+              <input type="text" id="idioma" list="lista_idioma" name="idioma" autocomplete="off"
+                    class="form-control input-sm fs-5 h-75 mt-2 ms-2" >
+              <datalist id="lista_idioma"> </datalist>
+            </div>
+            <!-- Soporte en el que se lee el libro -->
+            <div class="col-4 d-inline-flex">
+              <label for="soplib" class="form-text text-primary fs-5 mt-1 ms-2 text-primary">
+                      Soporte físico</label>
+              <input type="text" id="soplib" list="lista_soplib" name="soplib" autocomplete="off"
+                    class="form-control input-sm fs-5 h-75 mt-2 ms-1" >
+              <datalist id="lista_soplib"> </datalist>
             </div>
           </div>      
-        </div>
-                
+        </div>        
         <div class="row">
           <div class="d-flex mb-2">
             <!-- Fecha de nacimiento -->
