@@ -102,7 +102,7 @@
 			<form action="acceso_pagina.php" method="post">	
 
 				<div class="input-group-text border-primary col-12">
-					<fieldset class="form-group form-control-sm ">	 
+					<fieldset class="form-group form-control-sm">	 
 						<legend class="text-primary fs-5 fw-bold mt-3 mb-5 ms-1 border border-light border-1"> 
 							Datos de acceso del usuario
 						</legend>

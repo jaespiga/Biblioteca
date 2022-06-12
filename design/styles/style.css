@@ -112,6 +112,10 @@ body {
 	cursor: pointer;
 }
 
+.restaurar {	/* Anular el estilo de Bootstrap restaurando el CSS original*/
+	all: revert;
+}
+
 /* formateo de campos de fecha */
 .fechadd {
 	border: none;
