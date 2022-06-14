@@ -70,7 +70,7 @@ function autorInicializarDatosPantalla() {
     return
 }
 //  Informar los datos de la pantalla de libros
-function librorecuperarDatosPantalla(datos_pantalla) {
+function libroRecuperarDatosPantalla(datos_pantalla) {
 
 res=datos_pantalla.split("#&");
 
@@ -129,7 +129,7 @@ $('#tSUltCambioE').val(res[16]);
 return
 }
 //  Inicializar los datos de la pantalla de libros
-function libroinicializarDatosPantalla() {
+function libroInicializarDatosPantalla() {
 
 $('#clave').val("");
 $('#autores').val("");

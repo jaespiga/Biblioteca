@@ -14,15 +14,21 @@ const expresionesE = {
 function validarFormularioE(evento) {
     
     switch (evento.target.name) {  
-        case "claveE":       
-            if (expresionesE.claveE.test(evento.target.value)) {
+        case "claveE":
+            if (evento.target.value == "") {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
-                validar_campo_resultadoE("ok", evento.target.name, error_lit);
+                validar_campo_resultado("ok", evento.target.name, error_lit);
+            } else {       
+                    if (expresionesE.claveE.test(evento.target.value)) {
+                        /* Validación de caracteres correcta */
+                        error_lit="<p></p>";
+                        validar_campo_resultadoE("ok", evento.target.name, error_lit);
 
-            } else {
-                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
-                validar_campo_resultadoE("nok", evento.target.name, error_lit);
+                    } else {
+                        error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                        validar_campo_resultadoE("nok", evento.target.name, error_lit);
+                        }
                 }
         break; 
 

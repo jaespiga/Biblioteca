@@ -87,7 +87,7 @@ function leerDatosLibro($lit_libro) {
                     . "#&" . $fila["cGR03_Soporte"] . "#&" . $fila["cGR03_Género"] 
                     . "#&" . $fila["cGR03_Propietario"] . "#&" . $fila["cGR03_Sinopsis"] 
                     . "#&" . $fila["cGR03_Estado_S"] . "#&" . $fila["cGR03_Estado_Q_U"] 
-                    . "#&" . $fila["cGR03_Estado_F"] . "#&" . $fila["cGR02_WEB"];  
+                    . "#&" . $fila["cGR03_Estado_F"] . "#&" . $fila["cGR03_WEB"];  
                 }      
         } else {
                 require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
