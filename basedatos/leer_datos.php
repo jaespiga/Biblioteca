@@ -33,7 +33,7 @@ function leerDatosAutor($lit_autor) {
     if($lit_autor !== ""){
         $sql= "SELECT cGR02_Autor, cGR02_Foto, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                         cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
-                        cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB
+                        cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio 
                 FROM tgr02_autores
                 WHERE cGR02_Autor = '$lit_autor'";
         
@@ -49,7 +49,7 @@ function leerDatosAutor($lit_autor) {
                             . "#&" . $fila["cGR02_LNacimiento"] . "#&" . $fila["cGR02_PNacimiento"]
                             . "#&" . $fila["cGR02_LFallecimiento"] . "#&" . $fila["cGR02_PFallecimiento"]
                             . "#&" . $fila["cGR02_Nacionalidad"] . "#&" . $fila["cGR02_CLiteraria"] 
-                            . "#&" . $fila["cGR02_WEB"];  
+                            . "#&" . $fila["cGR02_WEB"]. "#&" . $fila["cGR02_TSUltCambio"];    
                 }      
         } else {
                 require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
@@ -69,7 +69,7 @@ function leerDatosLibro($lit_libro) {
     if($lit_libro !== ""){
         $sql= "SELECT cGR03_Título, cGR03_Autor, cGR03_Editorial, cGR03_FPublicación, cGR03_FAdquisición, 
                         cGR03_Idioma, cGR03_Soporte, cGR03_Género, cGR03_Propietario, cGR03_Sinopsis, 
-                        cGR03_Estado_S, cGR03_Estado_Q_U, cGR03_Estado_F, cGR03_WEB 
+                        cGR03_Estado_S, cGR03_Estado_Q_U, cGR03_Estado_F, cGR03_WEB, cGR03_TSUltCambio 
                 FROM tgr03_libros
                 WHERE cGR03_Título = '$lit_libro'";
         
@@ -87,7 +87,8 @@ function leerDatosLibro($lit_libro) {
                     . "#&" . $fila["cGR03_Soporte"] . "#&" . $fila["cGR03_Género"] 
                     . "#&" . $fila["cGR03_Propietario"] . "#&" . $fila["cGR03_Sinopsis"] 
                     . "#&" . $fila["cGR03_Estado_S"] . "#&" . $fila["cGR03_Estado_Q_U"] 
-                    . "#&" . $fila["cGR03_Estado_F"] . "#&" . $fila["cGR03_WEB"];  
+                    . "#&" . $fila["cGR03_Estado_F"] . "#&" . $fila["cGR03_WEB"] 
+                    . "#&" . $fila["cGR03_TSUltCambio"];  
                 }      
         } else {
                 require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 

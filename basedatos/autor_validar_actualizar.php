@@ -1,9 +1,6 @@
 
 <?php
 
-require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
-require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
-
 // Validación de los campos de la pantalla de autores y su actualización en la base de datos
 
 list ($respuesta) = autor_validar_actualizar();

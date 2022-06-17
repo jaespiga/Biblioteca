@@ -155,14 +155,14 @@
 		<script  id="tabla_idioma_cambio" data-clave="Idioma"
 				src="js/lista_tabla_codigos.js"></script>  <!-- Lista idiomas ordenado por tecleo  -->
 
-		<script  id="tabla_sitlibro" data-clave="SitLibro"
-				src="js/lista_tabla_codigos_sitlibro.js"></script>  <!-- Lista situación del libro  -->	
-		<script  id="tabla_sitlibro_cambio" data-clave="SitLibro"
+		<script  id="tabla_sitlib" data-clave="SitLib"
+				src="js/lista_tabla_codigos_sitlib.js"></script>  <!-- Lista situación del libro  -->	
+		<script  id="tabla_sitlib_cambio" data-clave="SitLib"
 				src="js/lista_tabla_codigos.js"></script>  <!-- Lista situación del libro ordenados por tecleo  -->
 
-		<script  id="tabla_soplib" data-clave="SopLibro"
-				src="js/lista_tabla_codigos_soplibro.js"></script>  <!-- Lista soportes publicación  -->	
-		<script  id="tabla_soplib_cambio" data-clave="SopLibro"
+		<script  id="tabla_soplib" data-clave="SopLib"
+				src="js/lista_tabla_codigos_soplib.js"></script>  <!-- Lista soportes publicación  -->	
+		<script  id="tabla_soplib_cambio" data-clave="SopLib"
 				src="js/lista_tabla_codigos.js"></script>  <!-- Lista soportes publicación ordenados por tecleo  -->									
 
 		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
