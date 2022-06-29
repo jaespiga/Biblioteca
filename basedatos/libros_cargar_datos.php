@@ -10,7 +10,7 @@
     require_once '../rutinas/fechas_tratamientos.php';  /* Función para informar datos de la pantalla de autor */
 ?>
 <div class="table-wrapper">
-<table class="table table-hover table-condensed table-borderer border-primary align-middle">
+<table class="table table-hover table-condensed table-borderer border-primary">
     <thead>
         <tr class="align-items-center fs-4">
             <th class="table-success th_editar">Editar</th>
@@ -21,8 +21,8 @@
             <th class="table-secondary">Fecha de publicación</th>
             <th class="table-secondary">Fecha de adquisición</th>
             <th class="table-secondary">Idioma</th>
-            <th class="table-secondary">Soporte</th>
-            <th class="table-secondary">Género</th>
+            <th class="table-secondary">Soporte físico</th>
+            <th class="table-secondary">Género literario</th>
             <th class="table-secondary">Propietario</th>
             <th class="table-secondary">Sinopsis</th>
             <th class="table-secondary">Situación del libro</th>
@@ -140,9 +140,9 @@ function leerDatosLibros($lit_libro) {
                 $idioma_lit=  $mensaje_codigo;
             }  
 
-        // Soporte
+        // Soporte del libro
         $funcion_obtener_descripcion = 2;
-        $tabla = "Soporte";
+        $tabla = "Soplib";
         $datos_entrada = $fila['cGR03_Soporte'];
         $ind_lectura= "";
         $soporte_lit= "";   
@@ -163,7 +163,7 @@ function leerDatosLibros($lit_libro) {
 
         // Género literario
         $funcion_obtener_descripcion = 2;
-        $tabla = "GLiteraria";
+        $tabla = "GenLit";
         $datos_entrada = $fila['cGR03_Género'];
         $ind_lectura= "";
         $gliterario_lit= "";   
@@ -184,7 +184,7 @@ function leerDatosLibros($lit_libro) {
 
         // Estado de situación del libro
         $funcion_obtener_descripcion = 2;
-        $tabla = "SitLibro";
+        $tabla = "SitLib";
         $datos_entrada = $fila['cGR03_Estado_S'];
         $ind_lectura= "";
         $sitlibro_lit= "";   

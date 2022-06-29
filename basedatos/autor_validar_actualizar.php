@@ -33,6 +33,7 @@ function validarSubmit($campos) {
     require_once 'connect.php';
     
     require_once '../basedatos/tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos                          
+    require_once '../basedatos/leer_datos_bdatos.php';  // leer datos de Autor / Libro / Lectura                         
     require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
     require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
 
@@ -53,40 +54,38 @@ function validarSubmit($campos) {
         $ind_actualizar = 1; 
         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
     } else {
-            $sql= "SELECT cGR02_Autor, cGR02_TSUltCambio
-                    FROM tgr02_autores
-                    WHERE cGR02_Autor = '$res[2]'";  
-                    
-            $resultados= $dbcon->query($sql);
+        $apartado = "Autor";
+        $clave = $res[2];
+        list($ind_error, $mensaje, $datos_salida) = leerDatosBDatos($apartado, $clave);
+            
+        if ($ind_error == 0) {
 
-            if ($dbcon->errno == 0){ 
-                if ($resultados->num_rows == 0)  {
-                    if ($res[1] !== "alta") {
-                        $mensaje = "Error. Autor no existe.";  
+            if ($datos_salida == ""){ 
+                if ($res[1] !== "alta") {
+                    $mensaje = "Error. Autor no existe.";  
+                    $ind_actualizar = 1;   
+                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
+                }
+            } else {
+                    if ($res[1] == "alta") {
+                        $mensaje = "Error. Autor ya existe.";  
                         $ind_actualizar = 1;   
                         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                    }
-                } else {
-                        if ($res[1] == "alta") {
-                            $mensaje = "Error. Autor ya existe.";  
-                            $ind_actualizar = 1;   
-                            return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                        } else {
-                                $fila = $resultados->fetch_assoc();
-                                if ($res[12] !== $fila['cGR02_TSUltCambio']) {
-                                    $mensaje = "Error. Datos del autor han sido modificados desde otro terminal. Refresque datos y repita operación.";  
-                                    $ind_actualizar = 1; 
-                                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];   
-                                }
-                            };
+                    } else {
+                            $fila = explode("#&", $datos_salida);
+                            if ($res[12] !== $fila[11]) {
+                                $mensaje = "Error. Datos del autor han sido modificados desde otro terminal. Refresque datos y repita operación.";  
+                                $ind_actualizar = 1; 
+                                return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];   
+                            }
+                        };
                     } 
-            } else {
-                    require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 
-                    $ind_actualizar = 1;
-                    return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
-                }  
+        } else {
+                $ind_actualizar = 1;
+                return [$ind_actualizar, $ind_validar, $mensaje, $datos_salida];  
+            }  
         }
-
+            
         $campos_bdatos .= "#&" . $res[2];    // Autor
         
     // Validar nacionalidad

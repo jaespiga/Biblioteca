@@ -8,7 +8,12 @@ echo $respuesta;
 // Función para validar todos los campos de libro
 function libro_validar_actualizar() {
 
-    $campos_pantalla = $_POST['param1'];
+    $ind_actualizar = 1;
+    $ind_validar = 0;
+    $mensaje_validar = "Validación no realizada";
+    $campos_bdatos = "";
+    
+    $campos_pantalla = trim($_POST['param1']);
 
     list($ind_actualizar, $ind_validar, $mensaje_validar, $campos_bdatos) 
                     = validarSubmit($campos_pantalla);
@@ -28,11 +33,9 @@ return [$respuesta];
 
 // Validación campos de formulario de libro
 function validarSubmit($campos) {
-   
-    require_once 'connect.php';
     
-    require_once '../basedatos/tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos                          
-    require_once '../basedatos/leer_datos.php';  // leer datos de Autor / Libro / Lectura
+    require_once '../basedatos/tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos 
+    require_once '../basedatos/leer_datos_bdatos.php';  // leer datos de Autor / Libro / Lectura                         
     require_once '../rutinas/Fechas_tratamientos_bloques.php';  // Bloques de operaciones sobre funciones de fechas
     require_once '../rutinas/Fechas_tratamientos.php';  // Funciones de validación de fechas
 
@@ -50,14 +53,16 @@ function validarSubmit($campos) {
     // Validar clave de la página web activa
 
     // Validar libro
-    echo "validar libro";
+    
     if ($res[2] == "") { 
         $mensaje = "Nombre del libro tiene que estar informado"; 
         $ind_actualizar = 1; 
         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
     } else {
-            list ($ind_error, $mensaje, $datos_salida) = leerDatosLibro($res[2]);
-            
+            $apartado = "Libro";
+            $clave = $res[2];
+            list($ind_error, $mensaje, $datos_salida) = leerDatosBDatos($apartado, $clave);
+             
             if ($ind_error == 0) {
 
                 if ($datos_salida == ""){ 
@@ -68,7 +73,7 @@ function validarSubmit($campos) {
                     }
                 } else {
                             if ($res[1] == "alta") {
-                                $mensaje = "Error. Autor ya existe.";  
+                                $mensaje = "Error. Libro ya existe.";  
                                 $ind_actualizar = 1;   
                                 return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
                             } else {
@@ -94,12 +99,14 @@ function validarSubmit($campos) {
         $ind_actualizar = 1; 
         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
     } else {
-            list ($ind_error, $mensaje, $datos_salida) = leerDatosAutor($res[3]);
+            $apartado = "Autor";
+            $clave = $res[3];
+            list($ind_error, $mensaje, $datos_salida) = leerDatosBDatos($apartado, $clave);
             
             if ($ind_error == 0) {
 
                 if ($datos_salida == ""){ 
-                    $mensaje = "Error. Libro no existe.";  
+                    $mensaje = "Error. Autor no existe.";  
                     $ind_actualizar = 1;   
                     return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];      
                 } 
@@ -364,10 +371,10 @@ function validarSubmit($campos) {
         }
 
     // Sinopsis
-    $campos_bdatos .= "#&" . $res[13];
+    $campos_bdatos .= "#&" . $res[14];
     
     // Web
-    $campos_bdatos .= "#&" . $res[11];
+    $campos_bdatos .= "#&" . $res[15];
 
     // VALIDACIONES RELACIONALES 
 

@@ -24,7 +24,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       fecha= $('#fest').val() + "-" + $('#festmm').val() + "-" + $('#festdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
-      
+      form_campos = form_campos  +  "#&" + $('#sinopsis').val();
       form_campos = form_campos  +  "#&" + $('#web').val();
       
       $.ajax({                        
