@@ -13,22 +13,22 @@
 <table class="table table-hover table-condensed table-borderer border-primary">
     <thead>
         <tr class="align-items-center fs-4">
-            <th class="table-success th_editar">Editar</th>
-            <th class="table-danger th_borrar">Eliminar</th>
-            <th class="table-secondary">Título</th>
-            <th class="table-secondary">Autor</th>
-            <th class="table-secondary">Editorial</th>
-            <th class="table-secondary">Fecha de publicación</th>
-            <th class="table-secondary">Fecha de adquisición</th>
-            <th class="table-secondary">Idioma</th>
-            <th class="table-secondary">Soporte físico</th>
-            <th class="table-secondary">Género literario</th>
-            <th class="table-secondary">Propietario</th>
-            <th class="table-secondary">Sinopsis</th>
-            <th class="table-secondary">Situación del libro</th>
-            <th class="table-secondary">Quién (prestado / regalado)</th>
-            <th class="table-secondary">Fecha préstamo / regalo</th>
-            <th class="table-secondary">Información WEB</th>
+            <th class="table-success th_editar th_5">Editar</th>
+            <th class="table-danger th_borrar th_5">Eliminar</th>
+            <th class="table-secondary th_10">Título</th>
+            <th class="table-secondary th_10">Autor</th>
+            <th class="table-secondary th_5">Editorial</th>
+            <th class="table-secondary th_5">Fecha de publicación</th>
+            <th class="table-secondary th_5">Fecha de adquisición</th>
+            <th class="table-secondary th_5">Idioma</th>
+            <th class="table-secondary th_5">Soporte físico</th>
+            <th class="table-secondary th_5">Género literario</th>
+            <th class="table-secondary th_5">Propietario</th>
+            <th class="table-secondary th_10">Sinopsis</th>
+            <th class="table-secondary th_5">Situación del libro</th>
+            <th class="table-secondary th_5">Quién (prestado / regalado)</th>
+            <th class="table-secondary th_5">Fecha préstamo / regalo</th>
+            <th class="table-secondary th_10">Información WEB</th>
         </tr>
     </thead>    
 
@@ -211,7 +211,19 @@ function leerDatosLibros($lit_libro) {
             $fecha_estado_DD_MM_SSAA = $fechas_elemento[2];
         } else {
             $fecha_estado_DD_MM_SSAA = $mensaje;
-            }     
+            }  
+        
+        // Limitar la presentación de la sinopsis a un tamaño máximo
+        if ($fila['cGR03_Sinopsis'] == "") {
+            $lit_sinopsis = "";
+        } else {
+                $longitud_maxima = 20;    
+                if (strlen($fila['cGR03_Sinopsis']) > $longitud_maxima) {
+                    $lit_sinopsis = substr($fila['cGR03_Sinopsis'], 0, $longitud_maxima) . " .....";
+                } else {
+                        $lit_sinopsis = $fila['cGR03_Sinopsis'];
+                    }
+            }
         
         $datos_pantalla = "Libro" . "#&" . $fila["cGR03_Título"] . "#&" . $fila["cGR03_Autor"] 
             . "#&" . $fila["cGR03_Foto"] . "#&" . $editorial_lit . "#&" . $fila["cGR03_FPublicación"]
@@ -225,7 +237,7 @@ function leerDatosLibros($lit_libro) {
             
             <td class='td_editar'> 
                 <button type="button"  class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
-                                fs-4' data-bs-toggle="modal"  data-bs-target="#autorEdicion" 
+                                fs-4' data-bs-toggle="modal"  data-bs-target="#libroEdicion" 
                         onclick="libroRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
@@ -249,16 +261,16 @@ function leerDatosLibros($lit_libro) {
             <td> <?php echo $fila['cGR03_Título'] ?> </td>";
             <td> <?php echo $fila['cGR03_Autor'] ?> </td>";
             <td> <?php echo $editorial_lit ?> </td>";
-            <td> <?php echo $fecha_publicacion_DD_MM_SSAA ?> </td>";
-            <td> <?php echo $fecha_adquisicion_DD_MM_SSAA ?> </td>";
+            <td class='td_centrar'> <?php echo $fecha_publicacion_DD_MM_SSAA ?> </td>";
+            <td class='td_centrar'> <?php echo $fecha_adquisicion_DD_MM_SSAA ?> </td>";
             <td> <?php echo $idioma_lit ?> </td>";
             <td> <?php echo $soporte_lit ?> </td>";
             <td> <?php echo $gliterario_lit ?> </td>";
             <td> <?php echo $fila['cGR03_Propietario'] ?> </td>";
-            <td> <?php echo $fila['cGR03_Sinopsis'] ?> </td>";
+            <td> <?php echo $lit_sinopsis ?> </td>";
             <td> <?php echo $sitlibro_lit  ?> </td>";        
             <td> <?php echo $fila['cGR03_Estado_Q_U'] ?> </td>";
-            <td> <?php echo $fecha_estado_DD_MM_SSAA  ?> </td>";        
+            <td class='td_centrar'> <?php echo $fecha_estado_DD_MM_SSAA  ?> </td>";        
             <td> <?php echo $fila['cGR03_WEB'] ?> </td>";
             
         </tr>

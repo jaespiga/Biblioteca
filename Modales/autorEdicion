@@ -238,9 +238,12 @@
             </div>	
           </div>      
         </div>
+
+        <!-- Guardar timestamp del último cambio -->
         <div>
               <input type="hidden" id="tSUltCambioE" name="tSUltCambioE"> 
         </div>
+
       </div>  
       <!-- Envío de datos para actualización -->
       <div class="modal-footer formulario__grupo">

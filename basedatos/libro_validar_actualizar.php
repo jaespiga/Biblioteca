@@ -41,7 +41,8 @@ function validarSubmit($campos) {
 
 
     $ind_actualizar = 0;    // 0- si actualizar, 1- no actualizar
-    $ind_validar = 0;     // 0- sin incidencias, 1- con incidencias
+    $ind_validar = 0;       // 0- sin incidencias, 1- con incidencias
+    $ind_error_fechas = 0;  // fechas publicación/adquisición: 0- correctas, 1- incorrectas
     $mensaje = "";
 
     $mascara = array("s", "a", "d", "m");   // Máscara de fecha ssaa-mm-dd para pasar a valor ("")
@@ -78,7 +79,7 @@ function validarSubmit($campos) {
                                 return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];  
                             } else {
                                     $fila = explode("#&", $datos_salida);
-                                    if ($res[12] !== $fila[15]) {
+                                    if ($res[16] !== $fila[14]) {
                                         $mensaje = "Error. Datos del libro han sido modificados desde otro terminal. Refresque datos y repita operación.";  
                                         $ind_actualizar = 1; 
                                         return [$ind_actualizar, $ind_validar, $mensaje, $campos_bdatos];   
@@ -142,8 +143,6 @@ function validarSubmit($campos) {
     $campos_bdatos .= "#&" . $bdatos_clave;
 
     // Validar fecha de publicación
-    $ind_error_fechas = 0;      
-
     $fecha = $res[5];
     $fecha_referencia = date('Y-m-d');
     
@@ -188,8 +187,6 @@ function validarSubmit($campos) {
     $campos_bdatos .= "#&" . $res[6];
     
     // Validar fecha de adquisición
-    $ind_error_fechas = 0;      
-
     $fecha = $res[7];
     $fecha_referencia = date('Y-m-d');
     

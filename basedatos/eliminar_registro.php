@@ -20,14 +20,14 @@ function eliminarRegistro($datos) {
     $mensaje_actualizar = "";
     $datos_salida = $res[1];
 
-    if ($res[0] = "Autor") {
+    if ($res[0] == "Autor") {
         $sql="DELETE FROM tgr02_autores 
                     WHERE cGR02_Autor = '$res[1]'";
         $mensaje = "Autor eliminado <br />";            
     } else {
-            if ($res[0] = "Libro") {
+            if ($res[0] == "Libro") {
                 $sql="DELETE FROM tgr03_libros 
-                WHERE cGR03_Título = '$res[1]'";
+                    WHERE cGR03_Título = '$res[1]'";
                 $mensaje = "Libro eliminado <br />";
             } else {
                     $sql="DELETE FROM tgr04_lecturas 

@@ -171,7 +171,7 @@ body {
 }
 
 .table-wrapper {
-	width: 100%;
+	width: 2500px;
 	height: 500px; /* Tamaño de la tabla en la pantalla. El tamaño es mayor o igual al espacio correspondiente */
 	overflow: auto;
   }
@@ -194,6 +194,17 @@ body {
 	text-align: center;
   }
 
+  .table-wrapper table thead .th_5{ 
+	width: 5%;
+  }
+ 
+  .table-wrapper table thead .th_10{ 
+	width: 10%;
+  } 
+  
+  .table-wrapper table thead .th_15{ 
+	width: 15%;
+  }
   .table-wrapper table thead .th_editar{ 
 	background-color: rgb(58, 112, 137);
   }
@@ -215,4 +226,8 @@ body {
   .table-wrapper table tbody .td_borrar{
 	text-align: center; 
 	background-color: rgb(255, 192, 203);
+  }
+   
+  .table-wrapper table tbody .td_centrar{
+	text-align: center; 
   }

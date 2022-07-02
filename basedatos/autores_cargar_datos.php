@@ -13,18 +13,18 @@
 <table class="table table-hover table-condensed table-borderer border-primary align-middle">
     <thead>
         <tr class="align-items-center fs-4">
-            <th class="table-success th_editar">Editar</th>
-            <th class="table-danger th_borrar">Eliminar</th>
-            <th class="table-secondary">Autor</th>
-            <th class="table-secondary">Nacionalidad</th>
-            <th class="table-secondary">Corriente literaria</th>
-            <th class="table-secondary">Fecha de nacimiento</th>
-            <th class="table-secondary">Lugar nacimiento</th>
-            <th class="table-secondary">País nacimiento</th>
-            <th class="table-secondary">Fecha de fallecimiento</th>
-            <th class="table-secondary">Lugar fallecimiento</th>
-            <th class="table-secondary">País fallecimiento</th>
-            <th class="table-secondary">Información WEB</th>
+            <th class="table-success th_editar th_5">Editar</th>
+            <th class="table-danger th_borrar th_5">Eliminar</th>
+            <th class="table-secondary th_10">Autor</th>
+            <th class="table-secondary th_10">Nacionalidad</th>
+            <th class="table-secondary th_10">Corriente literaria</th>
+            <th class="table-secondary th_5">Fecha de nacimiento</th>
+            <th class="table-secondary th_10">Lugar nacimiento</th>
+            <th class="table-secondary th_10">País nacimiento</th>
+            <th class="table-secondary th_5">Fecha de fallecimiento</th>
+            <th class="table-secondary th_10">Lugar fallecimiento</th>
+            <th class="table-secondary th_10">País fallecimiento</th>
+            <th class="table-secondary th_10">Información WEB</th>
         </tr>
     </thead>    
 
@@ -210,10 +210,10 @@ function leerDatosAutores($lit_autor) {
             <td> <?php echo $fila['cGR02_Autor'] ?> </td>";
             <td> <?php echo $nacionalidad_lit ?> </td>";
             <td> <?php echo $cliteraria_lit ?> </td>";
-            <td> <?php echo $fecha_nacimiento_DD_MM_SSAA ?> </td>";
+            <td class='td_centrar'> <?php echo $fecha_nacimiento_DD_MM_SSAA ?> </td>";
             <td> <?php echo $fila['cGR02_LNacimiento'] ?> </td>";
             <td> <?php echo $pais_nac_lit  ?> </td>";        
-            <td> <?php echo $fecha_fallecimiento_DD_MM_SSAA ?> </td>";
+            <td class='td_centrar'> <?php echo $fecha_fallecimiento_DD_MM_SSAA ?> </td>";
             <td> <?php echo $fila['cGR02_LFallecimiento'] ?> </td>";
             <td> <?php echo $pais_fal_lit  ?> </td>";        
             <td> <?php echo $fila['cGR02_WEB'] ?> </td>";

@@ -19,7 +19,7 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
     } else {
             $('#fnacEdd').val("dd");
             $('#fnacEmm').val("mm");
-            $('#fnacE').val("ssaa");
+            $('#fnacE').val("");
         }   
 
     // Tratamiento de la fecha de fallecimiento
@@ -31,7 +31,7 @@ function autorRecuperarDatosPantalla(datos_pantalla) {
     } else {
             $('#ffalEdd').val("dd");
             $('#ffalEmm').val("mm");
-            $('#ffalE').val("ssaa");
+            $('#ffalE').val("");
         }   
     
     $('#lnacE').val(res[5]);
@@ -54,13 +54,13 @@ function autorInicializarDatosPantalla() {
 // Tratamiento de la fecha de nacimiento
     $('#fnacdd').val("dd");
     $('#fnacmm').val("mm");
-    $('#fnac').val("ssaa");
+    $('#fnac').val("");
    
 // Tratamiento de la fecha de fallecimiento
 
     $('#ffaldd').val("dd");
     $('#ffalmm').val("mm");
-    $('#ffal').val("ssaa");   
+    $('#ffal').val("");   
 
     $('#lnac').val("");
     $('#pnac').val("");
@@ -75,32 +75,32 @@ function libroRecuperarDatosPantalla(datos_pantalla) {
 res=datos_pantalla.split("#&");
 
 $('#claveE').val(res[1]);
-$('#autorE').val(res[2]);
+$('#autoresE').val(res[2]);
 $('#editorialE').val(res[4]);
 
 // Tratamiento de la fecha de publicación
 if (!isNaN(Date.parse(res[5]))) { 
-    ele_fecha=res[3].split("-");
+    ele_fecha=res[5].split("-");
     $('#fpubEdd').val(ele_fecha[2]);
     $('#fpubEmm').val(ele_fecha[1]);
     $('#fpubE').val(ele_fecha[0]);
 } else {
         $('#fpubEdd').val("dd");
         $('#fpubEmm').val("mm");
-        $('#fpubE').val("ssaa");
+        $('#fpubE').val("");
     }   
 $('#propietarioE').val(res[10]);
 
 // Tratamiento de la fecha de adquisión del libro
 if (!isNaN(Date.parse(res[6]))) { 
-    ele_fecha=res[3].split("-");
+    ele_fecha=res[6].split("-");
     $('#fadqEdd').val(ele_fecha[2]);
     $('#fadqEmm').val(ele_fecha[1]);
     $('#fadqE').val(ele_fecha[0]);
 } else {
         $('#fadqEdd').val("dd");
         $('#fadqEmm').val("mm");
-        $('#fadqE').val("ssaa");
+        $('#fadqE').val("");
     }   
 $('#genlitE').val(res[9]);
 $('#idiomaE').val(res[7]);
@@ -111,14 +111,14 @@ $('#personaE').val(res[13]);
 // Tratamiento de la fecha en que se ha producido la situación en que se encuentra el libro
 
 if (!isNaN(Date.parse(res[14]))) { 
-    ele_fecha=res[3].split("-");
+    ele_fecha=res[14].split("-");
     $('#festEdd').val(ele_fecha[2]);
     $('#festEmm').val(ele_fecha[1]);
     $('#festE').val(ele_fecha[0]);
 } else {
         $('#festEdd').val("dd");
         $('#festEmm').val("mm");
-        $('#festE').val("ssaa");
+        $('#festE').val("");
     }   
 
 $('#sinopsisE').val(res[11]);
@@ -138,15 +138,15 @@ $('#editorial').val("");
 // Tratamiento de la fecha de publicación
 $('#fpubdd').val("dd");
 $('#fpubmm').val("mm");
-$('#fpub').val("ssaa");
+$('#fpub').val("");
 
 $('#propietario').val("");
 
-// Tratamiento de la fecha de fallecimiento
+// Tratamiento de la fecha de adquisición
 
 $('#fadqdd').val("dd");
 $('#fadqmm').val("mm");
-$('#fadq').val("ssaa");   
+$('#fadq').val("");   
 
 $('#genlit').val("");
 $('#idioma').val("");
@@ -158,7 +158,7 @@ $('#persona').val("");
 
 $('#festdd').val("dd");
 $('#festmm').val("mm");
-$('#fest').val("ssaa");   
+$('#fest').val("");   
 
 $('#sinopsis').val("");
 $('#web').val("");

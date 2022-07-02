@@ -311,17 +311,6 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
     $res = explode("#&", $campos_bdatos);
 
     if ($res[1] == "alta") {
-        
-        $Autor = $res[2];
-        $FNacimiento = $res[5];
-        $FDefunción = $res[6];
-        $LNacimiento = $res[7];
-        $PNacimiento = $res[8];
-        $LFallecimiento = $res[9];
-        $PFallecimiento = $res[10];
-        $Nacionalidad = $res[3];
-        $CLiteraria = $res[4];
-        $WEB = $res[11];
 
         $sql="INSERT INTO tgr02_autores(cGR02_Autor, cGR02_FNacimiento, cGR02_FDefunción, cGR02_LNacimiento, 
                                         cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento, 

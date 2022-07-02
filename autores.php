@@ -66,8 +66,10 @@
     	</nav>
 	
 		<nav class="navbar navbar-expand-lg navbar-light bg-orange p-3 h-50" >
-			 
-			<div class="d-flex collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="row  col-12">
+			<div class="d-flex flex-wrap flex-xl-nowrap flex-md-row collapse navbar-collapse" 
+					id="navbarSupportedContent">
+			<div class="col-12 col-md-8 d-inline-flex"> 
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
 					<li class="nav-item">
 						<form  method="post" class="row g-4 mb-0">
@@ -89,7 +91,8 @@
 						</form>	
 					</li>
 				</ul>	
-
+			</div>	
+			<div class="col-12 col-md-2 d-inline-flex"> 
 				<form>
 					<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
 						me-5 mb-0 text-light fs-4" 
@@ -101,7 +104,8 @@
 						</svg>								
 					</button>
 				</form>	
-			
+			</div>
+			<div class="col-12 col-md-2 d-inline-flex"> 
 				<form>
 					<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
 						data-bs-toggle="collapse" type="button">Filtros  &nbsp;
@@ -110,7 +114,9 @@
 						</svg>
 					</button>
 				</form>
+			</div>
         	</div>
+		</div>
     	</nav>
 
 		<div class="row">
