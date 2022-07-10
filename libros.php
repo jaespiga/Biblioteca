@@ -91,7 +91,7 @@
 							</li>
 						</ul>	
 					</div>
-					<div class="col-12 col-md-2 d-inline-flex">
+					<div class="col-12 col-md-4 d-inline-flex">
 						<form>
 							<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
 								me-5 mb-0 text-light fs-4" 
@@ -103,8 +103,7 @@
 								</svg>								
 							</button>
 						</form>	
-					</div>
-					<div class="col-12 col-md-2 d-inline-flex">
+					
 						<form>
 							<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
 								data-bs-toggle="collapse" type="button">Filtros  &nbsp;
@@ -141,7 +140,7 @@
 		<script type="text/javascript" src="js/libro_validar_formulario_edicion.js"></script>  <!-- validar datos libro: Edición  -->
 		<script type="text/javascript" src="js/libro_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 
-		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/libro_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista libros y sus datos  -->
 		<!--
 			Script para cargar las tablas de códigos

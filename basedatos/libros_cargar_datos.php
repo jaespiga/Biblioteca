@@ -59,7 +59,8 @@ function leerDatosLibros($lit_libro) {
                           cGR03_Sinopsis, cGR03_Estado_S, cGR03_Estado_Q_U, cGR03_Estado_F, cGR03_WEB, 
                           cGR03_TSUltCambio
                     FROM tgr03_libros
-                    WHERE cGR03_Título like '$lit_libro%'";
+                    WHERE cGR03_Título like '$lit_libro%'
+                    ORDER BY cGR03_Título, cGR03_Autor";
     }   
     
     $resultados= $dbcon->query($sql); 

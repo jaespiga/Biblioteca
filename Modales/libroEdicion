@@ -17,8 +17,8 @@
             <!-- Título -->    
             <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__claveE"> 
               <label for="claveE" class="fs-3 text-primary formulario__input-label mt-2">Título</label>
+              
               <input type="text" name="claveE" id="claveE" 
-                      onblur="document.getElementById('web').value=this.value"
                       class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" readonly>
               <div id="claveE_error"></div>
             </div>

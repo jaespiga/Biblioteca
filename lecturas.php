@@ -43,6 +43,7 @@
 		<div class="row">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light p-3  align-items-center justify-content-center
 					 mt-0 me-5 pe-5">
+			
 			<a class="navbar-brand" href="autores.php">
 				<span class="text-danger fs-5 fw-bold">Autores</span>
 			</a>
@@ -58,20 +59,55 @@
 			<div class="row  col-12"> 
 				<div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row collapse navbar-collapse" 
 							id="navbarSupportedContent">
-					<div class="col-12 col-md-8 d-inline-flex"> 
+					
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
 							<li class="nav-item">
-								<form  method="post" class="row g-3">
-									<div class="col-auto">
-										<label for="autores" class="form-text text-light fs-4 ps-2 ">Autor</label>
-									</div>	
-									<div class="col-auto">
+									<form class=" g-3">
+										<div class="col-12 col-md-4 d-inline-flex w-100">
+											<label for="lectores" class="form-text text-light  fs-4 pe-1">Lector</label>
+											
+											
+											<input type="text" id="lectores" list="lista_lectores" name="lectores" 
+													autocomplete="off" class="form-control h-100 pb-0 fs-4" >
+											<datalist id="lista_lectores">  </datalist>
+										
+											<button type="button" class="lecturasDatos">
+												<svg class="bi" width="30" height="30" fill="currentColor">
+													<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+												</svg>
+											</button>
+										</div>
+									</form>	
+							</li>
+							<li class="nav-item">
+								<form class=" g-3">
+									<div class="col-12 col-md-4 d-inline-flex w-100">
+										<label for="libros" class="form-text text-light  fs-4 pe-1">Libro</label>
+										
+										
+										<input type="text" id="libros" list="lista_libros" name="libro" autocomplete="off"
+										class="form-control h-100 pb-0 fs-4 ps-3" >
+										<datalist id="lista_libros">  </datalist>
+									
+										<button type="button" class="lecturasDatos">
+											<svg class="bi" width="30" height="30" fill="currentColor">
+												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+											</svg>
+										</button>
+									</div>
+								</form>	
+							</li>
+
+							<li class="nav-item">
+								<form  method="post" class=" g-3">
+								<div class="col-12 col-md-4 d-inline-flex w-100">
+										<label for="autores" class="form-text text-light fs-4 ps-3 pe-1 ">Autor</label>
+									
 										<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
 											class="form-control h-100 pb-0 fs-4">
 										<datalist id="lista_autores"> </datalist>
-									</div>
-									<div class="col-auto">
-										<button type="button" id="autoresDatos">
+									
+										<button type="button" class="lecturasDatos">
 											<svg class="bi" width="30" height="30" fill="currentColor">
 												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
 											</svg>
@@ -81,34 +117,14 @@
 								</form>	
 							</li>
 
-							<li class="nav-item">
-								<form class="row g-3">
-									<div class="col-auto">
-										<label for="libros" class="form-text text-light  fs-4 ps-5">Libros</label>
-										</div>
-									<div class="col-auto">	
-										<input type="text" id="libros" list="lista_libros" name="libro" autocomplete="off"
-										class="form-control h-100 pb-0 fs-4" >
-										<datalist id="lista_libros">  </datalist>
-									</div>
-									<div class="col-auto">
-										<button type="button" id="autoresDatos">
-											<svg class="bi" width="30" height="30" fill="currentColor">
-												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
-											</svg>
-										</button>
-									</div>
-								</form>	
-							</li>
-
 						</ul>	
-					</div>
-					<div class="col-12 col-md-2 d-inline-flex">	
+					
+					<div class="col-12 col-md-4 d-inline-flex">	
 						<form class="d-flex">
 							
 							<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
-								me-5 mb-2 text-light fs-4" 
-								data-bs-toggle="modal" data-bs-target="#autorNuevo">
+								me-5 mb-2 text-light fs-4 ms-5" 
+								data-bs-toggle="modal" data-bs-target="#lecturaNuevo">
 								Alta lectura &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
 									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#plus-square"/>
@@ -116,12 +132,11 @@
 										
 							</button>
 						</form>	
-					</div>
-					<div class="col-12 col-md-2 d-inline-flex">
+					
 						<form class="d-flex">
 							
 							<button type="button" class="d-inline-flex btn btn-warning btn-outline-success 
-								me-5 mb-2 text-light fs-4" data-bs-toggle="modal">
+								me-5 mb-2 text-light fs-4 ms-1" data-bs-toggle="modal">
 								Filtros &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
 									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>
@@ -138,6 +153,50 @@
 			Script para la realización de funcionalidades personalizadas de la página
 		-->
 		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  --
+
+		<div class="row">
+			<div class="col-12 ">
+				<div id="tabla_autores"> </div>
+			</div>
+		</div>
+		 
+		<?php 
+			// Pantallas modales a las que se puede acceder en la página 
+			require_once "Modales/lecturaNuevo"; 
+			require_once "Modales/lecturaEdicion"; 
+			require_once "Modales/lecturaFiltro"; 
+
+		?> 	
+		
+		<!-- 
+			Script para la realización de funcionalidades personalizadas de la página
+		-->
+		
+		<script type="text/javascript" src="js/consulta_web.js"></script>  <!-- Buscar en Google  -->
+		
+		<script type="text/javascript" src="js/lectura_validar_formulario.js"></script>  <!-- validar datos lectura: Alta  -->
+		<script type="text/javascript" src="js/lectura_validar_formulario_edicion.js"></script>  <!-- validar datos lectura: Edición  -->
+		<script type="text/javascript" src="js/lectura_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
+		
+		<script type="text/javascript" src="js/lector_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/libro_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/autor_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista lecturas y sus datos  -->
+		<!--
+			Script para cargar las tablas de códigos
+		-->
+		
+		<script  id="tabla_lector" data-clave="Lector"
+				src="js/lista_tabla_codigos_lector.js"></script>  <!-- Lista lectores  -->
+		<script  id="tabla_lector_cambio" data-clave="Lector"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista lectores ordenado por tecleo  -->
+		
+		<script  id="tabla_idioma" data-clave="Idioma"
+				src="js/lista_tabla_codigos_idioma.js"></script>  <!-- Lista idiomas  -->
+		<script  id="tabla_idioma_cambio" data-clave="Idioma"
+				src="js/lista_tabla_codigos.js"></script>  <!-- Lista idiomas ordenado por tecleo  -->
+	
+		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
 
 	</body>
 

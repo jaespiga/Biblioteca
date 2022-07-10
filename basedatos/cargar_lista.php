@@ -5,9 +5,9 @@
 $apartado = $_POST['param0']; 
 $clave = $_POST['param1'];
 
-if ($apartado = "Autor") {
+if ($apartado == "Autor") {
 	list($opciones) = leerListaAutores($clave);
-} else {if ($apartado = "Libro") {
+} else {if ($apartado == "Libro") {
 			list($opciones) = leerListaLibros($clave);
 		}
 	}
@@ -65,4 +65,5 @@ function leerListaLibros($lit_libro) {
 	}	
 	return [$listas]; 
 }   
+
 ?>

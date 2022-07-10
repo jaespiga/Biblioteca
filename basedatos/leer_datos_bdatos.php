@@ -16,8 +16,8 @@ if ($apartado == "Autor") {
         } else {
                 if ($apartado == "Lectura") {
                     list($ind_error, $mensaje, $datos_salida) = leerDatosLectura($clave);
-                }    
-            }
+                }   
+            } 
     }
 
 return[$ind_error, $mensaje, $datos_salida];
@@ -100,7 +100,6 @@ function leerDatosLibro($lit_libro) {
     return [$ind_error, $mensaje, $datos_salida];
 }
 
-
 function leerDatosLectura($lit_lectura) { 
 
     require 'connect.php';
@@ -110,7 +109,7 @@ function leerDatosLectura($lit_lectura) {
 
     if($lit_lectura !== ""){
         $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                        cGR04_FFinLectura, cGR04_Opinión 
+                        cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                 FROM tgr04_lecturas
                 WHERE cGR04_Lector = '$lit_lectura'";
         
@@ -125,7 +124,8 @@ function leerDatosLectura($lit_lectura) {
                     $datos_salida = $fila["cGR04_Lector"] . "#&" . $fila["cGR04_Título"] 
                     . "#&" . $fila["cGR04_Autor"] . "#&" . $fila["cGR04_IdLectura"] 
                     . "#&" . $fila["cGR04_FIniLectura"] . "#&" . $fila["cGR04_FFinLectura"] 
-                    . "#&" . $fila["cGR04_Opinión"];  
+                    . "#&" . $fila["cGR04_Calificacion"] . "#&" . $fila["cGR04_Opinión"] 
+                    . "#&" . $fila["cGR04_TSUltCambio"];  
                 }      
         } else {
                 require '../basedatos/errores_db.php';			/* Función para analizar errores DB */ 

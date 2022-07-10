@@ -53,7 +53,8 @@ function leerDatosAutores($lit_autor) {
                           cGR02_PNacimiento, cGR02_LFallecimiento, cGR02_PFallecimiento,
                           cGR02_Nacionalidad, cGR02_CLiteraria, cGR02_WEB, cGR02_TSUltCambio
                     FROM tgr02_autores
-                    WHERE cGR02_Autor like '$lit_autor%'";
+                    WHERE cGR02_Autor like '$lit_autor%'
+                    ORDER BY cGR02_Autor";
     }   
     
     $resultados= $dbcon->query($sql); 

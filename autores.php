@@ -51,7 +51,7 @@
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light p-3  align-items-center justify-content-center
 					 mt-0 me-5 pe-4">
-            
+			
 			<a class="navbar-brand" href="libros.php">
 				<span class="text-danger fs-5 fw-bold"> Libros</span>
 			</a>	
@@ -66,57 +66,56 @@
     	</nav>
 	
 		<nav class="navbar navbar-expand-lg navbar-light bg-orange p-3 h-50" >
-		<div class="row  col-12">
-			<div class="d-flex flex-wrap flex-xl-nowrap flex-md-row collapse navbar-collapse" 
-					id="navbarSupportedContent">
-			<div class="col-12 col-md-8 d-inline-flex"> 
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
-					<li class="nav-item">
-						<form  method="post" class="row g-4 mb-0">
-							<div class="col-auto">
-								<label for="autores" class="form-text text-light fs-4 ps-2 ">Autor</label>
-							</div>	
-							<div class="col-auto">
-								<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
-									class="form-control h-100 pb-0 fs-4">
-								<datalist id="lista_autores"> </datalist>
-							</div>
-							<div class="col-auto">
-								<button type="button" id="autoresDatos">
-									<svg class="bi" width="30" height="30" fill="currentColor">
-										<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
-									</svg>
-								</button>
-							</div>
-						</form>	
-					</li>
-				</ul>	
-			</div>	
-			<div class="col-12 col-md-2 d-inline-flex"> 
-				<form>
-					<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
-						me-5 mb-0 text-light fs-4" 
-						data-bs-toggle="modal" data-bs-target="#autorNuevo"
-						onclick="autorInicializarDatosPantalla()"> Alta autor &nbsp;
+			<div class="row  col-12">
+				<div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row collapse navbar-collapse" 
+						id="navbarSupportedContent">
+					<div class="col-12 col-md-8 d-inline-flex"> 
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
+							<li class="nav-item">
+								<form  method="post" class="row g-4 mb-0">
+									<div class="col-auto">
+										<label for="autores" class="form-text text-light fs-4 ps-2 ">Autor</label>
+									</div>	
+									<div class="col-auto">
+										<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
+											class="form-control h-100 pb-0 fs-4">
+										<datalist id="lista_autores"> </datalist>
+									</div>
+									<div class="col-auto">
+										<button type="button" id="autoresDatos">
+											<svg class="bi" width="30" height="30" fill="currentColor">
+												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+											</svg>
+										</button>
+									</div>
+								</form>	
+							</li>
+						</ul>	
+					</div>	
+					<div class="col-12 col-md-4 d-inline-flex"> 
+						<form>
+							<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
+								me-5 mb-0 text-light fs-4" 
+								data-bs-toggle="modal" data-bs-target="#autorNuevo"
+								onclick="autorInicializarDatosPantalla()"> Alta autor &nbsp;
 
-						<svg class="bi" width="30" height="30" fill="currentColor">
-							<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#plus-square"/>
-						</svg>								
-					</button>
-				</form>	
+								<svg class="bi" width="30" height="30" fill="currentColor">
+									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#plus-square"/>
+								</svg>								
+							</button>
+						</form>	
+				
+						<form>
+							<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
+								data-bs-toggle="collapse" type="button">Filtros  &nbsp;
+								<svg class="bi" width="30" height="30" fill="currentColor">
+									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>
+								</svg>
+							</button>
+						</form>
+					</div>
+				</div>
 			</div>
-			<div class="col-12 col-md-2 d-inline-flex"> 
-				<form>
-					<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
-						data-bs-toggle="collapse" type="button">Filtros  &nbsp;
-						<svg class="bi" width="30" height="30" fill="currentColor">
-							<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>
-						</svg>
-					</button>
-				</form>
-			</div>
-        	</div>
-		</div>
     	</nav>
 
 		<div class="row">
@@ -143,7 +142,7 @@
 		<script type="text/javascript" src="js/autor_validar_formulario_edicion.js"></script>  <!-- validar datos autor: Edición  -->
 		<script type="text/javascript" src="js/autor_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 
-		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
+		<script type="text/javascript" src="js/autor_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista autores y sus datos  -->
 		<!--
 			Script para cargar las tablas de códigos

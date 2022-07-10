@@ -1,10 +1,9 @@
-/* cargar listas de autores / libros / lectores */
-
-/* Autor. Obtener la lista total de autores. */
+/* cargar listas de libros*/
+/* Libro. Obtener la lista total de libros. */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
-  $("#autores").each(function () {
-    apartado = "Autor";
-    clave = $('#autores').val();
+  $("#libros").each(function () {
+    apartado = "Libro";
+    clave = $('#libros').val();
     $.ajax({                        
       type: 'POST',                 
       url: 'basedatos/cargar_lista.php',
@@ -14,26 +13,26 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       }                  
     })    
     .done(function(lista_select){
-        $('#lista_autores').html(lista_select)
+        $('#lista_libros').html(lista_select)
     })
     .fail(function(){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Hubo un error al cargar lista de autores',
+        text: 'Hubo un error al cargar la lista de libros',
         footer: '<a href="">Revise  datos de entrada y base de datos</a>'
       })                   
     })            
   })  
 
-  /* Autor. Obtener la lista ajustada a los valores de la clave tecleados. */
-  $("#autores").keyup(function(){     
+  /* Libro. Obtener la lista ajustada a los valores de la clave tecleados. */
+  $("#libros").keyup(function(){     
     //hacemos focus al campo de búsqueda
-    $("#autores").focus();
+    $("#libros").focus();
                                                      
     //obtenemos el texto introducido en el campo de búsqueda
-    apartado = "Autor";
-    clave = $('#autores').val();
+    apartado = "Libro";
+    clave = $('#libros').val();
     $.ajax({                        
     type: 'POST',                 
     url: 'basedatos/cargar_lista.php',
@@ -48,22 +47,22 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             Swal.fire({
                 position: 'top',
                 icon: 'info',
-                title: 'No existe ningún autor con esa combinación de caracteres.',
+                title: 'No existe ningún libro con esa combinación de caracteres.',
                 text: 'Nota. Se tiene en cuenta los acentos',
                 showConfirmButton: false,
                 timer: 3000
             })
 
         } else {
-                $("#lista_autores").empty();
-                $("#lista_autores").html(lista_select);
+                $("#lista_libros").empty();
+                $("#lista_libros").html(lista_select);
         } 
     })
     .fail(function(){
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Hubo un error al cargar autores',
+            text: 'Hubo un error al cargar libros',
             footer: '<a href="">Revise  datos de entrada y base de datos</a>'
         })              
     })      
