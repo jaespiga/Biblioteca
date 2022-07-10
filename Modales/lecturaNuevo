@@ -17,9 +17,10 @@
               <!-- Lector -->    
                <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__lector"> 
                     <label for="lector" class="fs-3 text-primary formulario__input-label mt-2">Lector</label>
-                    <input type="text" name="lector" id="lector" 
+                    <input type="text" name="lector" id="lector" list="lista_lectores" 
                             class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
                             autocomplete="off" required>
+                    <datalist id="lista_lectores"> </datalist>
                     <div id="lector_error"></div>
               </div>
             </div>
