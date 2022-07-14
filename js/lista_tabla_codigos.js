@@ -186,7 +186,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             })      
     }) 
 
-    // Idioma
+    // Idioma en que se escribió el libro
     // Caso: Libro / Alta
     $("#idioma").keyup(function(){ 
         var clave_tabla = document.getElementById('tabla_idioma_cambio').getAttribute('data-clave'); 
@@ -216,7 +216,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })
+    }) 
     
     // Caso: Libro / Edición
     $("#idiomaE").keyup(function(){  
@@ -236,6 +236,68 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 if ($.trim(lista_select)) {
                     $("#lista_idiomaE").empty();
                     $("#lista_idiomaE").html(lista_select);                 
+                } 
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hubo un error al cargar los idiomas',
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    }) 
+
+    // Idioma en el que se lee el libro
+    // Caso: Libro / Alta
+    $("#idioma_lectura").keyup(function(){ 
+        var clave_tabla = document.getElementById('tabla_idioma_lectura_cambio').getAttribute('data-clave'); 
+        //hacemos focus al campo de búsqueda
+        $("#idioma_lectura").focus();                            
+        //obtenemos el texto introducido en el campo de búsqueda
+        clave_clave = $("#idioma_lectura").val();
+
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_cargar.php",
+            data: {param1: clave_tabla,
+                   param2: clave_clave},
+            dataType: "html"
+            })
+            .done(function(lista_select){
+                if ($.trim(lista_select)) {
+                    $("#lista_idioma_lectura").empty();
+                    $("#lista_idioma_lectura").html(lista_select);                       
+                } 
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Hubo un error al cargar los idiomas',
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })
+
+    // Caso: Libro / Edición
+    $("#idiomaE_lectura").keyup(function(){  
+        var clave_tabla = document.getElementById('tabla_idioma_lectura_cambio').getAttribute('data-clave'); 
+        //hacemos focus al campo de búsqueda
+        $("#idiomaE_lectura").focus();                            
+        //obtenemos el texto introducido en el campo de búsqueda
+        clave_clave = $("#idiomaE_lectura").val();
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_cargar.php",
+            data: {param1: clave_tabla,
+                    param2: clave_clave},
+            dataType: "html"
+            })
+            .done(function(lista_select){
+                if ($.trim(lista_select)) {
+                    $("#lista_idiomaE_lectura").empty();
+                    $("#lista_idiomaE_lectura").html(lista_select);                 
                 } 
             })
             .fail(function(){

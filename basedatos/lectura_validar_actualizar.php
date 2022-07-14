@@ -145,7 +145,7 @@ function validarSubmit($campos) {
 
     if ($ind_error_codigo == 0) {
         if ($ind_validar_codigo == 1)  {
-            $mensaje .= "<br> <strong> Género literario no existe.</strong> Será ignorado. Dar de alta en tabla de codigos";  
+            $mensaje .= "<br> <strong> Idioma no existe.</strong> Será ignorado. Dar de alta en tabla de codigos";  
             $ind_validar = 1;   
         } else {
             $res_codigo = explode("#&", $campos_salida);
@@ -192,7 +192,7 @@ function validarSubmit($campos) {
         }
         
         if ($ind_error_fechas == 0) {
-            $fecha_ajustada = str_replace($mascara, "", $res[5]);
+            $fecha_ajustada = str_replace($mascara, "", $res[7]);
             if ($fecha_ajustada == "--") {
                 $fecha_ajustada = "";
             } 
@@ -233,7 +233,7 @@ function validarSubmit($campos) {
         }
         
     if ($ind_error_fechas == 0) {
-        $fecha_ajustada = str_replace($mascara, "", $res[7]);
+        $fecha_ajustada = str_replace($mascara, "", $res[8]);
         if ($fecha_ajustada == "--") {
             $fecha_ajustada = "";
         } 
@@ -303,7 +303,7 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
     if ($res[1] == "alta") {
 
         $sql="INSERT INTO tgr04_lecturas(cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura,
-                                         cGR04_FFinLectura, cGR004_Calificacion, cGR04_Opinión) 
+                                         cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión) 
                     VALUES ('$res[2]', '$res[3]', '$res[4]', '$res[5]', '$res[7]', '$res[8]', '$res[6]', '$res[9]')";
 		
         if($dbcon->query($sql) === true){
@@ -324,7 +324,7 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
                                 cGR04_IdLectura ='$res[5]', 
                                 cGR04_FIniLectura ='$res[7]', 
                                 cGR04_FFinLectura ='$res[8]', 
-                                cGR004_Calificacion ='$res[6]', 
+                                cGR04_Calificacion ='$res[6]', 
                                 cGR04_Opinión ='$res[9]', 
                                 cGR04_TSUltCambio= CURRENT_TIMESTAMP
                             WHERE cGR04_Lector ='$res[2]',

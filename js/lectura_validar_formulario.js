@@ -1,39 +1,17 @@
 /* Validación de campos de formularios: Lectura / Alta */
-const formulario = document.getElementById('formulario');
-const inputs = document.querySelectorAll('#formulario');
+const formulario_lectura = document.getElementById('formulario_lectura');
+const inputs = document.querySelectorAll('#formulario_lectura');
 
-const id_Apartado = document.getElementById('idApartado').value;
-const id_Oper = document.getElementById('idOper').value;
-const id_Autor = 'Autor';
-const id_Libro = 'Libro';
+const id_Libro_lectura = 'Libro';
 
 const expresiones = {
-    autores: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
     finil:  /^[0-9]{1,4}$/,                         // números
     ffinl:  /^[0-9]{1,4}$/,                         // números
 }
 
-function validarFormulario(evento) {
+function validarFormularioLectura(evento) {
     
     switch (evento.target.name) {  
-        case "autores":       
-
-            if (evento.target.value == "") {
-                /* Validación de caracteres correcta */
-                error_lit="<p></p>";
-                validar_campo_resultado("ok", evento.target.name, error_lit);
-            } else {
-                    if (expresiones.autores.test(evento.target.value)) {
-                        /* Validación de caracteres correcta */
-                        error_lit="<p></p>";
-                        validar_campo_resultado("ok", evento.target.name, error_lit);
-
-                    } else {
-                        error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
-                        validar_campo_resultado("nok", evento.target.name, error_lit);
-                        }
-                }
-        break; 
 
         case "finil":
             if (expresiones.finil.test(evento.target.value)) {
@@ -65,62 +43,12 @@ function validarFormulario(evento) {
     } 
     return
 }
-function validarCampoValor(evento){
+function validarCampoValorLectura(evento){
     switch (evento.target.name) {  
 
-        case "autores":   // Autor
+        case "libros_lectura":   // Libro
             if (evento.target.value == "") {
-                error_lit="<p></p>"
-                validar_campo_resultado("ok", evento.target.name, error_lit);       
-            } else {
-                    if (expresiones.autores.test(evento.target.value)) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'basedatos/leer_datos.php',
-                            data: {param1: evento.target.value,
-                                   param2: id_Autor
-                                }
-                        })
-                        .done(function(autor_datos){
-                            res=autor_datos.split("#&");                           
-                            if (res[0] == 0) {              // Lectura de datos correcta
-                                if (res[2].trim() == evento.target.value) {                           
-                                    error_lit="<p></p>"
-                                    validar_campo_resultado("ok", evento.target.name, error_lit);       
-                                        
-                                } else {
-                                        $error_texto = "Error. " + id_Autor + " no existe."
-                                        error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>'
-                                        validar_campo_resultado("nok", evento.target.name, error_lit);
-                                    }
-                            } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
-                                        text: res[1],
-                                        footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                                    }) 
-                                }    
-                        })
-            
-                        .fail(function(){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Hubo un error al leer autor',
-                                footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                            }) 
-                        })
-
-        } else {
-            error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
-            validar_campo_resultado("nok", evento.target.name, error_lit);
-            }
-                } 
-        break; 
-
-        case "libros":   // Libro
-            if (evento.target.value == "") {
+                $('#autores_lectura').val("");
                 error_lit="<p></p>"
                 validar_campo_resultado("ok", evento.target.name, error_lit);       
             } else {
@@ -128,22 +56,25 @@ function validarCampoValor(evento){
                         type: 'POST',
                         url: 'basedatos/leer_datos.php',
                         data: {param1: evento.target.value,
-                                param2: id_Libro
+                                param2: id_Libro_lectura
                             }
                     })
                     .done(function(libro_datos){
                         res=libro_datos.split("#&");                           
                         if (res[0] == 0) {              // Lectura de datos correcta
-                            if (res[2].trim() == evento.target.value) {                           
+                            if (res[2].trim() == evento.target.value) {  
+                                $('#autores_lectura').val(res[3]);                       
                                 error_lit="<p></p>"
                                 validar_campo_resultado("ok", evento.target.name, error_lit);       
                                     
                             } else {
-                                    $error_texto = "Error. " + id_Libro + " no existe."
+                                    $('#autores_lectura').val("");
+                                    $error_texto = "Error. " + id_Libro_lectura + " no existe."
                                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>'
                                     validar_campo_resultado("nok", evento.target.name, error_lit);
                                 }
                         } else {
+                                $('#autores_lectura').val("");
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
@@ -277,7 +208,7 @@ function validarCampoValor(evento){
 }
 
 /* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
-function validarCompararFechas () {
+function validarCompararFechasLectura () {
     
     fecha_inicial_id = "finil";
     fecha_final_id= "ffinl";
@@ -364,7 +295,7 @@ function validar_campo_resultado (resultado_validacion, campo, error_mensaje) {
 /* Analizar las entradas del formulario que queramos validar  */ 
 
 inputs.forEach((input, button)=> {
-    input.addEventListener('focusout', validarCampoValor);
-    input.addEventListener('keyup', validarFormulario);
+    input.addEventListener('focusout', validarCampoValorLectura);
+    input.addEventListener('keyup', validarFormularioLectura);
 });
 

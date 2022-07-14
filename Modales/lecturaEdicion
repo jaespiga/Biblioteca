@@ -1,22 +1,22 @@
 
 <!-- Modal para editar una lectura y datos asociados -->
 <div class="modal fade" id="lecturaEdicion" role = 'dialog' tabindex="-1" aria-labelledby="lectura_edicion">
-  <div class="modal-dialog modal-xl formulario" id='formularioE' role='document'>
+  <div class="modal-dialog modal-xl formulario" id='formulario_lectura' role='document'>
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title fw-bold">Datos de la lectura</h2>
+        <h2 class="modal-title fw-bold">Datos lectura</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         
-        <input type="hidden" id="idApartadoE" name="idApartadoE" value="Lectura">
-        <input type="hidden" id="idOperE" name="idOperE" value="alta">
+        <input type="hidden" id="idApartadoE_lectura" name="idApartadoE_lectura" value="Lectura">
+        <input type="hidden" id="idOperE_lectura" name="idOperE_lectura" value="alta">
 
         <div class="row col-12">
             <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
               <!-- Lector -->    
                <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__lectorE"> 
-                    <label for="lectorE" class="fs-3 text-primary formulario__input-label mt-2">lector</label>
+                    <label for="lectorE" class="fs-3 text-primary formulario__input-label mt-2">Lector</label>
                     <input type="text" name="lectorE" id="lectorE" list="lista_lectoresE" 
                             class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
                             autocomplete="off" required>
@@ -29,21 +29,23 @@
         <div class="row col-12">
           <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
             <!-- Libro --> 
-             <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__tituloE"> 
-                <label for="tituloE" class="fs-3 text-primary formulario__input-label mt-2">Título</label>
-                <input type="text" name="libro" id="libros"  list="lista_libros" 
+             <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__librosE_lectura"> 
+                <label for="librosE_lectura" class="fs-3 text-primary formulario__input-label mt-2">Libro</label>
+                <input type="text" name="librosE_lectura" id="librosE_lectura" list="lista_librosE_lectura" 
                       class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
-                      autocomplete="off" required>
-                <datalist id="lista_libros"> </datalist>  
-              <div id="tituloE_error"></div>
+                      autocomplete="off" required
+                      onblur="$('#idiomaE_lectura').focus()">
+                <datalist id="lista_librosE_lectura"> </datalist>  
+              <div id="librosE_lectura_error"></div>
             </div>
             <!-- Autor -->           
-            <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__autoresE">   
-              <label for="autoresE" class="formulario__input-label text-primary fs-3 mt-2 ms-3 me-2">Autor</label>                  
-              <input type="text" id="autoresE" list="lista_autoresE" name="autoresE" autocomplete="off"
-                    class="form-control input-sm mb-3 ms-2 fs-5 w-100">
-              <datalist id="lista_autoresE"> </datalist>
-              <div id="autoresE_error"></div>
+            <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__autoresE_lectura">   
+              <label for="autoresE_lectura" class="formulario__input-label text-primary fs-3 mt-2 ms-3 me-2">
+                      Autor</label>                  
+              <input type="text" name="autoresE_lectura" id="autoresE_lectura" autocomplete="off"
+                    class="form-control input-sm mb-3 ms-2 fs-5 w-100" readonly>
+            
+              <div id="autoresE_lectura_error"></div>
             </div>
           </div>
         </div>
@@ -53,26 +55,25 @@
             
                 <!-- Idioma en el que se lee el libro -->
                 <div class="col-12 col-md-6 d-inline-flex">
-                    <label for="idiomaE" class="form-text text-primary fs-5 mt-3 ms-2 text-primary">
+                    <label for="idiomaE_lectura" class="form-text text-primary fs-5 mt-3 ms-2 text-primary">
                             Idioma lectura</label>
-                    <input type="text" id="idiomaE" list="lista_idiomaE" name="idiomaE" autocomplete="off"
-                        class="form-control input-sm fs-5 h-75 w-75 mt-2 ms-2" >
-                    <datalist id="lista_idiomaE"> </datalist>
+                    <input type="text" name="idiomaE_lectura" id="idiomaE_lectura" list="lista_idiomaE_lectura" 
+                        class="form-control input-sm fs-5 h-75 w-75 mt-2 ms-2" autocomplete="off">
+                    <datalist id="lista_idiomaE_lectura"> </datalist>
                 </div>
                 
-                <!-- Calificación del libro por el lector-->
+                <!-- Calificación del libro por el lectorE-->
                 <div class="col-12 col-md-6 d-inline-flex">  
                     <label for="calificacionE" class="form-text text-primary fs-5 mt-2 ms-5 text-primary">
                             Grado de satisfacción &nbsp;</label>
                     
-                    <select id="calificacionE"  class="form-control fs-5 mt-0 w-50" 
-                                    onchange="$('#finilEdd').focus()">
-                            <option value= 0 selected>Sin calificar</option>
-                            <option value= 1>Horrible</option>
-                            <option value= 2>Prescindible</option>
-                            <option value= 3>Entretenido</option>
-                            <option value= 4>Bueno</option>
-                            <option value= 5>Excelente</option>
+                    <select id="calificacionE"  class="form-control fs-5 mt-0 w-50" onchange="$('#finilEdd').focus()">
+                            <option value= "Sin calificar" selected>Sin calificar</option>
+                            <option value= "Horrible">Horrible</option>
+                            <option value= "Prescindible">Prescindible</option>
+                            <option value= "Entretenido">Entretenido</option>
+                            <option value= "Bueno">Bueno</option>
+                            <option value= "Excelente">Excelente</option>
                     </select>
                 </div>
             </div>
@@ -86,7 +87,7 @@
                         <label class="fs-5 mt-2 text-primary">Fecha inicio de lectura</label>
                         <select id="finilEdd"  class="form-control fs-5 mt-0 fechadd" 
                         onchange="$('#finilEmm').focus()" 
-                        onblur="validarCompararFechas()">
+                        onblur="validarCompararFechasLectura()">
                         <option value="dd" selected>dd</option>
                         <option value="01">01</option>
                         <option value="02">02</option>
@@ -123,7 +124,7 @@
                         <label class="fs-5 mt-2 fecha_separador">/</label>
                         <select id="finilEmm" class="form-control input-sm fs-5 w-auto mt-0 fechamm"
                                 onchange="$('#finilE').focus()"  
-                                onblur="validarCompararFechas()">
+                                onblur="validarCompararFechasLectura()">
                         <option value="mm" selected>mm</option>
                         <option value="01">01</option>
                         <option value="02">02</option>
@@ -142,7 +143,7 @@
                         <input type="text" name="finilE" id="finilE"               
                             class="form-control input-sm fs-5 mt-0 formulario__input fechasa" placeholder="ssaa" maxlength="4" 
                             onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#ffinlEdd').focus()" 
-                            value="" onblur="validarCompararFechas()">       
+                            value="" onblur="validarCompararFechasLectura()">       
                     </div>    
                     <div id="finilE_error" class="d-flex flex-nowrap flex-column"></div>      
                 </div>      
@@ -210,7 +211,7 @@
                                 class="form-control input-sm fs-5 mt-0 formulario__input fechasa" placeholder="ssaa"
                                 maxlength="4" 
                                 onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#opinionE').focus()" 
-                                value="" onblur="validarCompararFechas()">       
+                                value="" onblur="validarCompararFechasLectura()">       
                     </div>    
                     <div id="ffinlE_error" class="d-flex flex-nowrap flex-column"></div>      
                 </div>
@@ -231,7 +232,7 @@
       </div>  
       <!-- Envío de datos para actualización -->
       <div class="modal-footer formulario__grupo">
-        <button type="submit" id="actualizar_datos" class="btn btn-success fs-4 submitBtn" 
+        <button type="submit" id="actualizar_datos_lectura" class="btn btn-success fs-4 submitBtn" 
                 >Actualizar
         </button>
       </div>

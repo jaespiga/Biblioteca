@@ -20,7 +20,7 @@
             <th class="table-secondary th_5">Editorial</th>
             <th class="table-secondary th_5">Fecha de publicación</th>
             <th class="table-secondary th_5">Fecha de adquisición</th>
-            <th class="table-secondary th_5">Idioma</th>
+            <th class="table-secondary th_5">Idioma original</th>
             <th class="table-secondary th_5">Soporte físico</th>
             <th class="table-secondary th_5">Género literario</th>
             <th class="table-secondary th_5">Propietario</th>

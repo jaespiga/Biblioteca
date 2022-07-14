@@ -3,7 +3,7 @@
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     //Corriente literaria
     // Alta
-        $("#cliteraria").change(function(){  
+    $("#cliteraria").change(function(){  
             funcion_codigo = 1  // Leer descripción de la tabla de códigos
             tabla = "CLiteraria";
             clave = document.getElementById('cliteraria').value
@@ -891,7 +891,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             })      
     })        
 
-    //Idioma
+    //Idioma en que lo escribió el autor
     //Alta
     $("#idioma").change(function(){  
         funcion_codigo = 1  // Leer descripción de la tabla de códigos
@@ -1113,6 +1113,227 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
             })      
     })        
 
+    //Idioma de lectura
+    //Alta
+    $("#idioma_lectura").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Idioma";
+        clave = document.getElementById('idioma_lectura').value
+        titulo = "Idioma"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        Swal.fire({
+                            title: titulo + ' no existe. ¿Desea dar de alta?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí',
+                            cancelButtonText: 'No'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                funcion_codigo = 3  // Dar de alta nueva fila en la tabla de códigos
+                                $.ajax({
+                                    type: "POST",
+                                    url: "basedatos/tabla_codigos_ajax.php",
+                                    data: {
+                                        param0: funcion_codigo,
+                                        param1: tabla,
+                                        param2: clave},
+                                    })
+                                    .done(function(respuesta){  
+                                        res=respuesta.split("#&");
+                                        nro_elementos= res.length
+                                        if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Alta realizada',
+                                                text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
+                                            }) 
+                                            
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "basedatos/tabla_codigos_cargar.php",
+                                                data: {param1: tabla,
+                                                    param2: clave},
+                                                dataType: "html"
+                                                })
+                                                .done(function(lista_select){
+                                                    $("#lista_idioma_lectura").empty();
+                                                    $("#lista_idioma_lectura").html(lista_select); 
+                                                })
+                                                .fail(function(){
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Oops...',
+                                                        text: 'Hubo un error al cargar los idiomas',
+                                                        footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                                                    })              
+                                                })    
+                                                
+                                        } else {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'ERROR. Alta no realizada',
+                                                    text: res[2],
+                                                    footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                                                }) 
+                                            } 
+                                    })
+                                    .fail(function(){
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Hubo un error al cargar los idiomas',
+                                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                                        })              
+                                    })      
+                            } else {
+                                $("#idioma_lectura").val("");
+                                } 
+                        })
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            }) 
+    })
+    // Edición    
+    $("#idioma_lecturaE").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Idioma";
+        clave = document.getElementById('idiomaE_lectura').value
+        titulo = "Idioma"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        Swal.fire({
+                            title: titulo + ' no existe. ¿Desea dar de alta?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí',
+                            cancelButtonText: 'No'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                funcion_codigo = 3  // Dar de alta nueva fila en la tabla de códigos
+                                $.ajax({
+                                    type: "POST",
+                                    url: "basedatos/tabla_codigos_ajax.php",
+                                    data: {
+                                        param0: funcion_codigo,
+                                        param1: tabla,
+                                        param2: clave},
+                                    })
+                                    .done(function(respuesta){  
+                                        res=respuesta.split("#&");
+                                        nro_elementos= res.length
+                                        if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Alta realizada',
+                                                text: 'Nueva fila en ' + tabla + " con código " + res[3],                                                
+                                            }) 
+                                            
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "basedatos/tabla_codigos_cargar.php",
+                                                data: {param1: tabla,
+                                                    param2: clave},
+                                                dataType: "html"
+                                                })
+                                                .done(function(lista_select){
+                                                    $("#lista_idiomaE_lectura").empty();
+                                                    $("#lista_idiomaE_lectura").html(lista_select); 
+                                                })
+                                                .fail(function(){
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Oops...',
+                                                        text: 'Hubo un error al cargar los idiomas',
+                                                        footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                                                    })              
+                                                })    
+                                                
+                                        } else {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'ERROR. Alta no realizada',
+                                                    text: res[2],
+                                                    footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                                                }) 
+                                            } 
+                                    })
+                                    .fail(function(){
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Oops...',
+                                            text: 'Hubo un error al cargar los idiomas',
+                                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                                        })              
+                                    })      
+                            } else {
+                                $("#idiomaE_lectura").val("");
+                                } 
+                        })
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })    
     //Lector
     //Alta
     $("#lector").change(function(){  

@@ -164,5 +164,66 @@ $('#sinopsis').val("");
 $('#web').val("");
 return
 }
+//  Informar los datos de la pantalla de lecturas
+function lecturaRecuperarDatosPantalla(datos_pantalla) {
 
+res=datos_pantalla.split("#&");
+
+$('#lectorE').val(res[1]);
+$('#librosE_lectura').val(res[2]);
+$('#autoresE_lectura').val(res[3]);
+$('#idiomaE_lectura').val(res[4]);
+$('#calificacionE').val(res[7]);
+
+// Tratamiento de la fecha de inicio de lectura
+if (!isNaN(Date.parse(res[5]))) { 
+    ele_fecha=res[5].split("-");
+    $('#finilEdd').val(ele_fecha[2]);
+    $('#finilEmm').val(ele_fecha[1]);
+    $('#finilE').val(ele_fecha[0]);
+} else {
+        $('#finilEdd').val("dd");
+        $('#finilEmm').val("mm");
+        $('#finilE').val("");
+    }   
+
+// Tratamiento de la fecha de fin de lectura del libro
+if (!isNaN(Date.parse(res[6]))) { 
+    ele_fecha=res[6].split("-");
+    $('#ffinlEdd').val(ele_fecha[2]);
+    $('#ffinlEmm').val(ele_fecha[1]);
+    $('#ffinlE').val(ele_fecha[0]);
+} else {
+        $('#ffinlEdd').val("dd");
+        $('#ffinlEmm').val("mm");
+        $('#ffinlE').val("");
+    }   
+$('#opinionE').val(res[8]);
+$('#tSUltCambioE').val(res[9]);
+
+return
+}
+//  Inicializar los datos de la pantalla de lecturas
+function lecturaInicializarDatosPantalla() {
+
+$('#lector').val("");
+$('#libros_lectura').val("");
+$('#autores_lectura').val("");
+$('#idioma_lectura').val("");
+$('#calificacion').val("Sin calificar");
+
+// Tratamiento de la fecha de inicio de lectura
+$('#finildd').val("dd");
+$('#finilmm').val("mm");
+$('#finil').val("");  
+
+// Tratamiento de la fecha de fin de lectura del libro
+$('#ffinldd').val("dd");
+$('#ffinlmm').val("mm");
+$('#ffinl').val("");
+
+$('#opinion').val(res[8]);
+
+return
+}
 </script>

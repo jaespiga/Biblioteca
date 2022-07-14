@@ -8,8 +8,10 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
            param2: ""}    
   })    
   .done(function(lista_select){
-    $('#lista_idioma').html(lista_select)         // Alta
-    $('#lista_idiomaE').html(lista_select)        // Edición
+    $('#lista_idioma').html(lista_select)                 // Alta     (idioma en que lo escribió el autor)
+    $('#lista_idiomaE').html(lista_select)                // Edición  (idioma en que lo escribió el autor)
+    $('#lista_idioma_lectura').html(lista_select)         // Alta     (idioma en que se ha leído)
+    $('#lista_idiomaE_lectura').html(lista_select)        // Edición  (idioma en que se ha leído)
   })
   .fail(function(){
     Swal.fire({

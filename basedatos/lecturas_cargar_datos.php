@@ -21,6 +21,7 @@
             <th class="table-secondary th_10">Idioma de lectura</th>
             <th class="table-secondary th_5">Fecha inicio de lectura</th>
             <th class="table-secondary th_5">Fecha fin de lectura</th>
+            <th class="table-secondary th_15">Calificación</th>
             <th class="table-secondary th_15">Opinión</th>
         </tr>
     </thead>    
@@ -31,6 +32,7 @@ $lector = trim($_POST['param1']);
 $libro = trim($_POST['param2']);
 $autor = trim($_POST['param3']);
 
+// Obtener clave para el lector leído 
 
 // No se devuelve nada porque la información ha sido generada ya en javascript y la recoge automáticamente la llamada.
 
@@ -41,70 +43,94 @@ function leerDatosLecturas($lit_lector, $lit_libro, $lit_autor) {
     require_once '../basedatos/tabla_codigos.php';  // tratamiento de todas las operaciones de las tablas de códigos                          
     
     require_once 'connect.php';
+
+    
+if($lector !== ""){
+
+    $funcion_obtener_clave = 1;
+    $tabla = "Lector";
+    $datos_entrada = $lit_lector;
+    $ind_lectura= "";
+
+    list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
+                            = tabla_codigos($funcion_obtener_clave, $tabla, $datos_entrada);
+
+    if ($ind_error_codigo == 0) {
+        if ($ind_validar_codigo == 1)  {
+            $num_lector = 0;   
+        } else {
+            $res_codigo = explode("#&", $campos_salida);
+            $num_lector= $res_codigo[0];  
+            }
+    } else {
+        $num_lector = 0;
+        }  
+}
     
     if($lit_lector == ""){
         if($lit_libro == ""){
             if($lit_autor == ""){
                 $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                              cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                              cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                          FROM tgr04_lecturas 
-                         ORDER BY cGR04_TSUltCambio";
+                         ORDER BY cGR04_TSUltCambio DESC";
             } else {
                     $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                                  cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                                  cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                             FROM tgr04_lecturas 
                             WHERE cGR04_Autor like '$lit_autor%'
-                            ORDER BY cGR04_TSUltCambio";
+                            ORDER BY cGR04_TSUltCambio DESC";
                 }
         } else {
             if($lit_autor == ""){
                 $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                              cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                              cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                          FROM tgr04_lecturas 
                          WHERE cGR04_Título like '$lit_libro%'
-                         ORDER BY cGR04_Título, cGR04_TSUltCambio";
+                         ORDER BY cGR04_Título ASC, cGR04_TSUltCambio DESC";
             } else {
                     $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                                  cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                                  cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                             FROM tgr04_lecturas 
                             WHERE cGR04_Título like '$lit_libro%'
                               AND cGR04_Autor like '$lit_autor%'
-                            ORDER BY cGR04_Título, cGR04_Autor, cGR04_TSUltCambio";
+                            ORDER BY cGR04_Título ASC, cGR04_Autor ASC, cGR04_TSUltCambio DESC";
                 }
             }
             
     } else{
+        
         if($lit_libro == ""){
             if($lit_autor == ""){
                 $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                              cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                              cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                          FROM tgr04_lecturas 
-                         WHERE cGR04_Lector like '$lit_lector%'
-                         ORDER BY cGR04_Lector, cGR04_TSUltCambio";
+                         WHERE cGR04_Lector like '$num_lector%'
+                         ORDER BY cGR04_Lector ASC, cGR04_TSUltCambio DESC";
             } else {
                     $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                                  cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                                  cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                             FROM tgr04_lecturas 
-                            WHERE cGR04_Lector like '$lit_lector%'
+                            WHERE cGR04_Lector like '$num_lector%'
                               AND cGR04_Autor like '$lit_autor%'
-                            ORDER BY cGR04_Lector, cGR04_Autor, cGR04_TSUltCambio";
+                            ORDER BY cGR04_Lector, cGR04_Autor ASC, cGR04_TSUltCambio DESC";
                 }
         } else {
             if($lit_autor == ""){
                 $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                              cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                              cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                          FROM tgr04_lecturas 
-                         WHERE cGR04_Lector like '$lit_lector%'
+                         WHERE cGR04_Lector like '$num_lector%'
                            AND cGR04_Título like '$lit_libro%'
-                         ORDER BY cGR04_Lector, cGR04_Título, cGR04_TSUltCambio";
+                         ORDER BY cGR04_Lector ASC, cGR04_Título ASC, cGR04_TSUltCambio DESC";
             } else {
                     $sql= "SELECT cGR04_Lector, cGR04_Título, cGR04_Autor, cGR04_IdLectura, cGR04_FIniLectura, 
-                                  cGR04_FFinLectura, cGR04_Opinión, cGR04_TSUltCambio 
+                                  cGR04_FFinLectura, cGR04_Calificacion, cGR04_Opinión, cGR04_TSUltCambio 
                             FROM tgr04_lecturas 
-                            WHERE cGR04_Lector like '$lit_lector%'
+                            WHERE cGR04_Lector like '$num_lector%'
                               AND cGR04_Título like '$lit_libro%'
                               AND cGR04_Autor like '$lit_autor%'
-                            ORDER BY cGR04_Título, cGR04_Autor, cGR04_TSUltCambio";
+                            ORDER BY cGR04_Título ASC, cGR04_Autor ASC, cGR04_TSUltCambio DESC";
                 }
             }
     }   
@@ -125,12 +151,32 @@ function leerDatosLecturas($lit_lector, $lit_libro, $lit_autor) {
 
     while($fila = $resultados->fetch_assoc()) { 
     // Obtener literales de las claves de los códigos 
+        
+        // Lector
+        $funcion_obtener_descripcion = 2;
+        $tabla = "Lector";
+        $datos_entrada = $fila['cGR04_Lector'];
+        $ind_lectura= "";
+
+        list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
+                                = tabla_codigos($funcion_obtener_descripcion, $tabla, $datos_entrada);
+
+        if ($ind_error_codigo == 0) {
+            if ($ind_validar_codigo == 1)  {
+                $lector_lit = "Código " +  $fila['cGR04_Lector'] + " no existe.";   
+            } else {
+                $res_codigo = explode("#&", $campos_salida);
+                $lector_lit= $res_codigo[0];  
+                }
+        } else {
+                $lector_lit=  $mensaje_codigo;
+            }  
+
         // Idioma
         $funcion_obtener_descripcion = 2;
         $tabla = "Idioma";
         $datos_entrada = $fila['cGR04_IdLectura'];
         $ind_lectura= "";
-        $pais_nac_lit= "";   
 
         list($ind_error_codigo, $ind_validar_codigo, $mensaje_codigo, $campos_salida) 
                                 = tabla_codigos($funcion_obtener_descripcion, $tabla, $datos_entrada);
@@ -165,7 +211,7 @@ function leerDatosLecturas($lit_lector, $lit_libro, $lit_autor) {
         } else {
             $fecha_finlectura_DD_MM_SSAA = $mensaje;
             }     
-        
+
         // Limitar la presentación de la opinión a un tamaño máximo
         if ($fila['cGR04_Opinión'] == "") {
             $lit_opinion = "";
@@ -178,17 +224,18 @@ function leerDatosLecturas($lit_lector, $lit_libro, $lit_autor) {
                     }
             }
 
-        $datos_pantalla = "Lectura" . "#&" . $fila["cGR04_Lector"] . "#&" . $fila["cGR04_Título"] 
+        $datos_pantalla = "Lectura" . "#&" . $lector_lit . "#&" . $fila["cGR04_Título"] 
             . "#&" . $fila["cGR04_Autor"]  . "#&" . $idioma_lit . "#&" . $fila["cGR04_FIniLectura"]
-            . "#&" . $fila["cGR04_FFinLectura"] . "#&" . $fila["cGR04_Opinión"] . "#&" . $fila["cGR02_TSUltCambio"];     
+            . "#&" . $fila["cGR04_FFinLectura"] . "#&" . $fila["cGR04_Calificacion"] 
+            . "#&" . $fila["cGR04_Opinión"] . "#&" . $fila["cGR04_TSUltCambio"];     
 ?>    
             
         <tr class="align-items-center fs-5">;
             
             <td class='td_editar'> 
                 <button type="button"  class='d-inline-flex btn btn-info btn-outline-success  mb-0 p-0 text-light 
-                                fs-4' data-bs-toggle="modal"  data-bs-target="#autorEdicion" 
-                        onclick="autorRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
+                                fs-4' data-bs-toggle="modal"  data-bs-target="#lecturaEdicion" 
+                        onclick="lecturaRecuperarDatosPantalla('<?php echo $datos_pantalla ?>')"> 
                     
                     <svg class="bi" width="30" height="30" fill="currentColor">
                         <use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#pencil"/>
@@ -208,15 +255,13 @@ function leerDatosLecturas($lit_lector, $lit_libro, $lit_autor) {
                 </button>
             </td>
             
-        $datos_pantalla = "Lectura" . "#&" . $fila["cGR04_Lector"] . "#&" . $fila["cGR04_Título"]  
-            . "#&" . $idioma_lit . "#&" . $fila["cGR04_FIniLectura"]. "#&" . $fila["cGR04_FFinLectura"]
-            . "#&" . $fila["cGR04_Opinión"] . "#&" . $fila["cGR02_TSUltCambio"];  
-            <td> <?php echo $fila['cGR04_Lector'] ?> </td>";
+            <td> <?php echo $lector_lit ?> </td>";
             <td> <?php echo $fila['cGR04_Título'] ?> </td>";
             <td> <?php echo $fila['cGR04_Autor'] ?> </td>";
             <td> <?php echo $idioma_lit ?> </td>";
             <td class='td_centrar'> <?php echo $fecha_inilectura_DD_MM_SSAA ?> </td>";       
             <td class='td_centrar'> <?php echo $fecha_finlectura_DD_MM_SSAA ?> </td>";
+            <td class='td_centrar'> <?php echo $fila['cGR04_Calificacion'] ?> </td>";
             <td> <?php echo $lit_opinion  ?> </td>";        
             
         </tr>

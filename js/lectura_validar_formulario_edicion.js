@@ -4,11 +4,9 @@ const inputsE = document.querySelectorAll('#formularioE');
 
 const id_ApartadoE = document.getElementById('idApartadoE').value;
 const id_OperE = document.getElementById('idOperE').value;
-const id_AutorE = 'Autor';
-const id_LibroE = 'Libro';
+const id_LibroE_lectura = 'Libro';
 
-const expresiones = {
-    autoresE: /^[a-zA-ZÀ-ÿ0-9\s\,\_\-]{1,100}$/,     // letras, acentos, números, espacios, guión bajo, guión
+const expresionesE = {
     finilE:  /^[0-9]{1,4}$/,                         // números
     ffinlE:  /^[0-9]{1,4}$/,                         // números
 }
@@ -16,27 +14,9 @@ const expresiones = {
 function validarFormularioE(evento) {
     
     switch (evento.target.name) {  
-        case "autoresE":       
-
-            if (evento.target.value == "") {
-                /* Validación de caracteres correcta */
-                error_lit="<p></p>";
-                validar_campo_resultado("ok", evento.target.name, error_lit);
-            } else {
-                    if (expresiones.autoresE.test(evento.target.value)) {
-                        /* Validación de caracteres correcta */
-                        error_lit="<p></p>";
-                        validar_campo_resultado("ok", evento.target.name, error_lit);
-
-                    } else {
-                        error_lit= "<p class='formularioE__input-error mt-0'>Error. Caracteres inválidos </p>";
-                        validar_campo_resultado("nok", evento.target.name, error_lit);
-                        }
-                }
-        break; 
 
         case "finilE":
-            if (expresiones.finilE.test(evento.target.value)) {
+            if (expresionesE.finilE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultado("ok", evento.target.name, error_lit);
@@ -48,7 +28,7 @@ function validarFormularioE(evento) {
         break; 
 
         case "ffinlE":
-            if (expresiones.ffinlE.test(evento.target.value)) {
+            if (expresionesE.ffinlE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultado("ok", evento.target.name, error_lit);
@@ -68,59 +48,9 @@ function validarFormularioE(evento) {
 function validarCampoValor(evento){
     switch (evento.target.name) {  
 
-        case "autoresE":   // Autor
+        case "librosE_lectura":   // Libro
             if (evento.target.value == "") {
-                error_lit="<p></p>"
-                validar_campo_resultado("ok", evento.target.name, error_lit);       
-            } else {
-                    if (expresiones.autoresE.test(evento.target.value)) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'basedatos/leer_datos.php',
-                            data: {param1: evento.target.value,
-                                   param2: id_AutorE
-                                }
-                        })
-                        .done(function(autor_datos){
-                            res=autor_datos.split("#&");                           
-                            if (res[0] == 0) {              // Lectura de datos correcta
-                                if (res[2].trim() == evento.target.value) {                           
-                                    error_lit="<p></p>"
-                                    validar_campo_resultado("ok", evento.target.name, error_lit);       
-                                        
-                                } else {
-                                        $error_texto = "Error. " + id_AutorE + " no existe."
-                                        error_lit='<p class="formularioE__grupo-incorrecto">' + $error_texto +'</p>'
-                                        validar_campo_resultado("nok", evento.target.name, error_lit);
-                                    }
-                            } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
-                                        text: res[1],
-                                        footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                                    }) 
-                                }    
-                        })
-            
-                        .fail(function(){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Hubo un error al leer autor',
-                                footer: '<a href="">Revise datos de entrada y base de datos</a>'
-                            }) 
-                        })
-
-        } else {
-            error_lit= "<p class='formularioE__input-error mt-0'>Error. Caracteres inválidos </p>";
-            validar_campo_resultado("nok", evento.target.name, error_lit);
-            }
-                } 
-        break; 
-
-        case "libros":   // Libro
-            if (evento.target.value == "") {
+                $('#autoresE_lectura').val("");
                 error_lit="<p></p>"
                 validar_campo_resultado("ok", evento.target.name, error_lit);       
             } else {
@@ -128,22 +58,25 @@ function validarCampoValor(evento){
                         type: 'POST',
                         url: 'basedatos/leer_datos.php',
                         data: {param1: evento.target.value,
-                                param2: id_LibroE
+                                param2: id_LibroE_lectura
                             }
                     })
                     .done(function(libro_datos){
                         res=libro_datos.split("#&");                           
                         if (res[0] == 0) {              // Lectura de datos correcta
-                            if (res[2].trim() == evento.target.value) {                           
+                            if (res[2].trim() == evento.target.value) {  
+                                $('#autoresE_lectura').val(res[3]);                       
                                 error_lit="<p></p>"
                                 validar_campo_resultado("ok", evento.target.name, error_lit);       
                                     
                             } else {
-                                    $error_texto = "Error. " + id_LibroE + " no existe."
-                                    error_lit='<p class="formularioE__grupo-incorrecto">' + $error_texto +'</p>'
+                                    $('#autoresE_lectura').val("");
+                                    $error_texto = "Error. " + id_LibroE_lectura + " no existe."
+                                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>'
                                     validar_campo_resultado("nok", evento.target.name, error_lit);
                                 }
                         } else {
+                                $('#autoresE_lectura').val("");
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
@@ -166,7 +99,7 @@ function validarCampoValor(evento){
         break; 
 
         case "finilE":    // Fecha de inicio de lectura del libro 
-            if (expresiones.finilE.test(evento.target.value)) {           
+            if (expresionesE.finilE.test(evento.target.value)) {           
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
                 mm = document.getElementById('finilEmm').value
@@ -218,7 +151,7 @@ function validarCampoValor(evento){
         break; 
         
         case "ffinlE":    // Fecha de fin de lectura del libro 
-            if (expresiones.ffinlE.test(evento.target.value)) {           
+            if (expresionesE.ffinlE.test(evento.target.value)) {           
                 funcion = 1
                 ssaa = document.getElementById(evento.target.name).value
                 mm = document.getElementById('ffinlEmm').value

@@ -48,7 +48,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     autor = $('#autores').val();
     $.ajax({                        
       type: 'POST',                 
-      url: 'basedatos/libros_cargar_datos.php',
+      url: 'basedatos/lecturas_cargar_datos.php',
       data: {param1: lector,
              param2: libro,
              param3: autor

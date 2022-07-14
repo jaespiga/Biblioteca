@@ -1,12 +1,12 @@
 /* Validación de campos de formulario de lectura y actualizar si son correctos */
 /* Alta lectura */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
-    $("#enviar_datos").click(function() {       /* Alta de autor */       
-      form_campos= $('#idApartado').val() + "#&" + $('#idOper').val();
+    $("#enviar_datos_lectura").click(function() {       /* Alta de autor */       
+      form_campos= $('#idApartado_lectura').val() + "#&" + $('#idOper_lectura').val();
       form_campos = form_campos  +  "#&" + $('#lector').val();
-      form_campos = form_campos  +  "#&" + $('#libros').val();
-      form_campos = form_campos  +  "#&" + $('#autores').val();
-      form_campos = form_campos  +  "#&" + $('#idioma').val();
+      form_campos = form_campos  +  "#&" + $('#libros_lectura').val();
+      form_campos = form_campos  +  "#&" + $('#autores_lectura').val();
+      form_campos = form_campos  +  "#&" + $('#idioma_lectura').val();
       form_campos = form_campos  +  "#&" + $('#calificacion').val();
 
       fecha= $('#finil').val() + "-" + $('#finilmm').val() + "-" + $('#finildd').val();
@@ -74,12 +74,12 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     })  
 
     /* Editar datos de la lectura */
-    $("#actualizar_datos").click(function() { /* Actualizar datos de la lectura */ 
-      form_campos= $('#idApartadoE').val() + "#&" + $('#idOperE').val();
+    $("#actualizar_datos_lectura").click(function() { /* Actualizar datos de la lectura */ 
+      form_campos= $('#idApartadoE_lectura').val() + "#&" + $('#idOperE_lectura').val();
       form_campos = form_campos  +  "#&" + $('#lectorE').val();
-      form_campos = form_campos  +  "#&" + $('#librosE').val();
-      form_campos = form_campos  +  "#&" + $('#autoresE').val();
-      form_campos = form_campos  +  "#&" + $('#idiomaE').val();
+      form_campos = form_campos  +  "#&" + $('#librosE_lectura').val();
+      form_campos = form_campos  +  "#&" + $('#autoresE_lectura').val();
+      form_campos = form_campos  +  "#&" + $('#idiomaE_lectura').val();
       form_campos = form_campos  +  "#&" + $('#calificacionE').val();
 
       fecha= $('#finilE').val() + "-" + $('#finilEmm').val() + "-" + $('#finilEdd').val();

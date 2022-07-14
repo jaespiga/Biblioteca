@@ -2,6 +2,13 @@
 	session_start(); 
 
 	require_once 'basedatos/connect.php';  
+
+	require_once 'rutinas/recuperar_datos_pantalla.php';  /* Función para informar datos de la pantalla de libros */
+	require_once 'rutinas/borrar_datos.php';  /* Función para confirmar el borrado */
+	/*
+	Scripts de bibliotecas públicas para el uso de funciones que facilitan la implantación de funcionalidades
+	*/
+	require_once "script/externos";  
 ?> 
 
 <!DOCTYPE html>
@@ -85,8 +92,8 @@
 										<label for="libros" class="form-text text-light  fs-4 pe-1">Libro</label>
 										
 										
-										<input type="text" id="libros" list="lista_libros" name="libro" autocomplete="off"
-										class="form-control h-100 pb-0 fs-4 ps-3" >
+										<input type="text" id="libros" list="lista_libros" name="libro" 
+											autocomplete="off"  class="form-control h-100 pb-0 fs-4 ps-3" >
 										<datalist id="lista_libros">  </datalist>
 									
 										<button type="button" class="lecturasDatos">
@@ -149,14 +156,9 @@
 			</div>
     	</nav>
 
-		<!--
-			Script para la realización de funcionalidades personalizadas de la página
-		-->
-		<script type="text/javascript" src="js/lista_clave.js"></script>  <!-- Lista de opciones de datalist  --
-
 		<div class="row">
 			<div class="col-12 ">
-				<div id="tabla_autores"> </div>
+				<div id="tabla_lecturas"> </div>
 			</div>
 		</div>
 		 
@@ -178,7 +180,6 @@
 		<script type="text/javascript" src="js/lectura_validar_formulario_edicion.js"></script>  <!-- validar datos lectura: Edición  -->
 		<script type="text/javascript" src="js/lectura_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 		
-		<script type="text/javascript" src="js/lector_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/libro_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/autor_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista lecturas y sus datos  -->
@@ -193,7 +194,7 @@
 		
 		<script  id="tabla_idioma" data-clave="Idioma"
 				src="js/lista_tabla_codigos_idioma.js"></script>  <!-- Lista idiomas  -->
-		<script  id="tabla_idioma_cambio" data-clave="Idioma"
+		<script  id="tabla_idioma_lectura_cambio" data-clave="Idioma"
 				src="js/lista_tabla_codigos.js"></script>  <!-- Lista idiomas ordenado por tecleo  -->
 	
 		<script type="text/javascript" src="js/validar_codigos.js"></script>  <!-- Validar códigos de la pantalla  -->
