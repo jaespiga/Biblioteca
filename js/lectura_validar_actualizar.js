@@ -88,7 +88,6 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       fecha= $('#ffinlE').val() + "-" + $('#ffinlEmm').val() + "-" + $('#ffinlEdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
-      form_campos = form_campos  +  "#&" + $('#idiomaE').val();
       form_campos = form_campos  +  "#&" + $('#opinionE').val();
       form_campos = form_campos  +  "#&" + $('#tSUltCambioE').val();
       

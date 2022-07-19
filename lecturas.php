@@ -63,19 +63,18 @@
     	</nav>
 		</div>	
 		<nav class="navbar navbar-expand-lg navbar-light bg-orange" >
-			<div class="row  col-12"> 
+			<div class="row  col-12 gx-5 h-100"> 
 				<div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row collapse navbar-collapse" 
 							id="navbarSupportedContent">
 					
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
+						<ul class="navbar-nav me-auto mb-1 mb-lg-0 bg-primary pt-3 pe-2 h-auto">
 							<li class="nav-item">
-									<form class=" g-3">
+									<form>
 										<div class="col-12 col-md-4 d-inline-flex w-100">
-											<label for="lectores" class="form-text text-light  fs-4 pe-1">Lector</label>
-											
-											
+											<label for="lectores" class="form-text text-light fs-5 ps-2 pe-1">
+													Lector</label>
 											<input type="text" id="lectores" list="lista_lectores" name="lectores" 
-													autocomplete="off" class="form-control h-100 pb-0 fs-4" >
+													autocomplete="off" class="form-control h-100 pb-0 fs-5" >
 											<datalist id="lista_lectores">  </datalist>
 										
 											<button type="button" class="lecturasDatos">
@@ -87,13 +86,13 @@
 									</form>	
 							</li>
 							<li class="nav-item">
-								<form class=" g-3">
+								<form>
 									<div class="col-12 col-md-4 d-inline-flex w-100">
-										<label for="libros" class="form-text text-light  fs-4 pe-1">Libro</label>
+										<label for="libros" class="form-text text-light  fs-5 ps-3 pe-1">Libro</label>
 										
 										
 										<input type="text" id="libros" list="lista_libros" name="libro" 
-											autocomplete="off"  class="form-control h-100 pb-0 fs-4 ps-3" >
+											autocomplete="off"  class="form-control h-100 pb-0 fs-5 ps-3" >
 										<datalist id="lista_libros">  </datalist>
 									
 										<button type="button" class="lecturasDatos">
@@ -106,12 +105,12 @@
 							</li>
 
 							<li class="nav-item">
-								<form  method="post" class=" g-3">
+								<form  method="post">
 								<div class="col-12 col-md-4 d-inline-flex w-100">
-										<label for="autores" class="form-text text-light fs-4 ps-3 pe-1 ">Autor</label>
+										<label for="autores" class="form-text text-light fs-5 ps-3 pe-1 ">Autor</label>
 									
 										<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
-											class="form-control h-100 pb-0 fs-4">
+											class="form-control h-100 pb-0 fs-5">
 										<datalist id="lista_autores"> </datalist>
 									
 										<button type="button" class="lecturasDatos">
@@ -126,11 +125,10 @@
 
 						</ul>	
 					
-					<div class="col-12 col-md-4 d-inline-flex">	
-						<form class="d-flex">
-							
+					<div class="col-12 col-md-2 d-inline-flex">	
+						<form class="d-flex">							
 							<button type="button" class="d-inline-flex btn btn-info btn-outline-success 
-								me-5 mb-2 text-light fs-4 ms-5" 
+								me-2 text-light fs-5" 
 								data-bs-toggle="modal" data-bs-target="#lecturaNuevo">
 								Alta lectura &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
@@ -143,7 +141,7 @@
 						<form class="d-flex">
 							
 							<button type="button" class="d-inline-flex btn btn-warning btn-outline-success 
-								me-5 mb-2 text-light fs-4 ms-1" data-bs-toggle="modal">
+								me-5 text-light fs-5 ms-1" data-bs-toggle="modal">
 								Filtros &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
 									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>

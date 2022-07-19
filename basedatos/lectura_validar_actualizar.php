@@ -327,8 +327,8 @@ function actualizarSubmit($campos_pantalla, $campos_bdatos) {
                                 cGR04_Calificacion ='$res[6]', 
                                 cGR04_Opinión ='$res[9]', 
                                 cGR04_TSUltCambio= CURRENT_TIMESTAMP
-                            WHERE cGR04_Lector ='$res[2]',
-                              AND cGR04_Título = '$res[3]',
+                            WHERE cGR04_Lector ='$res[2]'
+                              AND cGR04_Título = '$res[3]'
                               AND cGR04_Autor ='$res[4]'";
 
                 if($dbcon->query($sql) === true){

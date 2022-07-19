@@ -1,9 +1,7 @@
 /* Validación de campos de formularios: Lectura / Edición */
-const formularioE = document.getElementById('formularioE');
-const inputsE = document.querySelectorAll('#formularioE');
+const formularioE = document.getElementById('formularioE_lectura');
+const inputsE = document.querySelectorAll('#formularioE_lectura');
 
-const id_ApartadoE = document.getElementById('idApartadoE').value;
-const id_OperE = document.getElementById('idOperE').value;
 const id_LibroE_lectura = 'Libro';
 
 const expresionesE = {
@@ -19,11 +17,11 @@ function validarFormularioE(evento) {
             if (expresionesE.finilE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
-                validar_campo_resultado("ok", evento.target.name, error_lit);
+                validar_campo_resultadoE("ok", evento.target.name, error_lit);
 
             } else {
-                error_lit= "<p class='formularioE__input-error mt-0'>Error. Caracteres inválidos </p>";
-                validar_campo_resultado("nok", evento.target.name, error_lit);
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultadoE("nok", evento.target.name, error_lit);
                 }
         break; 
 
@@ -31,11 +29,11 @@ function validarFormularioE(evento) {
             if (expresionesE.ffinlE.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
-                validar_campo_resultado("ok", evento.target.name, error_lit);
+                validar_campo_resultadoE("ok", evento.target.name, error_lit);
 
             } else {
-                error_lit= "<p class='formularioE__input-error mt-0'>Error. Caracteres inválidos </p>";
-                validar_campo_resultado("nok", evento.target.name, error_lit);
+                error_lit= "<p class='formulario__input-error mt-0'>Error. Caracteres inválidos </p>";
+                validar_campo_resultadoE("nok", evento.target.name, error_lit);
                 }
         break; 
 
@@ -52,7 +50,7 @@ function validarCampoValor(evento){
             if (evento.target.value == "") {
                 $('#autoresE_lectura').val("");
                 error_lit="<p></p>"
-                validar_campo_resultado("ok", evento.target.name, error_lit);       
+                validar_campo_resultadoE("ok", evento.target.name, error_lit);       
             } else {
                     $.ajax({
                         type: 'POST',
@@ -67,13 +65,13 @@ function validarCampoValor(evento){
                             if (res[2].trim() == evento.target.value) {  
                                 $('#autoresE_lectura').val(res[3]);                       
                                 error_lit="<p></p>"
-                                validar_campo_resultado("ok", evento.target.name, error_lit);       
+                                validar_campo_resultadoE("ok", evento.target.name, error_lit);       
                                     
                             } else {
                                     $('#autoresE_lectura').val("");
                                     $error_texto = "Error. " + id_LibroE_lectura + " no existe."
                                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>'
-                                    validar_campo_resultado("nok", evento.target.name, error_lit);
+                                    validar_campo_resultadoE("nok", evento.target.name, error_lit);
                                 }
                         } else {
                                 $('#autoresE_lectura').val("");
@@ -126,15 +124,15 @@ function validarCampoValor(evento){
                         if (res[0] == 0) { // indicador de validación general                   
                             if (res[7] == 1) {   // Fecha superior a fecha límite máxima
                                 $error_texto = "Error. Fecha no puede ser superior a " + res[9];
-                                error_lit='<p class="formularioE__grupo-incorrecto">' + $error_texto +'</p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>';
+                                validar_campo_resultadoE("nok", evento.target.name, error_lit); 
                             } else {
                                     error_lit="<p></p>";
-                                    validar_campo_resultado("ok", evento.target.name, error_lit);  
+                                    validar_campo_resultadoE("ok", evento.target.name, error_lit);  
                                 }
                         } else {
-                                error_lit='<p class="formularioE__grupo-incorrecto">' + res[1] +'</p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                error_lit='<p class="formulario__grupo-incorrecto">' + res[1] +'</p>';
+                                validar_campo_resultadoE("nok", evento.target.name, error_lit); 
                             }
                     })
                     .fail(function(){
@@ -145,8 +143,8 @@ function validarCampoValor(evento){
                         }) 
                     })
             } else {
-                    error_lit= "<p class='formularioE__grupo-incorrecto mt-0'>Error. Caracteres inválidos </p>";
-                    validar_campo_resultado("nok", evento.target.name, error_lit);
+                    error_lit= "<p class='formulario__grupo-incorrecto mt-0'>Error. Caracteres inválidos </p>";
+                    validar_campo_resultadoE("nok", evento.target.name, error_lit);
                 }
         break; 
         
@@ -178,15 +176,15 @@ function validarCampoValor(evento){
                         if (res[0] == 0) { // indicador de validación general                   
                             if (res[7] == 1) {   // Fecha superior a fecha límite máxima
                                 $error_texto = "Error. Fecha no puede ser superior a " + res[9];
-                                error_lit='<p class="formularioE__grupo-incorrecto">' + $error_texto +'</p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto +'</p>';
+                                validar_campo_resultadoE("nok", evento.target.name, error_lit); 
                             } else {
                                     error_lit="<p></p>";
-                                    validar_campo_resultado("ok", evento.target.name, error_lit);  
+                                    validar_campo_resultadoE("ok", evento.target.name, error_lit);  
                                 }
                         } else {
-                                error_lit='<p class="formularioE__grupo-incorrecto">' + res[1] +'</p>';
-                                validar_campo_resultado("nok", evento.target.name, error_lit); 
+                                error_lit='<p class="formulario__grupo-incorrecto">' + res[1] +'</p>';
+                                validar_campo_resultadoE("nok", evento.target.name, error_lit); 
                             }
                     })
                     .fail(function(){
@@ -197,8 +195,8 @@ function validarCampoValor(evento){
                         }) 
                     })
             } else {
-                    error_lit= "<p class='formularioE__grupo-incorrecto mt-0'>Error. Caracteres inválidos </p>";
-                    validar_campo_resultado("nok", evento.target.name, error_lit);
+                    error_lit= "<p class='formulario__grupo-incorrecto mt-0'>Error. Caracteres inválidos </p>";
+                    validar_campo_resultadoE("nok", evento.target.name, error_lit);
                 }
         break; 
 
@@ -242,26 +240,26 @@ function validarCompararFechas () {
             if (res[0]==0) { // indicador de validación general                          
                 if (res[7] == 1) {   // Fecha superior a fecha límite máxima
                     $error_texto = "Error. Fecha de inicio de lectura (" + res[8] + ") no puede ser superior a fecha de fin de lectura (" + res[9] + ")"
-                    error_lit='<p class="formularioE__grupo-incorrecto">' + $error_texto+'</p>'
-                    validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
+                    error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                    validar_campo_resultadoE("nok", fecha_inicial_id, error_lit); 
                 } else {
                         error_lit="<p></p>"
-                        validar_campo_resultado("ok", fecha_inicial_id, error_lit);  
+                        validar_campo_resultadoE("ok", fecha_inicial_id, error_lit);  
                     }
             } else{
                     if (res[3] == 0) {
                                     error_lit="<p></p>"
-                                    validar_campo_resultado("ok", fecha_inicial_id, error_lit); 
+                                    validar_campo_resultadoE("ok", fecha_inicial_id, error_lit); 
                     } else {               
-                            error_lit='<p class="formularioE__grupo-incorrecto">' + res[4] +'</p>'
-                            validar_campo_resultado("nok", fecha_inicial_id, error_lit); 
+                            error_lit='<p class="formulario__grupo-incorrecto">' + res[4] +'</p>'
+                            validar_campo_resultadoE("nok", fecha_inicial_id, error_lit); 
                         }
                     if (res[5] == 0) {
                         error_lit="<p></p>"
-                        validar_campo_resultado("ok", fecha_final_id, error_lit); 
+                        validar_campo_resultadoE("ok", fecha_final_id, error_lit); 
                     } else {               
-                            error_lit='<p class="formularioE__grupo-incorrecto">' + res[6] +'</p>'
-                            validar_campo_resultado("nok", fecha_final_id, error_lit); 
+                            error_lit='<p class="formulario__grupo-incorrecto">' + res[6] +'</p>'
+                            validar_campo_resultadoE("nok", fecha_final_id, error_lit); 
                         }
                 }
         })
@@ -278,16 +276,16 @@ function validarCompararFechas () {
 
 
 /* función para resaltar resultados del análisis de un campo del formularioE */
-function validar_campo_resultado (resultado_validacion, campo, error_mensaje) {
+function validar_campo_resultadoE(resultado_validacion, campo, error_mensaje) {
     $(`#${campo}_error`).html(error_mensaje);   
     if (resultado_validacion == "ok") {
-        document.getElementById(`grupo__${campo}`).classList.remove('formularioE__grupo-incorrecto'); 
-        document.getElementById(`grupo__${campo}`).classList.add('formularioE__grupo-correcto');
-        document.querySelector(`#grupo__${campo} .formularioE__input-error`).classList.remove('formularioE__input-error-activo');     
+        document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto'); 
+        document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
+        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');     
     } else {
-        document.getElementById(`grupo__${campo}`).classList.remove('formularioE__grupo-correcto');
-        document.getElementById(`grupo__${campo}`).classList.add('formularioE__grupo-incorrecto'); 
-        document.querySelector(`#grupo__${campo} .formularioE__input-error`).classList.add('formularioE__input-error-activo'); 
+        document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+        document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto'); 
+        document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo'); 
         }  
     return                                              
 }

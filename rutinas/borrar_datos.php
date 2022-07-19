@@ -37,7 +37,7 @@ function eliminarRegistro(datos_pantalla) {
                         Swal.fire({
                             icon: 'error',
                             title: 'ERROR. Baja no realizada',
-                            text: res[2],
+                            text: res[1],
                             footer: '<a href="">Revise datos de entrada y base de datos</a>'
                         }) 
                     } 

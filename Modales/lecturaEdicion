@@ -1,7 +1,7 @@
 
 <!-- Modal para editar una lectura y datos asociados -->
 <div class="modal fade" id="lecturaEdicion" role = 'dialog' tabindex="-1" aria-labelledby="lectura_edicion">
-  <div class="modal-dialog modal-xl formulario" id='formulario_lectura' role='document'>
+  <div class="modal-dialog modal-xl formulario" id='formularioE_lectura' role='document'>
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title fw-bold">Datos lectura</h2>
@@ -10,7 +10,7 @@
       <div class="modal-body">
         
         <input type="hidden" id="idApartadoE_lectura" name="idApartadoE_lectura" value="Lectura">
-        <input type="hidden" id="idOperE_lectura" name="idOperE_lectura" value="alta">
+        <input type="hidden" id="idOperE_lectura" name="idOperE_lectura" value="edición">
 
         <div class="row col-12">
             <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
@@ -19,7 +19,7 @@
                     <label for="lectorE" class="fs-3 text-primary formulario__input-label mt-2">Lector</label>
                     <input type="text" name="lectorE" id="lectorE" list="lista_lectoresE" 
                             class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
-                            autocomplete="off" required>
+                            autocomplete="off" readonly>
                     <datalist id="lista_lectoresE"> </datalist>
                     <div id="lectorE_error"></div>
               </div>
@@ -31,11 +31,11 @@
             <!-- Libro --> 
              <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__librosE_lectura"> 
                 <label for="librosE_lectura" class="fs-3 text-primary formulario__input-label mt-2">Libro</label>
-                <input type="text" name="librosE_lectura" id="librosE_lectura" list="lista_librosE_lectura" 
+                <input type="text" name="librosE_lectura" id="librosE_lectura" list="lista_libros" 
                       class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
-                      autocomplete="off" required
+                      autocomplete="off" readonly
                       onblur="$('#idiomaE_lectura').focus()">
-                <datalist id="lista_librosE_lectura"> </datalist>  
+                <datalist id="lista_libros"> </datalist>  
               <div id="librosE_lectura_error"></div>
             </div>
             <!-- Autor -->           
