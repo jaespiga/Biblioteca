@@ -30,6 +30,14 @@ switch ($funcion) {
         list($respuesta) = comparar_fechas($fecha_inicial, $fecha_final);
     break;
     } 
+    
+    case 3: {   /* Función: 3- Validar fecha  */
+            
+        $fecha = trim($_POST['param1']);  // fecha a  validar    
+            
+        list($respuesta) = validar_fecha_bloque($fecha);
+    break;
+    } 
         
     default: {
         $respuesta = "";

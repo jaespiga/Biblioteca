@@ -9,6 +9,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
   .done(function(lista_select){
     $('#lista_nacionalidades').html(lista_select)       // Alta
     $('#lista_nacionalidadesE').html(lista_select)      // Edición
+    $('#lista_nacionalidadesF').html(lista_select)      // Filtro
   })
   .fail(function(){
     Swal.fire({

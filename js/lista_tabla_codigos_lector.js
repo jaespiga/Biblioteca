@@ -10,6 +10,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
   .done(function(lista_select){
     $('#lista_lectores').html(lista_select)         // Alta
     $('#lista_lectoresE').html(lista_select)        // Edición
+    $('#lista_lectoresF').html(lista_select)        // Filtro
   })
   .fail(function(){
     Swal.fire({

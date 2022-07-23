@@ -1,4 +1,4 @@
-
+<!--  Cabecera común a todas las páginas WEB -->
 
 <div class="row h-75">
 	<div class="col-2">

@@ -64,33 +64,33 @@
 			
     	</nav>
 	
-		<nav class="navbar navbar-expand-lg navbar-light bg-orange p-3 h-50" >
-			<div class="row  col-12">
+		<nav class="navbar navbar-expand-lg navbar-light bg-orange" >
+			<div class="row  col-12 gx-5 h-100">
 				<div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row collapse navbar-collapse" 
 							id="navbarSupportedContent">
-					<div class="col-12 col-md-8 d-inline-flex">		
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
-							<li class="nav-item">
-								<form  method="post" class="row g-4 mb-0">
-									<div class="col-auto">
-										<label for="libros" class="form-text text-light fs-4 ps-2 ">Libro</label>
-									</div>	
-									<div class="col-auto">
-										<input type="text" id="libros" list="lista_libros" name="libro" autocomplete="off"
-											class="form-control h-100 pb-0 fs-4">
-										<datalist id="lista_libros"> </datalist>
-									</div>
-									<div class="col-auto">
-										<button type="button" id="librosDatos">
-											<svg class="bi" width="30" height="30" fill="currentColor">
-												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
-											</svg>
-										</button>
-									</div>
-								</form>	
-							</li>
-						</ul>	
-					</div>
+						
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-primary p-2 mb-0">
+						<li class="nav-item">
+							<form  method="post" class="row g-4 mb-0">
+								<div class="col-auto">
+									<label for="libros" class="form-text text-light fs-4 ps-2 ">Libro</label>
+								</div>	
+								<div class="col-auto">
+									<input type="text" id="libros" list="lista_libros" name="libro" autocomplete="off"
+										class="form-control h-100 pb-0 fs-4">
+									<datalist id="lista_libros"> </datalist>
+								</div>
+								<div class="col-auto">
+									<button type="button" id="librosDatos">
+										<svg class="bi" width="30" height="30" fill="currentColor">
+											<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+										</svg>
+									</button>
+								</div>
+							</form>	
+						</li>
+					</ul>	
+					
 					<div class="col-12 col-md-4 d-inline-flex">
 						<form>
 							<button type="button" class="d-inline-flex btn btn-info btn-outline-success 

@@ -10,6 +10,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
   .done(function(lista_select){
     $('#lista_sitlib').html(lista_select)         // Alta
     $('#lista_sitlibE').html(lista_select)        // Edición
+    $('#lista_sitlibF').html(lista_select)        // Filtro
   })
   .fail(function(){
     Swal.fire({

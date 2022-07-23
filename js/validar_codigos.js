@@ -224,6 +224,52 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 })              
             })      
     })  
+ // Filtro 
+    $("#cliterariaF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "CLiteraria";
+        clave = document.getElementById('cliterariaF').value
+        titulo = "Corriente literaria"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#cliterariaF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    }) 
 
     //Editorial
     //Alta
@@ -446,7 +492,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 })              
             })      
     }) 
-    
+    // Filtro 
+    $("#editorialF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Editorial";
+        clave = document.getElementById('editorialF').value
+        titulo = "Editorial"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#editorialF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    }) 
+
     //Estatus de situación del libro
     //Alta
     $("#sitlib").change(function(){  
@@ -667,7 +759,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })        
+    }) 
+    // Filtro 
+    $("#sitlibF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "SitLib";
+        clave = document.getElementById('sitlibF').value
+        titulo = "Estatus de situación del libro"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#sitlibF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })       
    
     //Género literario
     //Alta
@@ -890,6 +1028,52 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 })              
             })      
     })        
+    // Filtro 
+    $("#genlitF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "GenLit";
+        clave = document.getElementById('genlitF').value
+        titulo = "Género literario"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#genlitF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })       
 
     //Idioma en que lo escribió el autor
     //Alta
@@ -1112,7 +1296,52 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                 })              
             })      
     })        
-
+    // Filtro 
+    $("#idiomaF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Idioma";
+        clave = document.getElementById('idiomaF').value
+        titulo = "Idioma"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#idiomaF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })       
     //Idioma de lectura
     //Alta
     $("#idioma_lectura").change(function(){  
@@ -1333,7 +1562,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })    
+    }) 
+    // Filtro 
+    $("#idioma_lecturaF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Idioma";
+        clave = document.getElementById('idioma_lecturaF').value
+        titulo = "Idioma"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#idioma_lecturaF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })          
     //Lector
     //Alta
     $("#lector").change(function(){  
@@ -1554,7 +1829,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })        
+    })  
+    // Filtro 
+    $("#lectorF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Lector";
+        clave = document.getElementById('lectorF').value
+        titulo = "Lector"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#lectorF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })             
 
     //Nacionalidad
     //Alta
@@ -1776,7 +2097,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })         
+    }) 
+    // Filtro 
+    $("#nacionalidadF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "Nacionalidad";
+        clave = document.getElementById('nacionalidadF').value
+        titulo = "Nacionalidad"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#nacionalidadF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })               
      
     //País de nacimiento
     // Alta
@@ -2004,7 +2371,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })  
+    }) 
+    // Filtro 
+    $("#pnacF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "País";
+        clave = document.getElementById('pnacF').value
+        titulo = "País de nacimiento"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#pnacF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })        
     
     //País de fallecimiento
     // Alta
@@ -2232,7 +2645,53 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })  
+    }) 
+    // Filtro 
+    $("#pfalF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "País";
+        clave = document.getElementById('pfalF').value
+        titulo = "País de fallecimimiento"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#pfalF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })        
 
     //Soporte físico en el que se encuentra el libro 
     $("#soplib").change(function(){  
@@ -2453,6 +2912,52 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                     footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
                 })              
             })      
-    })        
+    })   
+    // Filtro 
+    $("#soplibF").change(function(){  
+        funcion_codigo = 1  // Leer descripción de la tabla de códigos
+        tabla = "SopLib";
+        clave = document.getElementById('soplibF').value
+        titulo = "Soporte físico del libro"
+                
+        $.ajax({
+            type: "POST",
+            url: "basedatos/tabla_codigos_ajax.php",
+            data: {
+                param0: funcion_codigo,
+                param1: tabla,
+                param2: clave},
+            })
+            .done(function(respuesta){  
+                res=respuesta.split("#&");
+                nro_elementos= res.length
+                if (res[0] == 0) { // indicador de si el acceso a la base de datos ha sido correcto
+                    if (res[1] == 1
+                    && clave !== "") { // No existe el valor   
+                        $("#soplibF").val("");
+                        Swal.fire({
+                            icon: 'error',
+                            title: titulo + ' no existe.',
+                            text: 'Se ignora el valor.'
+                        }) 
+                    }
+                } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops... ERROR',
+                            text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                            footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                        })      
+                    }    
+            })
+            .fail(function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... ERROR',
+                    text: 'Hubo un error en la tabla de códigos (' + tabla + ")." + res[2],
+                    footer: '<a href="">Revise  datos de entrada y base de datos/tabla: biblioteca.db / tgr00_codigos</a>'
+                })              
+            })      
+    })            
 
 })      

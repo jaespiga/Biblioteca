@@ -67,33 +67,15 @@
 				<div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row collapse navbar-collapse" 
 							id="navbarSupportedContent">
 					
-						<ul class="navbar-nav me-auto mb-1 mb-lg-0 bg-primary pt-3 pe-2 h-auto">
-							<li class="nav-item">
-									<form>
-										<div class="col-12 col-md-4 d-inline-flex w-100">
-											<label for="lectores" class="form-text text-light fs-5 ps-2 pe-1">
-													Lector</label>
-											<input type="text" id="lectores" list="lista_lectores" name="lectores" 
-													autocomplete="off" class="form-control h-100 pb-0 fs-5" >
-											<datalist id="lista_lectores">  </datalist>
-										
-											<button type="button" class="lecturasDatos">
-												<svg class="bi" width="30" height="30" fill="currentColor">
-													<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
-												</svg>
-											</button>
-										</div>
-									</form>	
-							</li>
-							<li class="nav-item">
+					<ul class="navbar-nav me-auto mb-1 mb-lg-0 bg-primary pt-3 pe-2 h-auto">
+						<li class="nav-item">
 								<form>
 									<div class="col-12 col-md-4 d-inline-flex w-100">
-										<label for="libros" class="form-text text-light  fs-5 ps-3 pe-1">Libro</label>
-										
-										
-										<input type="text" id="libros" list="lista_libros" name="libro" 
-											autocomplete="off"  class="form-control h-100 pb-0 fs-5 ps-3" >
-										<datalist id="lista_libros">  </datalist>
+										<label for="lectores" class="form-text text-light fs-5 ps-2 pe-1">
+												Lector</label>
+										<input type="text" id="lectores" list="lista_lectores" name="lectores" 
+												autocomplete="off" class="form-control h-100 pb-0 fs-5" >
+										<datalist id="lista_lectores">  </datalist>
 									
 										<button type="button" class="lecturasDatos">
 											<svg class="bi" width="30" height="30" fill="currentColor">
@@ -102,28 +84,46 @@
 										</button>
 									</div>
 								</form>	
-							</li>
-
-							<li class="nav-item">
-								<form  method="post">
+						</li>
+						<li class="nav-item">
+							<form>
 								<div class="col-12 col-md-4 d-inline-flex w-100">
-										<label for="autores" class="form-text text-light fs-5 ps-3 pe-1 ">Autor</label>
+									<label for="libros" class="form-text text-light  fs-5 ps-3 pe-1">Libro</label>
 									
-										<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
-											class="form-control h-100 pb-0 fs-5">
-										<datalist id="lista_autores"> </datalist>
 									
-										<button type="button" class="lecturasDatos">
-											<svg class="bi" width="30" height="30" fill="currentColor">
-												<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
-											</svg>
-										</button>
-									</div>
-			
-								</form>	
-							</li>
+									<input type="text" id="libros" list="lista_libros" name="libro" 
+										autocomplete="off"  class="form-control h-100 pb-0 fs-5 ps-3" >
+									<datalist id="lista_libros">  </datalist>
+								
+									<button type="button" class="lecturasDatos">
+										<svg class="bi" width="30" height="30" fill="currentColor">
+											<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+										</svg>
+									</button>
+								</div>
+							</form>	
+						</li>
 
-						</ul>	
+						<li class="nav-item">
+							<form  method="post">
+							<div class="col-12 col-md-4 d-inline-flex w-100">
+									<label for="autores" class="form-text text-light fs-5 ps-3 pe-1 ">Autor</label>
+								
+									<input type="text" id="autores" list="lista_autores" name="autor" autocomplete="off"
+										class="form-control h-100 pb-0 fs-5">
+									<datalist id="lista_autores"> </datalist>
+								
+									<button type="button" class="lecturasDatos">
+										<svg class="bi" width="30" height="30" fill="currentColor">
+											<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#search"/>
+										</svg>
+									</button>
+								</div>
+		
+							</form>	
+						</li>
+
+					</ul>	
 					
 					<div class="col-12 col-md-2 d-inline-flex">	
 						<form class="d-flex">							
@@ -138,8 +138,7 @@
 							</button>
 						</form>	
 					
-						<form class="d-flex">
-							
+						<form class="d-flex">	
 							<button type="button" class="d-inline-flex btn btn-warning btn-outline-success 
 								me-5 text-light fs-5 ms-1" data-bs-toggle="modal">
 								Filtros &nbsp;

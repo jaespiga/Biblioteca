@@ -88,6 +88,22 @@ function comparar_fechas($fecha_inicial, $fecha_final){
         
         $respuesta = $ind_validar . "#&" . $mensaje . "#&" . $campos_salida;
         return [$respuesta];
-    }
+}
+
+function validar_fecha_bloque($fecha){
+    /*
+        Función 3 Validar fecha
+    */  
+        $ind_validar = 0;
+        
+        $campos_funcion = $fecha;
+
+        $funcion_validar_fecha = 1;
+        list($ind_validar, $mensaje, $campos_salida) 
+                        = fechas($funcion_validar_fecha, $campos_funcion); 
+        
+        $respuesta = $ind_validar . "#&" . $mensaje . "#&" . $campos_salida;
+        return [$respuesta];
+}
 
 ?>

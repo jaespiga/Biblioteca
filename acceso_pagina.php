@@ -86,8 +86,6 @@
     	<!--
 			Formulario validación del usuario
 		--> 
-		<div class="container.fluid"> 
-
 	    <?php require_once "rutinas/cabecera.php" ?> 		<!-- Cabecera estándar en páginas Web	-->
 		
 		<div class="row">
@@ -95,7 +93,7 @@
 				<h2 class="me-5 pe-4">Validación de acceso</h2>
 			</div>
 		</div>
-		
+			
 		<nav class="navbar navbar-expand-lg navbar-light bg-light pt-5 pe-5 d-flex 
 						align-items-center justify-content-center">
 	
