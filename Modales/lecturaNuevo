@@ -55,7 +55,7 @@
             
                 <!-- Idioma en el que se lee el libro -->
                 <div class="col-12 col-md-6 d-inline-flex">
-                    <label for="idioma_lectura" class="form-text text-primary fs-5 mt-3 ms-2 text-primary">
+                    <label for="idioma_lectura" class="form-text text-primary fs-5 mt-3 text-primary">
                             Idioma lectura</label>
                     <input type="text" name="idioma_lectura" id="idioma_lectura" list="lista_idioma_lectura" 
                         class="form-control input-sm fs-5 h-75 w-75 mt-2 ms-2" autocomplete="off">
@@ -83,7 +83,7 @@
             <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row mt-5">
                 <!-- Fecha de inicio de la lectura del libro -->
                 <div class="formulario__grupo" id="grupo__finil">  
-                    <div class="col-12 col-md-6 d-inline-flex ms-2 w-100"> 
+                    <div class="d-inline-flex"> 
                         <label class="fs-5 mt-2 text-primary">Fecha inicio de lectura</label>
                         <select id="finildd"  class="form-control fs-5 mt-0 fechadd" 
                         onchange="$('#finilmm').focus()" 
@@ -150,7 +150,7 @@
 
                 <!-- Fecha de fin de la lectura del libro -->
                 <div class="formulario__grupo" id="grupo__ffinl">  
-                    <div class="col-12 col-md-6 d-inline-flex ms-5 w-100"> 
+                    <div class="d-inline-flex ms-5 w-100"> 
                         <label class="fs-5 mt-2 text-primary">Fecha fin de lectura</label>
                         <select id="ffinldd"  class="form-control fs-5 mt-0 fechadd" 
                         onchange="$('#ffinlmm').focus()" 

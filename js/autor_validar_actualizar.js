@@ -1,4 +1,5 @@
 /* Validación de campos de formulario de autor y actualizar si son correctos */
+/* Validación de campos de formulario de filtro dentro de datos de autores y tratar carga datos si son correctos */
 /* Alta autor */
 $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     $("#enviar_datos").click(function() {       /* Alta de autor */       
@@ -151,6 +152,83 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
                             footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
                           })   
                       }
+            }
+      })
+      .fail(function(){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error al validar/actualizar datos del autor',
+          footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+        })                  
+      })            
+    })  
+    
+    /* Filtrar datos de los autores */
+    $("#filtro_datos").click(function() { /* Actualizar datos de autor */ 
+      
+      form_campos= "Autor" + "#&" + "filtro";
+      form_campos = form_campos  +  "#&" + $('#nacionalidadF').val();
+      form_campos = form_campos  +  "#&" + $('#cliterariaF').val();
+      form_campos = form_campos  +  "#&" + $('#pnacF').val();
+
+      fecha= $('#fnacFI').val() + "-" + $('#fnacFImm').val() + "-" + $('#fnacFIdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#fnacFS').val() + "-" + $('#fnacFSmm').val() + "-" + $('#fnacFSdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      form_campos = form_campos  +  "#&" + $('#pfalF').val();
+
+      fecha= $('#ffalFI').val() + "-" + $('#ffalFImm').val() + "-" + $('#ffalFIdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#ffalFS').val() + "-" + $('#ffalFSmm').val() + "-" + $('#ffalFSdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      $.ajax({                        
+        type: 'POST',                 
+        url: 'basedatos/autor_validar_filtro.php',
+        data: {param1: form_campos}                  
+      })    
+      .done(function(respuesta){   
+        res=respuesta.split("#&")
+        nro_elementos = respuesta.split("#&").length
+
+        if (res[0] == 0) {
+          // Formatear datos de entrada a partir de la salida de la validación de datos
+          datos_entrada = res[2]
+          for (var indice = 3; indice < nro_elementos; indice++) {
+            datos_entrada += "#&";
+            datos_entrada += res[indice];
+          }
+
+          $.ajax({                        
+            type: 'POST',                 
+            url: 'basedatos/autores_cargar_datos.php',
+            data: {param1: datos_entrada}                  
+          })    
+          .done(function(lista_select){   
+              //  list_select tiene la información de javascript (comentarios y la tabla rellena) de la rutina. 
+              $('#tabla_autores').html(lista_select)   
+
+          })
+          .fail(function(){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Hubo un error al cargar datos de autores',
+              footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+            })                  
+          })              
+
+        } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Validación con incidencias',
+                html: '<p align="left">' + res[3] + '</p>',
+                footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+              })   
             }
       })
       .fail(function(){

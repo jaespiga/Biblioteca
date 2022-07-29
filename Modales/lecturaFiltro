@@ -1,0 +1,348 @@
+<!-- Modal para dar criterios de selección en los datos de lectura -->
+<div class="modal fade" id="lecturaFiltro" role = 'dialog' tabindex="-1" aria-labelledby="lectura_filtro">
+  <div class="modal-dialog modal-lg formulario" id='formularioF' role='document'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title fw-bold">Lectura. Criterios de selección.</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">       
+            <input type="hidden" id="idApartadoF" name="idApartadoF" value="Lectura">
+            <input type="hidden" id="idOperF" name="idOperF" value="filtro">
+            
+            <div class="row col-12">
+                <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Lector -->    
+                    <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__lectorF"> 
+                            <label for="lectorF" class="fs-3 text-primary formulario__input-label mt-2">Lector</label>
+                            <input type="text" name="lectorF" id="lectorF" list="lista_lectoresF" 
+                                    class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
+                                    autocomplete="off">
+                            <datalist id="lista_lectoresF"> </datalist>
+                            <div id="lectorF_error"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-12">
+                <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Idioma en el que se lee el libro -->
+                    <div class="col-12 col-md-6 d-inline-flex">
+                        <label for="idiomaF_lectura" class="form-text text-primary fs-5 mt-5 pb-3 text-primary w-75">
+                            Idioma lectura
+                        </label>
+                        <input type="text" name="idiomaF_lectura" id="idiomaF_lectura" list="lista_idiomaF_lectura" 
+                            class="form-control input-sm fs-5 w-75 mt-4 ms-1" autocomplete="off">
+                        <datalist id="lista_idiomaF_lectura"> </datalist>
+                    </div>
+                    
+                    <!-- Calificación del libro por el lectorE-->
+                    <div class="col-12 col-md-6 d-inline-flex">  
+                        <label for="calificacionF" class="form-text text-primary fs-5 mt-5 pb-3 ms-2 text-primary w-75">
+                                Grado de satisfacción &nbsp;</label>
+                        
+                        <select id="calificacionF"  class="form-control fs-5 mt-4 w-50" onchange="$('#finilFdd').focus()">
+                                <option value= "" selected>Todos</option>
+                                <option value= "Sin calificar">Sin calificar</option>
+                                <option value= "Horrible">Horrible</option>
+                                <option value= "Prescindible">Prescindible</option>
+                                <option value= "Entretenido">Entretenido</option>
+                                <option value= "Bueno">Bueno</option>
+                                <option value= "Excelente">Excelente</option>
+                        </select>
+                    </div>
+                </div> 
+            </div>     
+
+            <!-- Límites de las fechas de lectura -->
+            <fieldset class="restaurar form-group form-control-sm w-auto mt-5 ">	 
+                <legend class="restaurar text-primary text-start fs-5 ms-1 "> 
+                    Límites de las fechas de lectura
+                </legend>
+                
+                <!-- Fecha de inicio de la lectura: límites inferior y superior -->
+                <div class="row col-12 text-start">
+                    <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Fecha de inicio de la lectura. Inferior -->
+                        <div class="formulario__grupo" id="grupo__finilFI">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 text-primary">Inicio de la lectura.&nbsp;&nbsp;&nbsp;&nbsp;De </label>
+                                <select id="finilFIdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#finilFImm').focus()" 
+                                    onblur="validarCompararFinilF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="finilFImm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#finilFI').focus()"  
+                                        onblur="validarCompararFinilF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="finilFI" id="finilFI" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="0001" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#finilFSdd').focus()" 
+                                    onblur="validarCompararFinilF()">       
+                            </div>    
+                            <div class="text-center" id="finilFI_error"></div>      
+                        </div>
+                        <!-- Fecha de inicio de la lectura. Superior -->
+                        <div class="formulario__grupo" id="grupo__finilFS">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 ms-5 text-primary"> a </label>
+                                <select id="finilFSdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#finilFSmm').focus()" 
+                                    onblur="validarCompararFinilF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31" selected>31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="finilFSmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#finilFS').focus()"  
+                                        onblur="validarCompararFinilF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected>12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="finilFS" id="finilFS" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="9999" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#ffinlFIdd').focus()" 
+                                    onblur="validarCompararFinilF()">       
+                            </div>    
+                            <div class="text-center" id="finilFS_error"></div>    
+                        </div>  
+                    </div>
+                </div>
+            
+                <!-- Fecha de fin de lectura: límites inferior y superior -->
+                <div class="row col-12 text-start">
+                    <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Fecha de fin de lectura. Inferior -->
+                        <div class="formulario__grupo" id="grupo__ffinlFI">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 text-primary">
+                                        Fin de la lectura.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De 
+                                </label>
+                                <select id="ffinlFIdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#ffinlFImm').focus()" 
+                                    onblur="validarCompararFfinlF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="ffinlFImm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#ffinlFI').focus()"  
+                                        onblur="validarCompararFfinlF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="ffinlFI" id="ffinlFI" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="0001" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#ffinlFSdd').focus()" 
+                                    onblur="validarCompararFfinlF()">       
+                            </div>    
+                            <div class="text-center" id="ffinlFI_error"></div>      
+                        </div>
+                        <!-- Fecha de fin de lectura. Superior -->
+                        <div class="formulario__grupo" id="grupo__ffinlFS">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 ms-5 text-primary"> a </label>
+                                <select id="ffinlFSdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#ffinlFSmm').focus()" 
+                                    onblur="validarCompararFfinlF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31" selected>31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="ffinlFSmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#ffinlFS').focus()"  
+                                        onblur="validarCompararFfinlF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected>12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="ffinlFS" id="ffinlFS" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="9999" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#filtro_datos').focus()" 
+                                    onblur="validarCompararFfinlF()">       
+                            </div>    
+                            <div class="text-center" id="ffinlFS_error"></div>      
+                        </div>
+                    </div>
+                </div>
+            </fieldset>		 
+        </div>         
+      
+      <!-- Envío de datos para actualización -->
+      <div class="modal-footer formulario__grupo">
+        <button type="submit" id="filtro_datos_lectura" class="btn btn-success fs-4 submitBtn">
+            Selección
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,8 +23,7 @@
                       autocomplete="off" required>
               <div id="clave_error"></div>
             </div>
-            <!-- Autor -->
-            
+            <!-- Autor -->           
             <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__autores">   
               <label for="autores" class="formulario__input-label text-primary fs-3 mt-2 ms-3 me-2">Autor</label>                  
               <input type="text" id="autores" list="lista_autores" name="autores" autocomplete="off"

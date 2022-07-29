@@ -83,7 +83,7 @@
             <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row mt-5">
                 <!-- Fecha de inicio de la lectura del libro -->
                 <div class="formulario__grupo" id="grupo__finilE">  
-                    <div class="col-12 col-md-6 d-inline-flex ms-2 w-100"> 
+                    <div class= "d-inline-flex"> 
                         <label class="fs-5 mt-2 text-primary">Fecha inicio de lectura</label>
                         <select id="finilEdd"  class="form-control fs-5 mt-0 fechadd" 
                         onchange="$('#finilEmm').focus()" 
@@ -150,8 +150,8 @@
 
                 <!-- Fecha de fin de la lectura del libro -->
                 <div class="formulario__grupo" id="grupo__ffinlE">  
-                    <div class="col-12 col-md-6 d-inline-flex ms-5 w-100"> 
-                        <label class="fs-5 mt-2 text-primary">Fecha fin de lectura</label>
+                    <div class="d-inline-flex"> 
+                        <label class="fs-5 mt-2 ms-5 text-primary">Fecha fin de lectura</label>
                         <select id="ffinlEdd"  class="form-control fs-5 mt-0 fechadd" 
                         onchange="$('#ffinlEmm').focus()" 
                         onblur="validarCompararFechas()">

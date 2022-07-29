@@ -138,15 +138,14 @@
 							</button>
 						</form>	
 					
-						<form class="d-flex">	
+						<form class="d-flex">
 							<button type="button" class="d-inline-flex btn btn-warning btn-outline-success 
-								me-5 text-light fs-5 ms-1" data-bs-toggle="modal">
-								Filtros &nbsp;
+									me-5 mb-0 text-light fs-4"
+								data-bs-toggle="modal" data-bs-target="#lecturaFiltro">Filtros  &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
 									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>
 								</svg>
-										
-							</button>
+							</button>	
 						</form>
 					</div>	
 				</div>
@@ -175,6 +174,7 @@
 		
 		<script type="text/javascript" src="js/lectura_validar_formulario.js"></script>  <!-- validar datos lectura: Alta  -->
 		<script type="text/javascript" src="js/lectura_validar_formulario_edicion.js"></script>  <!-- validar datos lectura: Edición  -->
+		<script type="text/javascript" src="js/lectura_validar_formulario_filtro.js"></script>  <!-- validar datos lectura: Filtro  -->
 		<script type="text/javascript" src="js/lectura_validar_actualizar.js"></script>  <!-- validar y actualizar datos autor  -->
 		
 		<script type="text/javascript" src="js/libro_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->

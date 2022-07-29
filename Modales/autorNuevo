@@ -49,7 +49,7 @@
           <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row mb-2">
             <!-- Fecha de nacimiento -->
             <div class="formulario__grupo" id="grupo__fnac">  
-              <div class="col-12 col-lg-6 d-inline-flex"> 
+              <div class="d-inline-flex"> 
                 <label class="fs-5 mt-3 text-primary">Fecha nacimiento</label>
                 <select id="fnacdd"  class="form-control fs-5 mt-2 fechadd" 
                   onchange="$('#fnacmm').focus()" 
@@ -115,7 +115,7 @@
             </div>
             <!-- Fecha de fallecimiento -->
             <div class="formulario__grupo  ms-5 ps-5"  id="grupo__ffal"> 
-              <div class="col-12 col-lg-6 d-inline-flex">
+              <div class="d-inline-flex">
                 <label class="fs-5 mt-3 text-primary">Fecha defunción</label>
                 <select id="ffaldd"  class="form-control fs-5 mt-2 fechadd"
                         onchange="$('#ffalmm').focus()" 

@@ -6,18 +6,18 @@ const id_ApartadoF = document.getElementById('idApartadoF').value;
 const id_OperF = document.getElementById('idOperF').value;
 
 const expresionesF = {
-    fnacFI:  /^[0-9]{1,4}$/,                      // números
-    fnacFS:  /^[0-9]{1,4}$/,                      // números
-    ffalFI:  /^[0-9]{1,4}$/,                      // números
-    ffalFS:  /^[0-9]{1,4}$/                       // números
+    finilFI:  /^[0-9]{1,4}$/,                      // números
+    finilFS:  /^[0-9]{1,4}$/,                      // números
+    ffinlFI:  /^[0-9]{1,4}$/,                      // números
+    ffinlFS:  /^[0-9]{1,4}$/                       // números
 }
 
 function validarformularioF(evento) {
     
     switch (evento.target.name) {  
 
-        case "fnacFI":
-            if (expresionesF.fnacFI.test(evento.target.value)) {
+        case "finilFI":
+            if (expresionesF.finilFI.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -28,8 +28,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "fnacFS":
-            if (expresionesF.fnacFS.test(evento.target.value)) {
+        case "finilFS":
+            if (expresionesF.finilFS.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -40,8 +40,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "ffalFI":
-            if (expresionesF.ffalFI.test(evento.target.value)) {
+        case "ffinlFI":
+            if (expresionesF.ffinlFI.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -52,8 +52,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "ffalFS":
-            if (expresionesF.ffalFS.test(evento.target.value)) {
+        case "ffinlFS":
+            if (expresionesF.ffinlFS.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -73,12 +73,12 @@ function validarformularioF(evento) {
 function validarCampoValorF(evento){
     switch (evento.target.name) {  
 
-        case "fnacFI":    // Fecha de nacimiento. Límite inferior
-            if (expresionesF.fnacFI.test(evento.target.value)) {          
+        case "finilFI":    // Fecha de lectura. Límite inferior
+            if (expresionesF.finilFI.test(evento.target.value)) {          
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('fnacFImm').value
-                dd = document.getElementById('fnacFIdd').value
+                mm = document.getElementById('finilFImm').value
+                dd = document.getElementById('finilFIdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -114,12 +114,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "fnacFS":    // Fecha de nacimiento. Límite inferior
-            if (expresionesF.fnacFS.test(evento.target.value)) {           
+        case "finilFS":    // Fecha de lectura. Límite inferior
+            if (expresionesF.finilFS.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('fnacFSmm').value
-                dd = document.getElementById('fnacFSdd').value
+                mm = document.getElementById('finilFSmm').value
+                dd = document.getElementById('finilFSdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -155,12 +155,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "ffalFI":    // Fecha de nacimiento. Límite inferior
-            if (expresionesF.ffalFI.test(evento.target.value)) {           
+        case "ffinlFI":    // Fecha de lectura. Límite inferior
+            if (expresionesF.ffinlFI.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('ffalFImm').value
-                dd = document.getElementById('ffalFIdd').value
+                mm = document.getElementById('ffinlFImm').value
+                dd = document.getElementById('ffinlFIdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -196,12 +196,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "ffalFS":    // Fecha de fallecimiento. Límite superior
-            if (expresionesF.ffalFS.test(evento.target.value)) {           
+        case "ffinlFS":    // Fecha de fallecimiento. Límite superior
+            if (expresionesF.ffinlFS.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('ffalFSmm').value
-                dd = document.getElementById('ffalFSdd').value
+                mm = document.getElementById('ffinlFSmm').value
+                dd = document.getElementById('ffinlFSdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -245,19 +245,19 @@ function validarCampoValorF(evento){
 }
 
 /* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
-function validarCompararFNacF () {
+function validarCompararFinilF () {
     
-    fecha_inicial_id = "fnacFI";
-    fecha_final_id= "fnacFS";
+    fecha_inicial_id = "finilFI";
+    fecha_final_id= "finilFS";
 
     ssaa = document.getElementById(`${fecha_inicial_id}`).value;
-    mm = document.getElementById('fnacFImm').value
-    dd = document.getElementById('fnacFIdd').value
+    mm = document.getElementById('finilFImm').value
+    dd = document.getElementById('finilFIdd').value
     fecha_inicial = ssaa + "-" + mm + "-" + dd
 
     ssaa = document.getElementById(`${fecha_final_id}`).value;
-    mm = document.getElementById('fnacFSmm').value
-    dd = document.getElementById('fnacFSdd').value
+    mm = document.getElementById('finilFSmm').value
+    dd = document.getElementById('finilFSdd').value
     fecha_final = ssaa + "-" + mm + "-" + dd
     
     funcion = 2
@@ -276,7 +276,7 @@ function validarCompararFNacF () {
             
             if (res[0]==0) { // indicador de validación general                          
                 if (res[7] == 1) {   // Fecha superior a fecha límite máxima
-                    $error_texto = "Error. Fecha de nacimiento inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
+                    $error_texto = "Error. Fecha de comienzo de lectura inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto + '</p>'
                     validar_campo_resultadoF("nok", fecha_inicial_id, error_lit); 
                 } else {
@@ -311,19 +311,19 @@ function validarCompararFNacF () {
     return
 }
 /* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
-function validarCompararFFalF () {
+function validarCompararFfinlF () {
     
-    fecha_inicial_id = "ffalFI";
-    fecha_final_id= "ffalFS";
+    fecha_inicial_id = "ffinlFI";
+    fecha_final_id= "ffinlFS";
 
     ssaa = document.getElementById(`${fecha_inicial_id}`).value;
-    mm = document.getElementById('ffalFImm').value
-    dd = document.getElementById('ffalFIdd').value
+    mm = document.getElementById('ffinlFImm').value
+    dd = document.getElementById('ffinlFIdd').value
     fecha_inicial = ssaa + "-" + mm + "-" + dd
 
     ssaa = document.getElementById(`${fecha_final_id}`).value;
-    mm = document.getElementById('ffalFSmm').value
-    dd = document.getElementById('ffalFSdd').value
+    mm = document.getElementById('ffinlFSmm').value
+    dd = document.getElementById('ffinlFSdd').value
     fecha_final = ssaa + "-" + mm + "-" + dd
     
     funcion = 2
@@ -342,7 +342,7 @@ function validarCompararFFalF () {
             
             if (res[0]==0) { // indicador de validación general                          
                 if (res[7] == 1) {   // Fecha superior a fecha límite máxima
-                    $error_texto = "Error. Fecha de fallecimiento inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
+                    $error_texto = "Error. Fecha de fin de lectura inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                     validar_campo_resultadoF("nok", fecha_inicial_id, error_lit); 
                 }  else {

@@ -160,4 +160,79 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         })                  
       })            
     })  
+    
+    /* Filtrar datos de la lectura */
+    $("#filtro_datos_lectura").click(function() { /* Validar datos de la lectura para filtrar por ellos */ 
+      
+      form_campos= "Lectura" + "#&" + "filtro";
+      form_campos = form_campos  +  "#&" + $('#lectorF').val();
+      form_campos = form_campos  +  "#&" + $('#idiomaF_lectura').val();
+      form_campos = form_campos  +  "#&" + $('#calificacionF').val();
+
+      fecha= $('#finilFI').val() + "-" + $('#finilFImm').val() + "-" + $('#finilFIdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#finilFS').val() + "-" + $('#finilFSmm').val() + "-" + $('#finilFSdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#ffinlFI').val() + "-" + $('#ffinlFImm').val() + "-" + $('#ffinlFIdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+
+      fecha= $('#ffinlFS').val() + "-" + $('#ffinlFSmm').val() + "-" + $('#ffinlFSdd').val();
+      form_campos = form_campos  +  "#&" + fecha;
+      
+      $.ajax({                        
+        type: 'POST',                 
+        url: 'basedatos/lectura_validar_filtro.php',
+        data: {param1: form_campos}                  
+      })    
+      .done(function(respuesta){   
+        res=respuesta.split("#&")
+        nro_elementos = respuesta.split("#&").length
+
+        if (res[0] == 0) {
+          // Formatear datos de entrada a partir de la salida de la validación de datos
+          datos_entrada = res[2]
+          for (var indice = 3; indice < nro_elementos; indice++) {
+            datos_entrada += "#&";
+            datos_entrada += res[indice];
+          }
+
+          $.ajax({                        
+            type: 'POST',                 
+            url: 'basedatos/lecturas_cargar_datos.php',
+            data: {param1: datos_entrada}                  
+          })    
+          .done(function(lista_select){   
+              //  list_select tiene la información de javascript (comentarios y la tabla rellena) de la rutina. 
+              $('#tabla_lecturas').html(lista_select)   
+
+          })
+          .fail(function(){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Hubo un error al cargar datos de lecturas',
+              footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+            })                  
+          })              
+
+        } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Validación con incidencias',
+                html: '<p align="left">' + res[3] + '</p>',
+                footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
+              })   
+            }
+      })
+      .fail(function(){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Hubo un error al validar datos de las lecturas',
+          footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+        })                  
+      })            
+    })  
   })
