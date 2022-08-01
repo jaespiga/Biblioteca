@@ -1,4 +1,4 @@
-/* Validación de campos de formularios: Autor / Edición */
+/* Validación de campos de formularios: Autor / Filtro */
 const formularioF = document.getElementById('formularioF');
 const inputsF = document.querySelectorAll('#formularioF');
 

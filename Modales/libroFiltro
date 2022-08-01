@@ -1,0 +1,367 @@
+<!-- Modal para dar criterios de selección en los datos de lectura -->
+<div class="modal fade" id="libroFiltro" role = 'dialog' tabindex="-1" aria-labelledby="libro_filtro">
+  <div class="modal-dialog modal-xl formulario" id='formularioF' role='document'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title fw-bold">Libro. Criterios de selección.</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">       
+            <input type="hidden" id="idApartadoF" name="idApartadoF" value="Libro">
+            <input type="hidden" id="idOperF" name="idOperF" value="filtro">
+            
+            <div class="row col-12">
+                <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Autores -->    
+                    <div class="formulario__grupo col-12 col-lg-6 d-inline-flex" id="grupo__autoresF"> 
+                            <label for="autoresF" class="fs-3 text-primary formulario__input-label mt-2">Autor</label>
+                            <input type="text" name="autoresF" id="autoresF" list="lista_autoresF" 
+                                    class="form-control input-sm fs-5 ms-2 mb-3 w-100 formulario__input" 
+                                    autocomplete="off">
+                            <datalist id="lista_autoresF"> </datalist>
+                            <div id="autoresF_error"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Datos de publicación -->
+            <fieldset class="restaurar form-group form-control-sm w-auto mt-3 ">	 
+                <legend class="restaurar text-primary text-start fs-5 ms-1 "> 
+                    Datos de publicación
+                </legend>
+                <div class="col-12 col-md-12 d-inline-flex">
+                <!-- Editorial -->
+                    <label for="editorialF" class="form-text text-primary fs-5 mt-4 pt-2">
+                            Editorial&nbsp;&nbsp;</label>
+                    <input type="text" id="editorialF" list="lista_editF" name="editorialF" 
+                          autocomplete="off" class="form-control input-sm fs-5 h-75 w-auto mt-4 ms-2">
+                    <datalist id="lista_editF"> </datalist>
+                </div>
+            
+                <!-- Fecha de publicación: límites inferior y superior -->
+                <div class="row col-12 text-start">
+                    <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Fecha de publicación. Inferior -->
+                        <div class="formulario__grupo" id="grupo__fpubFI">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 pt-1 text-primary">Fecha publicación.&nbsp;&nbsp;&nbsp;&nbsp;De </label>
+                                <select id="fpubFIdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#fpubFImm').focus()" 
+                                    onblur="validarCompararFpubF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="fpubFImm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#fpubFI').focus()"  
+                                        onblur="validarCompararFpubF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="fpubFI" id="fpubFI" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="0001" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#fpubFSdd').focus()" 
+                                    onblur="validarCompararFpubF()">       
+                            </div>    
+                            <div class="text-center" id="fpubFI_error"></div>      
+                        </div>
+                        <!-- Fecha de publicación. Superior -->
+                        <div class="formulario__grupo" id="grupo__fpubFS">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 pt-1 ms-5 text-primary"> a </label>
+                                <select id="fpubFSdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#fpubFSmm').focus()" 
+                                    onblur="validarCompararFpubF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31" selected>31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="fpubFSmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#fpubFS').focus()"  
+                                        onblur="validarCompararFpubF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected>12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="fpubFS" id="fpubFS" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="9999" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#genlitF').focus()" 
+                                    onblur="validarCompararFpubF()">       
+                            </div>    
+                            <div class="text-center" id="fpubFS_error"></div>    
+                        </div>  
+                    </div>
+                </div>
+            </fieldset>		 
+
+            <!-- Datos de referencia del libro -->
+            <fieldset class="restaurar form-group form-control-sm w-auto mt-3 ">	 
+                <legend class="restaurar text-primary text-start fs-5 ms-1 "> 
+                    Datos de referencia del libro
+                </legend>
+                <div class="row d-flex">
+                    <!-- Género literario -->
+                    <div class="col-12 col-lg-6 d-inline-flex">  
+                        <label class="fs-5 mt-3 text-primary">Género literario</label>
+                        <input type="text" id="genlitF" list="lista_genlitF" name="genlitF" autocomplete="off"
+                            class="form-control input-sm fs-5 h-75 w-auto mt-2 ms-3 me-4" >
+                        <datalist id="lista_genlitF"> </datalist>
+                    </div>
+                    <!-- Idioma original en que se ha escrito el libro -->
+                    <div class="col-12 col-lg-6 d-inline-flex">
+                        <label for="idiomaF" class="form-text text-primary fs-5 mt-3 ms-3 text-primary">
+                                Idioma original</label>
+                        <input type="text" id="idiomaF" list="lista_idiomaF" name="idiomaF" autocomplete="off"
+                            class="form-control input-sm fs-5 h-75 w-auto mt-2 ms-5" >
+                        <datalist id="lista_idiomaF"> </datalist>
+                    </div>
+                </div>
+
+                <div class="row d-flex">
+                    <!-- Soporte en el que se lee el libro -->
+                    <div class="col-12 col-lg-6 d-inline-flex">
+                        <label for="soplibF" class="form-text text-primary fs-5 mt-3 ms-2 text-primary">
+                                Soporte físico</label>
+                        <input type="text" id="soplibF" list="lista_soplibF" name="soplibF" autocomplete="off"
+                            class="form-control input-sm fs-5 h-75 w-auto mt-2 ms-3" >
+                        <datalist id="lista_soplibF"> </datalist>
+                    </div>
+                    <!-- Estatus de situación del libro -->
+                    <div class="col-12 col-lg-6 d-inline-flex">  
+                        <label class="fs-5 mt-3 text-primary">Estatus de situación</label>
+                        <input type="text" id="sitlibF" list="lista_sitlibF" name="sitlibF" autocomplete="off"
+                            class="form-control input-sm fs-5 h-75 w-auto mt-2  ms-3" >
+                        <datalist id="lista_sitlibF"> </datalist>
+                    </div>
+                </div>
+
+                <!-- Fecha de adquisición: límites inferior y superior -->
+                <div class="row col-12 text-start">
+                    <div class="d-flex flex-wrap flex-xl-nowrap flex-column flex-md-row">
+                    <!-- Fecha de adquisición. Inferior -->
+                        <div class="formulario__grupo" id="grupo__fadqFI">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 pt-1 text-primary">Fecha adquisición.&nbsp;&nbsp;&nbsp;&nbsp;De </label>
+                                <select id="fadqFIdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#fadqFImm').focus()" 
+                                    onblur="validarCompararFadqF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="fadqFImm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#fadqFI').focus()"  
+                                        onblur="validarCompararFadqF()">
+                                    <option value="01" selected>01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="fadqFI" id="fadqFI" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="0001" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#fadqFSdd').focus()" 
+                                    onblur="validarCompararFadqF()">       
+                            </div>    
+                            <div class="text-center" id="fadqFI_error"></div>      
+                        </div>
+                        <!-- Fecha de adquisición. Superior -->
+                        <div class="formulario__grupo" id="grupo__fadqFS">  
+                            <div class="d-inline-flex"> 
+                                <label class="fs-5 mt-3 ms-5  pt-1 text-primary"> a </label>
+                                <select id="fadqFSdd"  class="form-control fs-5 mt-2 fechadd" 
+                                    onchange="$('#fadqFSmm').focus()" 
+                                    onblur="validarCompararFadqF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31" selected>31</option>        
+                                </select>        
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <select id="fadqFSmm" class="form-control input-sm fs-5 w-auto mt-2 fechamm"
+                                        onchange="$('#fadqFS').focus()"  
+                                        onblur="validarCompararFadqF()">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected>12</option>
+                                </select>
+                                <label class="fs-5 mt-3 fecha_separador">/</label>
+                                <input type="text" name="fadqFS" id="fadqFS" 
+                                    class="form-control input-sm fs-5 mt-2 formulario__input fechasa" 
+                                    maxlength="4" value="9999" 
+                                    onkeyup="if (this.value.length == this.getAttribute('maxlength')) $('#filtro_datos_libro').focus()" 
+                                    onblur="validarCompararFadqF()">       
+                            </div>    
+                            <div class="text-center" id="fadqFS_error"></div>    
+                        </div>  
+                    </div>
+                </div>
+            </fieldset>		 
+
+        </div>         
+      
+      <!-- Envío de datos para actualización -->
+      <div class="modal-footer formulario__grupo">
+        <button type="submit" id="filtro_datos_libro" class="btn btn-success fs-4 submitBtn">
+            Selección
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

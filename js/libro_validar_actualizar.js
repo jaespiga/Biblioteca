@@ -83,7 +83,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
     })  
 
     /* Editar datos del libro */
-    $("#actualizar_datos").click(function() { /* Actualizar datos de autor */ 
+    $("#actualizar_datos").click(function() { /* Actualizar datos del libro */ 
       form_campos= $('#idApartadoE').val() + "#&" + $('#idOperE').val();
       form_campos = form_campos  +  "#&" + $('#claveE').val();
       form_campos = form_campos  +  "#&" + $('#autoresE').val();
@@ -180,120 +180,33 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
       })            
     })  
     
-    /* Editar datos de autor */
-    $("#actualizar_datos").click(function() { /* Actualizar datos de autor */ 
-      form_campos= $('#idApartadoE').val() + "#&" + $('#idOperE').val();
-      form_campos = form_campos  +  "#&" + $('#claveE').val();
-      form_campos = form_campos  +  "#&" + $('#nacionalidadE').val();
-      form_campos = form_campos  +  "#&" + $('#cliterariaE').val();
-
-      fecha= $('#fnacE').val() + "-" + $('#fnacEmm').val() + "-" + $('#fnacEdd').val();
-      form_campos = form_campos  +  "#&" + fecha;
-
-      fecha= $('#ffalE').val() + "-" + $('#ffalEmm').val() + "-" + $('#ffalEdd').val();
-      form_campos = form_campos  +  "#&" + fecha;
-
-      form_campos = form_campos  +  "#&" + $('#lnacE').val();
-      form_campos = form_campos  +  "#&" + $('#pnacE').val();
-      form_campos = form_campos  +  "#&" + $('#lfalE').val();
-      form_campos = form_campos  +  "#&" + $('#pfalE').val();
-      form_campos = form_campos  +  "#&" + $('#webE').val();
-      form_campos = form_campos  +  "#&" + $('#tSUltCambioE').val();
-      $.ajax({                        
-        type: 'POST',                 
-        url: 'basedatos/autor_validar_actualizar.php',
-        data: {param1: form_campos}                  
-      })    
-      .done(function(respuesta){   
-        res=respuesta.split("#&")
-    
-        if (res[0] == 0) { // Indicador de actualización. 0- realizada, resto- no realizada
-          
-          if (res[1] == 0) { // Indicador de validación correcta
-              Swal.fire({
-                icon: 'success',
-                title: "Operación efectuada",
-                confirmButtonText: 'Ok'
-              }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    };
-                  }
-                );
-
-              if ($('#idOperE').val() == "alta") {
-                  $('#autorEdicion').modal('hide');  // oculta el modal
-                  $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                  $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-              }
-          } else {
-
-              Swal.fire({
-                icon: 'success',
-                title: 'Operación realizada con incidencias',
-                html: '<p align="left">' + res[2] + '</p>',
-                confirmButtonText: 'Ok'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      location.reload();
-                  };
-                }
-              );
-              } 
-          
-        } else {
-                if (res[0] == 1) {
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Operación no efectuada',
-                      html: '<p align="left">' + res[3] + '</p>',
-                      footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
-                    })   
-                  } else {
-                          Swal.fire({
-                            icon: 'warning',
-                            title: 'Código de validación desconocido: ' + res[0],
-                            html: '<p align="left">' + res[3] + '</p>',
-                            footer: '<a href="">Se tiene que corregir la codificación de la página Web</a>'
-                          })   
-                      }
-            }
-      })
-      .fail(function(){
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Hubo un error al validar/actualizar datos del autor',
-          footer: '<a href="">Revise  datos de entrada y base de datos</a>'
-        })                  
-      })            
-    })  
-    
-    /* Filtrar datos de los autores */
-    $("#filtro_datos").click(function() { /* Actualizar datos de autor */ 
+    /* Filtrar datos de los libros */
+    $("#filtro_datos_libro").click(function() { 
       
       form_campos= "Lectura" + "#&" + "filtro";
-      form_campos = form_campos  +  "#&" + $('#lectorF').val();
-      form_campos = form_campos  +  "#&" + $('#idiomaF_lectura').val();
-      form_campos = form_campos  +  "#&" + $('#calificacionF').val();
+      form_campos = form_campos  +  "#&" + $('#autoresF').val();
+      form_campos = form_campos  +  "#&" + $('#editorialF').val();
 
-      fecha= $('#finilFI').val() + "-" + $('#finilFImm').val() + "-" + $('#finilFIdd').val();
+      fecha= $('#fpubFI').val() + "-" + $('#fpubFImm').val() + "-" + $('#fpubFIdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
-      fecha= $('#finilFS').val() + "-" + $('#finilFSmm').val() + "-" + $('#finilFSdd').val();
+      fecha= $('#fpubFS').val() + "-" + $('#fpubFSmm').val() + "-" + $('#fpubFSdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
-      form_campos = form_campos  +  "#&" + $('#pfalF').val();
+      form_campos = form_campos  +  "#&" + $('#genlitF').val();
+      form_campos = form_campos  +  "#&" + $('#idiomaF').val();
+      form_campos = form_campos  +  "#&" + $('#soplibF').val();
+      form_campos = form_campos  +  "#&" + $('#sitlibF').val();
 
-      fecha= $('#ffinlFI').val() + "-" + $('#ffinlFImm').val() + "-" + $('#ffinlFIdd').val();
+      fecha= $('#fadqFI').val() + "-" + $('#fadqFImm').val() + "-" + $('#fadqFIdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
-      fecha= $('#ffinlFS').val() + "-" + $('#ffinlFSmm').val() + "-" + $('#ffinlFSdd').val();
+      fecha= $('#fadqFS').val() + "-" + $('#fadqFSmm').val() + "-" + $('#fadqFSdd').val();
       form_campos = form_campos  +  "#&" + fecha;
 
       $.ajax({                        
         type: 'POST',                 
-        url: 'basedatos/autor_validar_filtro.php',
+        url: 'basedatos/libro_validar_filtro.php',
         data: {param1: form_campos}                  
       })    
       .done(function(respuesta){   
@@ -310,19 +223,19 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
 
           $.ajax({                        
             type: 'POST',                 
-            url: 'basedatos/autores_cargar_datos.php',
+            url: 'basedatos/libros_cargar_datos.php',
             data: {param1: datos_entrada}                  
           })    
           .done(function(lista_select){   
               //  list_select tiene la información de javascript (comentarios y la tabla rellena) de la rutina. 
-              $('#tabla_autores').html(lista_select)   
+              $('#tabla_libros').html(lista_select)   
 
           })
           .fail(function(){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Hubo un error al cargar datos de autores',
+              text: 'Hubo un error al cargar datos de libros',
               footer: '<a href="">Revise  datos de entrada y base de datos</a>'
             })                  
           })              
@@ -331,7 +244,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
               Swal.fire({
                 icon: 'error',
                 title: 'Validación con incidencias',
-                html: '<p align="left">' + res[3] + '</p>',
+                html: '<p align="left">' + res[1] + '</p>',
                 footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
               })   
             }
@@ -340,7 +253,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Hubo un error al validar/actualizar datos del autor',
+          text: 'Hubo un error al validar/actualizar datos del libro',
           footer: '<a href="">Revise  datos de entrada y base de datos</a>'
         })                  
       })            

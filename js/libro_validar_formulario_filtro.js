@@ -1,23 +1,24 @@
-/* Validación de campos de formularios: Lectura / Filtro */
+/* Validación de campos de formularios: Libro / Filtro */
 const formularioF = document.getElementById('formularioF');
 const inputsF = document.querySelectorAll('#formularioF');
 
 const id_ApartadoF = document.getElementById('idApartadoF').value;
+const id_Apartado_AutorF = "Autor";
 const id_OperF = document.getElementById('idOperF').value;
 
 const expresionesF = {
-    finilFI:  /^[0-9]{1,4}$/,                      // números
-    finilFS:  /^[0-9]{1,4}$/,                      // números
-    ffinlFI:  /^[0-9]{1,4}$/,                      // números
-    ffinlFS:  /^[0-9]{1,4}$/                       // números
+    fpubFI:  /^[0-9]{1,4}$/,                      // números
+    fpubFS:  /^[0-9]{1,4}$/,                      // números
+    fadqFI:  /^[0-9]{1,4}$/,                      // números
+    fadqFS:  /^[0-9]{1,4}$/                       // números
 }
 
 function validarformularioF(evento) {
     
     switch (evento.target.name) {  
 
-        case "finilFI":
-            if (expresionesF.finilFI.test(evento.target.value)) {
+        case "fpubFI":
+            if (expresionesF.fpubFI.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -28,8 +29,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "finilFS":
-            if (expresionesF.finilFS.test(evento.target.value)) {
+        case "fpubFS":
+            if (expresionesF.fpubFS.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -40,8 +41,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "ffinlFI":
-            if (expresionesF.ffinlFI.test(evento.target.value)) {
+        case "fadqFI":
+            if (expresionesF.fadqFI.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -52,8 +53,8 @@ function validarformularioF(evento) {
                 }
         break; 
 
-        case "ffinlFS":
-            if (expresionesF.ffinlFS.test(evento.target.value)) {
+        case "fadqFS":
+            if (expresionesF.fadqFS.test(evento.target.value)) {
                 /* Validación de caracteres correcta */
                 error_lit="<p></p>";
                 validar_campo_resultadoF("ok", evento.target.name, error_lit);
@@ -72,13 +73,62 @@ function validarformularioF(evento) {
 }
 function validarCampoValorF(evento){
     switch (evento.target.name) {  
+        case "autoresF":   
+            if (evento.target.value == "") {
+                /* Validación de caracteres correcta */
+                error_lit="<p></p>";
+                validar_campo_resultado("ok", evento.target.name, error_lit);
+            } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'basedatos/leer_datos.php',
+                        data: {param1: evento.target.value,
+                               param2: "id_Apartado_AutorF"
+                            }
+                    })
+                    .done(function(autor_datos){
+                        res=autor_datos.split("#&");
+                        
+                        if (res[0] == 0) {              // adquisición de datos correcta
+                            if (evento.target.value !== "" 
+                                && res[2].trim() == evento.target.value) {
+                                error_lit="<p></p>"
+                                validar_campo_resultado("ok", evento.target.name, error_lit);      
+                            } else {   
+                                $('#autoresF').val(""); 
+                                $error_texto = "Error. " + evento.target.value + " no existe. Se anula. </p>'"
+                                error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
+                                validar_campo_resultado("nok", evento.target.name, error_lit);       
+                                }
+                            
+                        } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ERROR AL ACCEDER A LA BASE DE DATOS',
+                                    text: res[1],
+                                    footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                                }) 
+                            }    
+                    })
+                    
+                    .fail(function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Hubo un error al leer autor',
+                            footer: '<a href="">Revise datos de entrada y base de datos</a>'
+                        }) 
+                    })
+                    
+                }        
+        break; 
 
-        case "finilFI":    // Fecha de lectura. Límite inferior
-            if (expresionesF.finilFI.test(evento.target.value)) {          
+        case "fpubFI":    // Fecha de publicación. Límite inferior
+            if (expresionesF.fpubFI.test(evento.target.value)) {          
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('finilFImm').value
-                dd = document.getElementById('finilFIdd').value
+                mm = document.getElementById('fpubFImm').value
+                dd = document.getElementById('fpubFIdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -114,12 +164,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "finilFS":    // Fecha de lectura. Límite inferior
-            if (expresionesF.finilFS.test(evento.target.value)) {           
+        case "fpubFS":    // Fecha de publicación. Límite superior
+            if (expresionesF.fpubFS.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('finilFSmm').value
-                dd = document.getElementById('finilFSdd').value
+                mm = document.getElementById('fpubFSmm').value
+                dd = document.getElementById('fpubFSdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -155,12 +205,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "ffinlFI":    // Fecha de lectura. Límite inferior
-            if (expresionesF.ffinlFI.test(evento.target.value)) {           
+        case "fadqFI":    // Fecha de adquisición. Límite inferior
+            if (expresionesF.fadqFI.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('ffinlFImm').value
-                dd = document.getElementById('ffinlFIdd').value
+                mm = document.getElementById('fadqFImm').value
+                dd = document.getElementById('fadqFIdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -196,12 +246,12 @@ function validarCampoValorF(evento){
                 }
         break; 
 
-        case "ffinlFS":    // Fecha de fallecimiento. Límite superior
-            if (expresionesF.ffinlFS.test(evento.target.value)) {           
+        case "fadqFS":    // Fecha de adquisición. Límite superior
+            if (expresionesF.fadqFS.test(evento.target.value)) {           
                 funcion = 3 // Validar fecha
                 ssaa = document.getElementById(evento.target.name).value
-                mm = document.getElementById('ffinlFSmm').value
-                dd = document.getElementById('ffinlFSdd').value
+                mm = document.getElementById('fadqFSmm').value
+                dd = document.getElementById('fadqFSdd').value
                 fecha = ssaa + "-" + mm + "-" + dd
                 
                 $.ajax({
@@ -245,19 +295,19 @@ function validarCampoValorF(evento){
 }
 
 /* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
-function validarCompararFinilF () {
+function validarCompararFpubF () {
     
-    fecha_inicial_id = "finilFI";
-    fecha_final_id= "finilFS";
+    fecha_inicial_id = "fpubFI";
+    fecha_final_id= "fpubFS";
 
     ssaa = document.getElementById(`${fecha_inicial_id}`).value;
-    mm = document.getElementById('finilFImm').value
-    dd = document.getElementById('finilFIdd').value
+    mm = document.getElementById('fpubFImm').value
+    dd = document.getElementById('fpubFIdd').value
     fecha_inicial = ssaa + "-" + mm + "-" + dd
 
     ssaa = document.getElementById(`${fecha_final_id}`).value;
-    mm = document.getElementById('finilFSmm').value
-    dd = document.getElementById('finilFSdd').value
+    mm = document.getElementById('fpubFSmm').value
+    dd = document.getElementById('fpubFSdd').value
     fecha_final = ssaa + "-" + mm + "-" + dd
     
     funcion = 2
@@ -276,7 +326,7 @@ function validarCompararFinilF () {
             
             if (res[0]==0) { // indicador de validación general                          
                 if (res[7] == 1) {   // Fecha superior a fecha límite máxima
-                    $error_texto = "Error. Fecha de comienzo de lectura inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
+                    $error_texto = "Error. Fecha de publicación inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto + '</p>'
                     validar_campo_resultadoF("nok", fecha_inicial_id, error_lit); 
                 } else {
@@ -311,19 +361,19 @@ function validarCompararFinilF () {
     return
 }
 /* Comparación de dos fechas. Devolver cuál es mayor y la diferencia entre ellas: 1/ en días 2/ años, meses y días */
-function validarCompararFfinlF () {
+function validarCompararFadqF () {
     
-    fecha_inicial_id = "ffinlFI";
-    fecha_final_id= "ffinlFS";
+    fecha_inicial_id = "fadqFI";
+    fecha_final_id= "fadqFS";
 
     ssaa = document.getElementById(`${fecha_inicial_id}`).value;
-    mm = document.getElementById('ffinlFImm').value
-    dd = document.getElementById('ffinlFIdd').value
+    mm = document.getElementById('fadqFImm').value
+    dd = document.getElementById('fadqFIdd').value
     fecha_inicial = ssaa + "-" + mm + "-" + dd
 
     ssaa = document.getElementById(`${fecha_final_id}`).value;
-    mm = document.getElementById('ffinlFSmm').value
-    dd = document.getElementById('ffinlFSdd').value
+    mm = document.getElementById('fadqFSmm').value
+    dd = document.getElementById('fadqFSdd').value
     fecha_final = ssaa + "-" + mm + "-" + dd
     
     funcion = 2
@@ -342,7 +392,7 @@ function validarCompararFfinlF () {
             
             if (res[0]==0) { // indicador de validación general                          
                 if (res[7] == 1) {   // Fecha superior a fecha límite máxima
-                    $error_texto = "Error. Fecha de fin de lectura inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
+                    $error_texto = "Error. Fecha de adquisición inicial (" + res[8] + ") no puede ser mayor que la superior (" + res[9] + ")"
                     error_lit='<p class="formulario__grupo-incorrecto">' + $error_texto+'</p>'
                     validar_campo_resultadoF("nok", fecha_inicial_id, error_lit); 
                 }  else {

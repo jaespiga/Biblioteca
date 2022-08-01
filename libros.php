@@ -103,15 +103,17 @@
 								</svg>								
 							</button>
 						</form>	
-					
-						<form>
-							<button class="d-inline-flex btn btn-warning btn-outline-success me-5 mb-0 text-light fs-4"
-								data-bs-toggle="collapse" type="button">Filtros  &nbsp;
+						
+						<form class="d-flex">
+							<button type="button" class="d-inline-flex btn btn-warning btn-outline-success 
+									me-5 mb-0 text-light fs-4"
+								data-bs-toggle="modal" data-bs-target="#libroFiltro">Filtros  &nbsp;
 								<svg class="bi" width="30" height="30" fill="currentColor">
 									<use xlink:href="bootstrap-5.1.3\main\iconos\bootstrap-icons.svg#funnel"/>
 								</svg>
-							</button>
+							</button>	
 						</form>
+						
 					</div>
 				</div>
 			</div>
@@ -142,6 +144,8 @@
 
 		<script type="text/javascript" src="js/libro_lista_clave.js"></script>  <!-- Lista de opciones de datalist  -->
 		<script type="text/javascript" src="js/lista_datos.js"></script>  <!-- Lista libros y sus datos  -->
+
+		<script type="text/javascript" src="js/autor_lista_clave.js"></script>  <!-- Lista de opciones de datalist para filtro -->
 		<!--
 			Script para cargar las tablas de códigos
 		-->

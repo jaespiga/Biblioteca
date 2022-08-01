@@ -68,4 +68,71 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
         })              
     })      
   })
+  /* Autor / Filtro. Obtener la lista total de autores. */
+  $("#autoresF").each(function () {
+    apartado = "Autor";
+    clave = $('#autoresF').val();
+    $.ajax({                        
+      type: 'POST',                 
+      url: 'basedatos/cargar_lista.php',
+      data: {
+          param0: apartado,
+          param1: clave
+      }                  
+    })    
+    .done(function(lista_select){
+        $('#lista_autoresF').html(lista_select)
+    })
+    .fail(function(){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hubo un error al cargar lista de autores',
+        footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+      })                   
+    })            
+  })  
+
+  /* Autor / Filtro. Obtener la lista ajustada a los valores de la clave tecleados. */
+  $("#autoresF").keyup(function(){     
+    //hacemos focus al campo de búsqueda
+    $("#autoresF").focus();
+                                                     
+    //obtenemos el texto introducido en el campo de búsqueda
+    apartado = "Autor";
+    clave = $('#autoresF').val();
+    $.ajax({                        
+    type: 'POST',                 
+    url: 'basedatos/cargar_lista.php',
+    data: {
+            param0: apartado,
+            param1: clave
+        }                  
+    })           
+    .done(function(lista_select){
+        if (!$.trim(lista_select)) {
+            
+            Swal.fire({
+                position: 'top',
+                icon: 'info',
+                title: 'No existe ningún autor con esa combinación de caracteres.',
+                text: 'Nota. Se tiene en cuenta los acentos',
+                showConfirmButton: false,
+                timer: 3000
+            })
+
+        } else {
+                $("#lista_autoresF").empty();
+                $("#lista_autoresF").html(lista_select);
+        } 
+    })
+    .fail(function(){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al cargar autores',
+            footer: '<a href="">Revise  datos de entrada y base de datos</a>'
+        })              
+    })      
+  })
 })

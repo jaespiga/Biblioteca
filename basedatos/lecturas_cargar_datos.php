@@ -51,8 +51,8 @@ function leerDatosLecturas($datos_entrada) {
         $lit_autor = "";
     } else {
             $lit_lector = $res[2];
-            $lit_lector = $res[3];
-            $lit_lector = $res[4];
+            $lit_libro = $res[3];
+            $lit_autor = $res[4];
         }
     
 if($lit_lector !== ""){

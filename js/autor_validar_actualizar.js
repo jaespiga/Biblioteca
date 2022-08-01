@@ -226,7 +226,7 @@ $(document).ready(function(){     /* Ejecutar cuando la página esté cargada */
               Swal.fire({
                 icon: 'error',
                 title: 'Validación con incidencias',
-                html: '<p align="left">' + res[3] + '</p>',
+                html: '<p align="left">' + res[1] + '</p>',
                 footer: '<a href="">Corrija los errores y vuelva a realizarla</a>'
               })   
             }
